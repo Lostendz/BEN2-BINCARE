@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BINCARE | ระบบดูแลโรงเรียน</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7f5;
+            color: #1f2937;
+        }
+
+        header {
+            background: #166534;
+            color: white;
+            padding: 20px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .subtitle {
+            margin-top: 5px;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 25px 18px;
+        }
+
+        .hero {
+            background: white;
+            border-radius: 20px;
+            padding: 30px 20px;
+            text-align: center;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .hero h1 {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 18px;
+            padding: 25px 15px;
+            text-align: center;
+            text-decoration: none;
+            color: #1f2937;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+            transition: 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+        }
+
+        .icon {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .card h2 {
+            font-size: 19px;
+            margin-bottom: 6px;
+        }
+
+        .card p {
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        .notice {
+            background: #ecfdf5;
+            border-left: 5px solid #16a34a;
+            padding: 18px;
+            border-radius: 10px;
+            margin-top: 25px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+            .menu {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">BINCARE</div>
+    <div class="subtitle">ระบบดูแลและแจ้งปัญหาภายในโรงเรียน</div>
+</header>
+
+<div class="container">
+
+    <section class="hero">
+        <h1>🏫 ยินดีต้อนรับสู่ BINCARE</h1>
+
+        <p>
+            ระบบสำหรับแจ้งปัญหา ดูแลพื้นที่
+            และช่วยกันสร้างโรงเรียนให้น่าอยู่ยิ่งขึ้น
+        </p>
+    </section>
+
+    <section class="menu">
+
+        <a href="#" class="card">
+            <div class="icon">🚮</div>
+            <h2>แผนที่ถังขยะ</h2>
+            <p>ดูตำแหน่งและสถานะถังขยะภายในโรงเรียน</p>
+        </a>
+
+        <a href="#" class="card">
+            <div class="icon">🚨</div>
+            <h2>แจ้งปัญหา</h2>
+            <p>แจ้งปัญหาและสิ่งที่ต้องการให้โรงเรียนแก้ไข</p>
+        </a>
+
+        <a href="#" class="card">
+            <div class="icon">🔎</div>
+            <h2>ของหาย / พบของ</h2>
+            <p>แจ้งของหายหรือสิ่งของที่พบภายในโรงเรียน</p>
+        </a>
+
+        <a href="#" class="card">
+            <div class="icon">📋</div>
+            <h2>ตรวจสอบสถานะ</h2>
+            <p>ตรวจสอบความคืบหน้าของรายการที่แจ้ง</p>
+        </a>
+
+    </section>
+
+    <div class="notice">
+        <strong>💡 ร่วมกันดูแลโรงเรียน</strong>
+        <p style="margin-top: 6px;">
+            หากพบปัญหา อย่าปล่อยผ่าน
+            แจ้ง BINCARE เพื่อให้ปัญหาได้รับการแก้ไข
+        </p>
+    </div>
+
+</div>
+
+<footer>
+    BINCARE © 2026<br>
+    ระบบดูแลและแจ้งปัญหาภายในโรงเรียน
+</footer>
+
+</body>
+</html>
