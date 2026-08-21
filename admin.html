@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Dashboard | BINCARE</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #1f2937;
+}
+
+header {
+    background: #166534;
+    color: white;
+    padding: 20px;
+}
+
+.header-inner {
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.logout {
+    border: 0;
+    background: white;
+    color: #166534;
+    padding: 9px 14px;
+    border-radius: 9px;
+    font-weight: bold;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 25px 18px;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+}
+
+.stat {
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 3px 12px rgba(0,0,0,.06);
+}
+
+.stat-number {
+    font-size: 32px;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.pending {
+    color: #ca8a04;
+}
+
+.progress {
+    color: #2563eb;
+}
+
+.resolved {
+    color: #16a34a;
+}
+
+.report {
+    background: white;
+    margin-top: 15px;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 3px 12px rgba(0,0,0,.06);
+}
+
+.ticket {
+    font-weight: bold;
+    color: #166534;
+}
+
+.meta {
+    color: #6b7280;
+    margin: 7px 0;
+}
+
+.status {
+    margin-top: 15px;
+}
+
+select {
+    padding: 10px;
+    border-radius: 9px;
+    border: 1px solid #d1d5db;
+}
+
+.loading {
+    text-align: center;
+    padding: 30px;
+}
+
+@media(max-width:700px) {
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .header-inner {
+        align-items: flex-start;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<header>
+
+<div class="header-inner">
+
+<div>
+<div class="logo">BINCARE</div>
+<div>📊 Dashboard เจ้าหน้าที่</div>
+</div>
+
+<button
+class="logout"
+onclick="logout()">
+ออกจากระบบ
+</button>
+
+</div>
+
+</header>
+
+
+<div class="container">
+
+<h1>รายการแจ้งปัญหา</h1>
+
+
+<div class="stats">
+
+<div class="stat">
+
+รอตรวจสอบ
+
+<div
+id="pendingCount"
+class="stat-number pending">
+0
+</div>
+
+</div>
+
+
+<div class="stat">
+
+กำลังดำเนินการ
+
+<div
+id="progressCount"
+class="stat-number progress">
+0
+</div>
+
+</div>
+
+
+<div class="stat">
+
+แก้ไขแล้ว
+
+<div
+id="resolvedCount"
+class="stat-number resolved">
+0
+</div>
+
+</div>
+
+</div>
+
+
+<div id="reports">
+
+<div class="loading">
+กำลังโหลดข้อมูล...
+</div>
+
+</div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<script>
+
+const SUPABASE_URL =
+"https://pbjeyvupzbhxodlibjuh.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_paiTf1uzpiCAPR1oWQMlDg_PfVzT2p6";
+
+const supabaseClient =
+supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+async function checkLogin() {
+
+    const {
+        data: { session }
+    } = await supabaseClient
+        .auth
+        .getSession();
+
+    if (!session) {
+
+        window.location.href =
+            "admin-login.html";
+
+        return false;
+    }
+
+    return true;
+}
+
+
+async function loadReports() {
+
+    const loggedIn =
+        await checkLogin();
+
+    if (!loggedIn) return;
+
+
+    const {
+        data,
+        error
+    } =
+    await supabaseClient
+        .from("reports")
+        .select("*")
+        .order(
+            "created_at",
+            {
+                ascending: false
+            }
+        );
+
+
+    if (error) {
+
+        document
+        .getElementById("reports")
+        .innerHTML =
+        "<p>ไม่สามารถโหลดข้อมูลได้</p>";
+
+        console.error(error);
+
+        return;
+    }
+
+
+    let pending = 0;
+    let progress = 0;
+    let resolved = 0;
+
+
+    data.forEach(report => {
+
+        if (report.status === "pending")
+            pending++;
+
+        if (report.status === "in_progress")
+            progress++;
+
+        if (report.status === "resolved")
+            resolved++;
+
+    });
+
+
+    document
+    .getElementById("pendingCount")
+    .textContent = pending;
+
+
+    document
+    .getElementById("progressCount")
+    .textContent = progress;
+
+
+    document
+    .getElementById("resolvedCount")
+    .textContent = resolved;
+
+
+    const container =
+        document.getElementById("reports");
+
+
+    if (data.length === 0) {
+
+        container.innerHTML =
+            "<p>ยังไม่มีรายการแจ้งปัญหา</p>";
+
+        return;
+    }
+
+
+    container.innerHTML =
+        data.map(report => `
+
+        <div class="report">
+
+            <div class="ticket">
+                ${escapeHtml(report.ticket_number)}
+            </div>
+
+            <h2>
+                ${escapeHtml(report.title)}
+            </h2>
+
+            <div class="meta">
+                📌 ${escapeHtml(report.category)}
+            </div>
+
+            <div class="meta">
+                📍 ${escapeHtml(report.location)}
+            </div>
+
+            <div class="meta">
+                📝 ${escapeHtml(
+                    report.description || "-"
+                )}
+            </div>
+
+            <div class="status">
+
+                <label>
+                    สถานะ:
+                </label>
+
+                <select
+                    onchange="updateStatus(
+                        ${report.id},
+                        this.value
+                    )">
+
+                    <option
+                    value="pending"
+                    ${report.status === "pending"
+                    ? "selected" : ""}>
+                    🟡 รอตรวจสอบ
+                    </option>
+
+                    <option
+                    value="in_progress"
+                    ${report.status === "in_progress"
+                    ? "selected" : ""}>
+                    🔵 กำลังดำเนินการ
+                    </option>
+
+                    <option
+                    value="resolved"
+                    ${report.status === "resolved"
+                    ? "selected" : ""}>
+                    🟢 แก้ไขแล้ว
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+        `).join("");
+
+}
+
+
+async function updateStatus(id, status) {
+
+    const {
+        error
+    } =
+    await supabaseClient
+        .from("reports")
+        .update({
+            status: status,
+            updated_at:
+                new Date().toISOString()
+        })
+        .eq("id", id);
+
+
+    if (error) {
+
+        alert(
+            "ไม่สามารถเปลี่ยนสถานะได้"
+        );
+
+        console.error(error);
+
+        return;
+    }
+
+
+    loadReports();
+
+}
+
+
+async function logout() {
+
+    await supabaseClient
+        .auth
+        .signOut();
+
+    window.location.href =
+        "admin-login.html";
+
+}
+
+
+function escapeHtml(value) {
+
+    return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+
+}
+
+
+loadReports();
+
+</script>
+
+</body>
+
+</html>
