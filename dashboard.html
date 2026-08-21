@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BINCARE | Dashboard</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #172033;
+}
+
+header {
+    background: #166534;
+    color: white;
+    padding: 18px 25px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 18px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.ticket {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 15px;
+}
+
+.ticket h2 {
+    margin: 0 0 10px;
+}
+
+.info {
+    margin: 6px 0;
+}
+
+.status {
+    display: inline-block;
+    padding: 7px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.in_progress {
+    background: #cfe8ff;
+    color: #075985;
+}
+
+.resolved {
+    background: #d1fae5;
+    color: #166534;
+}
+
+select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    background: #16a34a;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 8px;
+}
+
+button:hover {
+    background: #15803d;
+}
+
+.empty {
+    text-align: center;
+    color: #777;
+    padding: 30px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    🏫 BINCARE | ระบบจัดการแจ้งปัญหา
+</header>
+
+<div class="container">
+
+    <h1>📋 รายการแจ้งปัญหา</h1>
+
+    <div class="card">
+        <button onclick="loadReports()">🔄 รีเฟรชข้อมูล</button>
+    </div>
+
+    <div id="reports">
+        <div class="empty">กำลังโหลดข้อมูล...</div>
+    </div>
+
+</div>
+
+<script>
+
+const SUPABASE_URL =
+"https://pbjeyvupzbhxodlibjuh.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_paiTf1uzpiCAPR1oWQMlDg_PfVzT2p6";
+
+const supabaseClient =
+supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+
+// โหลดข้อมูล
+async function loadReports() {
+
+    const container = document.getElementById("reports");
+
+    container.innerHTML =
+        '<div class="empty">กำลังโหลดข้อมูล...</div>';
+
+    const { data, error } = await supabaseClient
+        .from("reports")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+    if (error) {
+
+        container.innerHTML =
+            `<div class="card">
+                ❌ เกิดข้อผิดพลาด<br>
+                ${error.message}
+            </div>`;
+
+        return;
+    }
+
+    if (!data || data.length === 0) {
+
+        container.innerHTML =
+            '<div class="card empty">ยังไม่มีรายการแจ้งปัญหา</div>';
+
+        return;
+    }
+
+    container.innerHTML = "";
+
+    data.forEach(report => {
+
+        const statusClass =
+            report.status || "pending";
+
+        const statusText = {
+            pending: "รอตรวจสอบ",
+            in_progress: "กำลังดำเนินการ",
+            resolved: "แก้ไขแล้ว"
+        };
+
+        const ticket = document.createElement("div");
+
+        ticket.className = "ticket";
+
+        ticket.innerHTML = `
+
+            <h2>🚨 ${escapeHtml(report.title)}</h2>
+
+            <div class="info">
+                🎫 <b>หมายเลข:</b>
+                ${escapeHtml(report.ticket_number)}
+            </div>
+
+            <div class="info">
+                📂 <b>ประเภท:</b>
+                ${escapeHtml(report.category)}
+            </div>
+
+            <div class="info">
+                📍 <b>สถานที่:</b>
+                ${escapeHtml(report.location)}
+            </div>
+
+            <div class="info">
+                📝 <b>รายละเอียด:</b><br>
+                ${escapeHtml(report.description || "-")}
+            </div>
+
+            <div>
+                <span class="status ${statusClass}">
+                    ${statusText[statusClass] || statusClass}
+                </span>
+            </div>
+
+            <div style="margin-top:15px">
+
+                <select id="status-${report.id}">
+
+                    <option value="pending"
+                        ${statusClass === "pending" ? "selected" : ""}>
+                        รอตรวจสอบ
+                    </option>
+
+                    <option value="in_progress"
+                        ${statusClass === "in_progress" ? "selected" : ""}>
+                        กำลังดำเนินการ
+                    </option>
+
+                    <option value="resolved"
+                        ${statusClass === "resolved" ? "selected" : ""}>
+                        แก้ไขแล้ว
+                    </option>
+
+                </select>
+
+                <button onclick="updateStatus(${report.id})">
+                    บันทึกสถานะ
+                </button>
+
+            </div>
+        `;
+
+        container.appendChild(ticket);
+
+    });
+}
+
+
+// เปลี่ยนสถานะ
+async function updateStatus(id) {
+
+    const select =
+        document.getElementById(`status-${id}`);
+
+    const newStatus = select.value;
+
+    const { error } = await supabaseClient
+        .from("reports")
+        .update({
+            status: newStatus,
+            updated_at: new Date().toISOString()
+        })
+        .eq("id", id);
+
+    if (error) {
+
+        alert("❌ เปลี่ยนสถานะไม่สำเร็จ\n" + error.message);
+
+        return;
+    }
+
+    alert("✅ เปลี่ยนสถานะเรียบร้อย");
+
+    loadReports();
+}
+
+
+// ป้องกัน HTML แปลกๆ
+function escapeHtml(text) {
+
+    if (!text) return "";
+
+    return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+loadReports();
+
+</script>
+
+</body>
+</html>
