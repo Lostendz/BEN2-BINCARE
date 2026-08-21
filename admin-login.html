@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>เจ้าหน้าที่ | BINCARE</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    background: white;
+    width: min(92%, 420px);
+    padding: 30px;
+    border-radius: 22px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+}
+
+.logo {
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    color: #166534;
+}
+
+.subtitle {
+    text-align: center;
+    color: #6b7280;
+    margin: 8px 0 28px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin: 15px 0 7px;
+}
+
+input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+button {
+    width: 100%;
+    margin-top: 22px;
+    padding: 14px;
+    border: 0;
+    border-radius: 11px;
+    background: #166534;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+#error {
+    display: none;
+    margin-top: 15px;
+    padding: 12px;
+    background: #fee2e2;
+    color: #991b1b;
+    border-radius: 10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="logo">BINCARE</div>
+
+    <div class="subtitle">
+        🔐 เข้าสู่ระบบเจ้าหน้าที่
+    </div>
+
+    <form id="loginForm">
+
+        <label>อีเมล</label>
+
+        <input
+            id="email"
+            type="email"
+            placeholder="อีเมลเจ้าหน้าที่"
+            required
+        >
+
+        <label>รหัสผ่าน</label>
+
+        <input
+            id="password"
+            type="password"
+            placeholder="รหัสผ่าน"
+            required
+        >
+
+        <button id="loginButton">
+            เข้าสู่ระบบ
+        </button>
+
+    </form>
+
+    <div id="error"></div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL =
+"https://pbjeyvupzbhxodlibjuh.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_paiTf1uzpiCAPR1oWQMlDg_PfVzT2p6";
+
+const supabaseClient =
+supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+document
+.getElementById("loginForm")
+.addEventListener("submit", async function(e) {
+
+    e.preventDefault();
+
+    const email =
+        document.getElementById("email").value;
+
+    const password =
+        document.getElementById("password").value;
+
+    const button =
+        document.getElementById("loginButton");
+
+    const errorBox =
+        document.getElementById("error");
+
+    button.disabled = true;
+    button.textContent = "กำลังเข้าสู่ระบบ...";
+
+    errorBox.style.display = "none";
+
+
+    const { data, error } =
+        await supabaseClient.auth.signInWithPassword({
+            email: email,
+            password: password
+        });
+
+
+    if (error) {
+
+        errorBox.textContent =
+            "อีเมลหรือรหัสผ่านไม่ถูกต้อง";
+
+        errorBox.style.display = "block";
+
+        button.disabled = false;
+        button.textContent = "เข้าสู่ระบบ";
+
+        return;
+    }
+
+
+    window.location.href =
+        "admin.html";
+
+});
+
+</script>
+
+</body>
+</html>
