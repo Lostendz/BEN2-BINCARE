@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ตรวจสอบสถานะ | BINCARE</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7f5;
+            color: #1f2937;
+        }
+
+        header {
+            background: #166534;
+            color: white;
+            padding: 20px;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            padding: 25px 18px;
+        }
+
+        .back {
+            display: inline-block;
+            margin-bottom: 15px;
+            color: #166534;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #6b7280;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 15px;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            background: #16a34a;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            background: #9ca3af;
+        }
+
+        .result {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 12px;
+            background: #f0fdf4;
+        }
+
+        .ticket {
+            font-size: 24px;
+            font-weight: bold;
+            color: #166534;
+            margin-bottom: 15px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 8px 14px;
+            border-radius: 20px;
+            background: #dbeafe;
+            color: #1d4ed8;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .info {
+            margin-top: 10px;
+            line-height: 1.7;
+        }
+
+        .error {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            background: #fee2e2;
+            color: #991b1b;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">BINCARE</div>
+    <div>ระบบตรวจสอบสถานะแจ้งปัญหา</div>
+</header>
+
+<div class="container">
+
+    <a href="index.html" class="back">
+        ← กลับหน้าหลัก
+    </a>
+
+    <div class="card">
+
+        <h1>📋 ตรวจสอบสถานะ</h1>
+
+        <p class="subtitle">
+            กรอกเลขที่แจ้งปัญหาเพื่อตรวจสอบความคืบหน้า
+        </p>
+
+        <label for="ticket">
+            เลขที่แจ้งปัญหา
+        </label>
+
+        <input
+            id="ticket"
+            type="text"
+            placeholder="เช่น ISSUE-960848"
+        >
+
+        <button id="searchButton">
+            🔎 ตรวจสอบสถานะ
+        </button>
+
+        <div id="errorMessage" class="error">
+            ❌ ไม่พบรายการแจ้งปัญหานี้
+        </div>
+
+        <div id="result" class="result">
+
+            <div id="ticketNumber" class="ticket"></div>
+
+            <div id="status" class="status"></div>
+
+            <div class="info">
+                <strong>ประเภทปัญหา:</strong>
+                <span id="category"></span>
+            </div>
+
+            <div class="info">
+                <strong>หัวข้อ:</strong>
+                <span id="title"></span>
+            </div>
+
+            <div class="info">
+                <strong>สถานที่:</strong>
+                <span id="location"></span>
+            </div>
+
+            <div class="info">
+                <strong>รายละเอียด:</strong>
+                <span id="description"></span>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const SUPABASE_URL =
+    "https://pbjeyvupzbhxodlibjuh.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_paiTf1uzpiCAPR1oWQMlDg_PfVzT2p6";
+
+
+document
+    .getElementById("searchButton")
+    .addEventListener("click", async function() {
+
+        const ticket =
+            document
+                .getElementById("ticket")
+                .value
+                .trim()
+                .toUpperCase();
+
+        const button =
+            document.getElementById("searchButton");
+
+        const result =
+            document.getElementById("result");
+
+        const errorMessage =
+            document.getElementById("errorMessage");
+
+        result.style.display = "none";
+        errorMessage.style.display = "none";
+
+        if (!ticket) {
+            errorMessage.textContent =
+                "❌ กรุณากรอกเลขที่แจ้งปัญหา";
+
+            errorMessage.style.display = "block";
+            return;
+        }
+
+        button.disabled = true;
+        button.textContent = "กำลังค้นหา...";
+
+        try {
+
+            const response = await fetch(
+                SUPABASE_URL +
+                "/rest/v1/reports?ticket_number=eq." +
+                encodeURIComponent(ticket) +
+                "&select=*",
+                {
+                    method: "GET",
+
+                    headers: {
+                        "apikey": SUPABASE_KEY,
+                        "Authorization":
+                            "Bearer " + SUPABASE_KEY
+                    }
+                }
+            );
+
+            if (!response.ok) {
+                throw new Error(
+                    await response.text()
+                );
+            }
+
+            const data =
+                await response.json();
+
+            if (data.length === 0) {
+
+                errorMessage.textContent =
+                    "❌ ไม่พบรายการแจ้งปัญหานี้";
+
+                errorMessage.style.display =
+                    "block";
+
+                return;
+            }
+
+            const report = data[0];
+
+            document
+                .getElementById("ticketNumber")
+                .textContent =
+                report.ticket_number;
+
+            document
+                .getElementById("category")
+                .textContent =
+                report.category || "-";
+
+            document
+                .getElementById("title")
+                .textContent =
+                report.title || "-";
+
+            document
+                .getElementById("location")
+                .textContent =
+                report.location || "-";
+
+            document
+                .getElementById("description")
+                .textContent =
+                report.description || "-";
+
+            document
+                .getElementById("status")
+                .textContent =
+                report.status || "รับเรื่องแล้ว";
+
+            result.style.display = "block";
+
+        } catch (error) {
+
+            console.error(error);
+
+            errorMessage.textContent =
+                "❌ เกิดข้อผิดพลาดในการเชื่อมต่อ";
+
+            errorMessage.style.display =
+                "block";
+
+        }
+
+        button.disabled = false;
+        button.textContent =
+            "🔎 ตรวจสอบสถานะ";
+
+    });
+
+</script>
+
+</body>
+</html>
