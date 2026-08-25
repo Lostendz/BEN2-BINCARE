@@ -1,535 +1,268 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>แผนที่ถังขยะ | BINCARE</title>
-
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f7f5;
-            color: #1f2937;
-        }
-
-        header {
-            background: #166534;
-            color: white;
-            padding: 20px;
-        }
-
-        .logo {
-            font-size: 26px;
-            font-weight: bold;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 25px 18px;
-        }
-
-        .back {
-            display: inline-block;
-            margin-bottom: 15px;
-            color: #166534;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .card {
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            margin-bottom: 20px;
-        }
-
-        h1 {
-            margin-bottom: 8px;
-        }
-
-        .subtitle {
-            color: #6b7280;
-            margin-bottom: 20px;
-        }
-
-        /* =========================
-           แผนที่จริงของโรงเรียน
-        ========================= */
-
-        .map-wrapper {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-            border-radius: 15px;
-            border: 2px solid #d1d5db;
-            background: #eee;
-        }
-
-        .school-map {
-            display: block;
-            width: 100%;
-            height: auto;
-        }
-
-        /* จุดถังขยะ */
-
-        .bin {
-            position: absolute;
-
-            width: 42px;
-            height: 42px;
-
-            border-radius: 50%;
-
-            border: 3px solid white;
-
-            box-shadow:
-                0 3px 8px rgba(0,0,0,0.35);
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            font-size: 21px;
-
-            cursor: pointer;
-
-            transform: translate(-50%, -50%);
-
-            z-index: 10;
-
-            transition: 0.2s;
-        }
-
-        .bin:hover {
-            transform: translate(-50%, -50%) scale(1.15);
-        }
-
-        .normal {
-            background: #16a34a;
-        }
-
-        .almost {
-            background: #f59e0b;
-        }
-
-        .full {
-            background: #dc2626;
-        }
-
-        /* =========================
-           กล่องข้อมูล
-        ========================= */
-
-        .info-box {
-            display: none;
-
-            margin-top: 20px;
-
-            padding: 18px;
-
-            background: #ecfdf5;
-
-            border-left: 5px solid #16a34a;
-
-            border-radius: 10px;
-        }
-
-        .info-box h2 {
-            color: #166534;
-            margin-bottom: 8px;
-        }
-
-        .info-box p {
-            margin-top: 6px;
-            line-height: 1.6;
-        }
-
-        /* =========================
-           สถานะ
-        ========================= */
-
-        .legend {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 18px;
-
-            margin-top: 20px;
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 7px;
-
-            font-size: 14px;
-        }
-
-        .dot {
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-        }
-
-        .green {
-            background: #16a34a;
-        }
-
-        .orange {
-            background: #f59e0b;
-        }
-
-        .red {
-            background: #dc2626;
-        }
-
-        /* =========================
-           รายการถังขยะ
-        ========================= */
-
-        .bin-list {
-            display: grid;
-
-            grid-template-columns:
-                repeat(2, 1fr);
-
-            gap: 12px;
-
-            margin-top: 15px;
-        }
-
-        .bin-card {
-            border: 1px solid #e5e7eb;
-
-            border-radius: 12px;
-
-            padding: 15px;
-
-            background: #fafafa;
-        }
-
-        .bin-card h3 {
-            margin-bottom: 8px;
-        }
-
-        .status {
-            display: inline-block;
-
-            padding: 5px 10px;
-
-            border-radius: 20px;
-
-            font-size: 13px;
-
-            font-weight: bold;
-        }
-
-        .status-normal {
-            background: #dcfce7;
-            color: #166534;
-        }
-
-        .status-almost {
-            background: #fef3c7;
-            color: #92400e;
-        }
-
-        .status-full {
-            background: #fee2e2;
-            color: #991b1b;
-        }
-
-        @media (max-width: 650px) {
-
-            .card {
-                padding: 18px;
-            }
-
-            .bin {
-                width: 36px;
-                height: 36px;
-                font-size: 18px;
-            }
-
-            .bin-list {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>แผนที่โรงเรียน | BINCARE</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #1f2937;
+}
+
+header {
+    background: #166534;
+    color: white;
+    padding: 20px;
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px;
+}
+
+.back {
+    display: inline-block;
+    margin-bottom: 15px;
+    color: #166534;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.card {
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+h1 {
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: #6b7280;
+    margin-bottom: 15px;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+
+button {
+    border: none;
+    border-radius: 10px;
+    padding: 12px 18px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.add-btn {
+    background: #16a34a;
+    color: white;
+}
+
+.delete-btn {
+    background: #dc2626;
+    color: white;
+}
+
+.save-btn {
+    background: #166534;
+    color: white;
+}
+
+.cancel-btn {
+    background: #6b7280;
+    color: white;
+}
+
+button:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+}
+
+#mapWrapper {
+    width: 100%;
+    overflow: auto;
+    border-radius: 15px;
+    border: 2px solid #d1d5db;
+    background: #eee;
+}
+
+#map {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+    user-select: none;
+}
+
+#mapImage {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.trash {
+    position: absolute;
+    width: 38px;
+    height: 38px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: white;
+    border: 3px solid #166534;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 21px;
+    cursor: grab;
+    z-index: 10;
+}
+
+.trash.selected {
+    border-color: #dc2626;
+    background: #fee2e2;
+    transform: translate(-50%, -50%) scale(1.15);
+}
+
+.trash.dragging {
+    cursor: grabbing;
+}
+
+.notice {
+    display: none;
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 10px;
+    background: #dcfce7;
+    color: #166534;
+    font-weight: bold;
+}
+
+.admin-panel {
+    display: none;
+}
+
+.admin-panel.active {
+    display: block;
+}
+
+.mode {
+    display: inline-block;
+    padding: 7px 12px;
+    border-radius: 20px;
+    background: #e5e7eb;
+    color: #374151;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.info {
+    margin-top: 15px;
+    color: #6b7280;
+    font-size: 14px;
+}
+</style>
 </head>
 
 <body>
 
 <header>
-
-    <div class="logo">
-        BINCARE
-    </div>
-
-    <div>
-        ระบบดูแลและแจ้งปัญหาภายในโรงเรียน
-    </div>
-
+    <div class="logo">BINCARE</div>
+    <div>แผนที่โรงเรียน</div>
 </header>
-
 
 <div class="container">
 
-    <a href="index.html" class="back">
-        ← กลับหน้าหลัก
-    </a>
+<a href="index.html" class="back">
+    ← กลับหน้าหลัก
+</a>
 
+<div class="card">
 
-    <div class="card">
+    <h1>🗺️ แผนที่โรงเรียน</h1>
 
-        <h1>🚮 แผนที่ถังขยะ</h1>
+    <p class="subtitle">
+        ตำแหน่งอาคาร สนาม และจุดต่าง ๆ ภายในโรงเรียน
+    </p>
 
-        <p class="subtitle">
-            คลิกที่จุด 🚮 เพื่อดูตำแหน่งและสถานะของถังขยะ
-        </p>
+    <!-- ส่วนควบคุมแอดมิน -->
+    <div id="adminPanel" class="admin-panel">
 
+        <div class="mode">
+            🛠️ โหมดจัดการถังขยะ
+        </div>
 
-        <!-- =========================
-             แผนที่โรงเรียนจริง
-        ========================== -->
+        <div class="controls">
 
-        <div class="map-wrapper">
+            <button
+                class="add-btn"
+                onclick="addTrash()">
+                ➕ เพิ่มถังขยะ
+            </button>
 
-            <img
-                src="school-map.jpg"
-                class="school-map"
-                alt="แผนผังโรงเรียน"
-            >
+            <button
+                class="delete-btn"
+                onclick="deleteSelectedTrash()">
+                🗑️ ลบถังขยะ
+            </button>
 
+            <button
+                class="save-btn"
+                onclick="saveTrash()">
+                💾 บันทึกตำแหน่ง
+            </button>
 
-            <!-- ถังขยะจุดที่ 1 -->
-            <div
-                class="bin normal"
-                style="left: 27%; top: 30%;"
-                onclick="showBin(
-                    'ถังขยะ จุดที่ 1',
-                    'ปกติ',
-                    'บริเวณอาคารเรียน 1'
-                )"
-            >
-                🚮
-            </div>
-
-
-            <!-- ถังขยะจุดที่ 2 -->
-            <div
-                class="bin almost"
-                style="left: 61%; top: 31%;"
-                onclick="showBin(
-                    'ถังขยะ จุดที่ 2',
-                    'ใกล้เต็ม',
-                    'บริเวณอาคารเรียน 2'
-                )"
-            >
-                🚮
-            </div>
-
-
-            <!-- ถังขยะจุดที่ 3 -->
-            <div
-                class="bin full"
-                style="left: 78%; top: 48%;"
-                onclick="showBin(
-                    'ถังขยะ จุดที่ 3',
-                    'เต็ม',
-                    'บริเวณอาคารเรียน 3'
-                )"
-            >
-                🚮
-            </div>
-
-
-            <!-- ถังขยะจุดที่ 4 -->
-            <div
-                class="bin normal"
-                style="left: 45%; top: 72%;"
-                onclick="showBin(
-                    'ถังขยะ จุดที่ 4',
-                    'ปกติ',
-                    'บริเวณสนามฟุตบอล'
-                )"
-            >
-                🚮
-            </div>
-
-
-            <!-- ถังขยะจุดที่ 5 -->
-            <div
-                class="bin normal"
-                style="left: 83%; top: 76%;"
-                onclick="showBin(
-                    'ถังขยะ จุดที่ 5',
-                    'ปกติ',
-                    'บริเวณด้านหน้าโรงเรียน'
-                )"
-            >
-                🚮
-            </div>
+            <button
+                class="cancel-btn"
+                onclick="exitAdmin()">
+                ✕ ออกจากโหมดจัดการ
+            </button>
 
         </div>
 
-
-        <!-- คำอธิบายสี -->
-
-        <div class="legend">
-
-            <div class="legend-item">
-                <div class="dot green"></div>
-                🟢 ปกติ
-            </div>
-
-            <div class="legend-item">
-                <div class="dot orange"></div>
-                🟠 ใกล้เต็ม
-            </div>
-
-            <div class="legend-item">
-                <div class="dot red"></div>
-                🔴 เต็ม
-            </div>
-
-        </div>
-
-
-        <!-- กล่องข้อมูล -->
-
-        <div id="infoBox" class="info-box">
-
-            <h2 id="infoName">
-                -
-            </h2>
-
-            <p>
-                <strong>สถานะ:</strong>
-                <span id="infoStatus">
-                    -
-                </span>
-            </p>
-
-            <p>
-                <strong>ตำแหน่ง:</strong>
-                <span id="infoLocation">
-                    -
-                </span>
-            </p>
-
+        <div class="info">
+            💡 คลิกถังขยะเพื่อเลือก แล้วลากไปยังตำแหน่งที่ต้องการ
         </div>
 
     </div>
 
+    <div id="notice" class="notice"></div>
 
-    <!-- =========================
-         รายการถังขยะ
-    ========================== -->
+    <div id="mapWrapper">
 
-    <div class="card">
+        <div id="map">
 
-        <h2>
-            📋 รายการถังขยะ
-        </h2>
-
-
-        <div class="bin-list">
-
-
-            <div class="bin-card">
-
-                <h3>
-                    🚮 ถังขยะ จุดที่ 1
-                </h3>
-
-                <span class="status status-normal">
-                    🟢 ปกติ
-                </span>
-
-                <p style="margin-top:8px;">
-                    อาคารเรียน 1
-                </p>
-
-            </div>
-
-
-            <div class="bin-card">
-
-                <h3>
-                    🚮 ถังขยะ จุดที่ 2
-                </h3>
-
-                <span class="status status-almost">
-                    🟠 ใกล้เต็ม
-                </span>
-
-                <p style="margin-top:8px;">
-                    อาคารเรียน 2
-                </p>
-
-            </div>
-
-
-            <div class="bin-card">
-
-                <h3>
-                    🚮 ถังขยะ จุดที่ 3
-                </h3>
-
-                <span class="status status-full">
-                    🔴 เต็ม
-                </span>
-
-                <p style="margin-top:8px;">
-                    อาคารเรียน 3
-                </p>
-
-            </div>
-
-
-            <div class="bin-card">
-
-                <h3>
-                    🚮 ถังขยะ จุดที่ 4
-                </h3>
-
-                <span class="status status-normal">
-                    🟢 ปกติ
-                </span>
-
-                <p style="margin-top:8px;">
-                    สนามฟุตบอล
-                </p>
-
-            </div>
-
-
-            <div class="bin-card">
-
-                <h3>
-                    🚮 ถังขยะ จุดที่ 5
-                </h3>
-
-                <span class="status status-normal">
-                    🟢 ปกติ
-                </span>
-
-                <p style="margin-top:8px;">
-                    ด้านหน้าโรงเรียน
-                </p>
-
-            </div>
-
+            <!--
+                เปลี่ยนชื่อไฟล์ตรงนี้ให้ตรงกับชื่อรูปแผนที่
+                ที่อัปโหลดไว้ใน GitHub
+            -->
+            <img
+                id="mapImage"
+                src="school-map.png"
+                alt="แผนที่โรงเรียน"
+            >
 
         </div>
 
@@ -537,32 +270,509 @@
 
 </div>
 
+</div>
 
 <script>
 
-function showBin(name, status, location) {
+const SUPABASE_URL =
+    "https://pbjeyvupzbhxodlibjuh.supabase.co";
 
-    document.getElementById("infoName").textContent =
-        name;
+const SUPABASE_KEY =
+    "sb_publishable_paiTf1uzpiCAPR1oWQMlDg_PfVzT2p6";
 
-    document.getElementById("infoStatus").textContent =
-        status;
+const map = document.getElementById("map");
+const notice = document.getElementById("notice");
 
-    document.getElementById("infoLocation").textContent =
-        location;
+let trashBins = [];
+let selectedTrash = null;
 
-    document.getElementById("infoBox").style.display =
-        "block";
 
-    document.getElementById("infoBox").scrollIntoView({
-        behavior: "smooth",
-        block: "nearest"
+/* =========================
+   แสดงข้อความ
+========================= */
+
+function showNotice(text) {
+
+    notice.textContent = text;
+    notice.style.display = "block";
+
+    setTimeout(() => {
+        notice.style.display = "none";
+    }, 2500);
+}
+
+
+/* =========================
+   โหลดถังขยะจาก Supabase
+========================= */
+
+async function loadTrash() {
+
+    try {
+
+        const response = await fetch(
+            SUPABASE_URL +
+            "/rest/v1/trash_bins?select=*",
+            {
+                headers: {
+                    "apikey": SUPABASE_KEY,
+                    "Authorization":
+                        "Bearer " + SUPABASE_KEY
+                }
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error(await response.text());
+        }
+
+        trashBins = await response.json();
+
+        renderTrash();
+
+    } catch (error) {
+
+        console.error(error);
+
+        /*
+            ถ้ายังไม่ได้สร้างตาราง trash_bins
+            แผนที่จะยังเปิดได้ตามปกติ
+        */
+
+        trashBins = [];
+
+    }
+}
+
+
+/* =========================
+   แสดงหมุด
+========================= */
+
+function renderTrash() {
+
+    document
+        .querySelectorAll(".trash")
+        .forEach(el => el.remove());
+
+    trashBins.forEach(bin => {
+
+        const marker =
+            document.createElement("div");
+
+        marker.className = "trash";
+
+        marker.textContent = "🗑️";
+
+        marker.dataset.id = bin.id;
+
+        marker.style.left =
+            bin.x + "%";
+
+        marker.style.top =
+            bin.y + "%";
+
+
+        marker.addEventListener(
+            "pointerdown",
+            startDrag
+        );
+
+        marker.addEventListener(
+            "click",
+            function(event) {
+
+                event.stopPropagation();
+
+                selectTrash(bin.id);
+
+            }
+        );
+
+
+        map.appendChild(marker);
+
     });
+}
+
+
+/* =========================
+   เลือกถังขยะ
+========================= */
+
+function selectTrash(id) {
+
+    selectedTrash = id;
+
+    document
+        .querySelectorAll(".trash")
+        .forEach(el => {
+
+            el.classList.remove("selected");
+
+            if (
+                String(el.dataset.id) ===
+                String(id)
+            ) {
+                el.classList.add("selected");
+            }
+
+        });
 
 }
 
-</script>
 
+/* =========================
+   ลากหมุด
+========================= */
+
+let dragging = null;
+
+function startDrag(event) {
+
+    if (
+        !document
+            .getElementById("adminPanel")
+            .classList
+            .contains("active")
+    ) {
+        return;
+    }
+
+    event.preventDefault();
+
+    const id = this.dataset.id;
+
+    selectTrash(id);
+
+    dragging = this;
+
+    this.classList.add("dragging");
+
+    document.addEventListener(
+        "pointermove",
+        dragMove
+    );
+
+    document.addEventListener(
+        "pointerup",
+        stopDrag
+    );
+}
+
+
+function dragMove(event) {
+
+    if (!dragging) return;
+
+    const rect =
+        map.getBoundingClientRect();
+
+    let x =
+        ((event.clientX - rect.left) /
+        rect.width) * 100;
+
+    let y =
+        ((event.clientY - rect.top) /
+        rect.height) * 100;
+
+
+    x = Math.max(0, Math.min(100, x));
+    y = Math.max(0, Math.min(100, y));
+
+
+    dragging.style.left = x + "%";
+    dragging.style.top = y + "%";
+
+
+    const bin =
+        trashBins.find(
+            b =>
+                String(b.id) ===
+                String(dragging.dataset.id)
+        );
+
+    if (bin) {
+
+        bin.x = x;
+        bin.y = y;
+
+    }
+
+}
+
+
+function stopDrag() {
+
+    if (!dragging) return;
+
+    dragging.classList.remove("dragging");
+
+    dragging = null;
+
+    document.removeEventListener(
+        "pointermove",
+        dragMove
+    );
+
+    document.removeEventListener(
+        "pointerup",
+        stopDrag
+    );
+
+}
+
+
+/* =========================
+   เพิ่มถังขยะ
+========================= */
+
+function addTrash() {
+
+    const newBin = {
+
+        id:
+            "new-" +
+            Date.now(),
+
+        x: 50,
+
+        y: 50,
+
+        name:
+            "ถังขยะใหม่"
+
+    };
+
+    trashBins.push(newBin);
+
+    renderTrash();
+
+    selectTrash(newBin.id);
+
+    showNotice(
+        "➕ เพิ่มถังขยะแล้ว ลากหมุดไปยังตำแหน่งที่ต้องการ"
+    );
+
+}
+
+
+/* =========================
+   ลบถังขยะ
+========================= */
+
+function deleteSelectedTrash() {
+
+    if (!selectedTrash) {
+
+        showNotice(
+            "⚠️ กรุณาเลือกถังขยะก่อน"
+        );
+
+        return;
+    }
+
+    trashBins =
+        trashBins.filter(
+            b =>
+                String(b.id) !==
+                String(selectedTrash)
+        );
+
+    selectedTrash = null;
+
+    renderTrash();
+
+    showNotice(
+        "🗑️ ลบถังขยะแล้ว"
+    );
+
+}
+
+
+/* =========================
+   บันทึกตำแหน่ง
+========================= */
+
+async function saveTrash() {
+
+    try {
+
+        /*
+            ลบข้อมูลเดิมทั้งหมด
+            แล้วบันทึกตำแหน่งใหม่
+        */
+
+        const deleteResponse =
+            await fetch(
+                SUPABASE_URL +
+                "/rest/v1/trash_bins?id=not.is.null",
+                {
+                    method: "DELETE",
+
+                    headers: {
+
+                        "apikey":
+                            SUPABASE_KEY,
+
+                        "Authorization":
+                            "Bearer " +
+                            SUPABASE_KEY
+
+                    }
+                }
+            );
+
+
+        if (!deleteResponse.ok) {
+
+            throw new Error(
+                await deleteResponse.text()
+            );
+
+        }
+
+
+        const data =
+            trashBins.map(bin => ({
+
+                name:
+                    bin.name ||
+                    "ถังขยะ",
+
+                x:
+                    Number(bin.x),
+
+                y:
+                    Number(bin.y)
+
+            }));
+
+
+        if (data.length > 0) {
+
+            const insertResponse =
+                await fetch(
+                    SUPABASE_URL +
+                    "/rest/v1/trash_bins",
+                    {
+
+                        method: "POST",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json",
+
+                            "apikey":
+                                SUPABASE_KEY,
+
+                            "Authorization":
+                                "Bearer " +
+                                SUPABASE_KEY,
+
+                            "Prefer":
+                                "return=minimal"
+
+                        },
+
+                        body:
+                            JSON.stringify(data)
+
+                    }
+                );
+
+
+            if (!insertResponse.ok) {
+
+                throw new Error(
+                    await insertResponse.text()
+                );
+
+            }
+
+        }
+
+
+        await loadTrash();
+
+        showNotice(
+            "✅ บันทึกตำแหน่งถังขยะเรียบร้อยแล้ว"
+        );
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        showNotice(
+            "❌ บันทึกไม่ได้ กรุณาตรวจสอบตาราง trash_bins"
+        );
+
+    }
+
+}
+
+
+/* =========================
+   โหมดแอดมิน
+========================= */
+
+function enterAdmin() {
+
+    document
+        .getElementById("adminPanel")
+        .classList
+        .add("active");
+
+}
+
+
+function exitAdmin() {
+
+    document
+        .getElementById("adminPanel")
+        .classList
+        .remove("active");
+
+    selectedTrash = null;
+
+    document
+        .querySelectorAll(".trash")
+        .forEach(el =>
+            el.classList.remove("selected")
+        );
+
+}
+
+
+/*
+    ตอนนี้ใช้ ?admin=1
+    เพื่อทดสอบระบบจัดการ
+
+    ตัวอย่าง:
+    map.html?admin=1
+*/
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+if (params.get("admin") === "1") {
+
+    enterAdmin();
+
+}
+
+
+/* =========================
+   เริ่มระบบ
+========================= */
+
+loadTrash();
+
+</script>
 
 </body>
 </html>
