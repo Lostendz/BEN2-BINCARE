@@ -31,7 +31,7 @@
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1100px;
             margin: auto;
             padding: 25px 18px;
         }
@@ -61,90 +61,57 @@
             margin-bottom: 20px;
         }
 
-        /* แผนที่ */
-        .map {
+        /* =========================
+           แผนที่จริงของโรงเรียน
+        ========================= */
+
+        .map-wrapper {
             position: relative;
             width: 100%;
-            height: 500px;
-            background: #dcfce7;
-            border: 3px solid #86efac;
-            border-radius: 16px;
             overflow: hidden;
-        }
-
-        .building {
-            position: absolute;
-            background: #ffffff;
-            border: 2px solid #9ca3af;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            font-weight: bold;
-            color: #374151;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-        }
-
-        .building1 {
-            width: 180px;
-            height: 100px;
-            left: 30px;
-            top: 35px;
-        }
-
-        .building2 {
-            width: 180px;
-            height: 100px;
-            right: 30px;
-            top: 35px;
-        }
-
-        .building3 {
-            width: 180px;
-            height: 100px;
-            left: 30px;
-            bottom: 35px;
-        }
-
-        .building4 {
-            width: 180px;
-            height: 100px;
-            right: 30px;
-            bottom: 35px;
-        }
-
-        .field {
-            position: absolute;
-            width: 230px;
-            height: 150px;
-            background: #bbf7d0;
-            border: 2px solid #4ade80;
             border-radius: 15px;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #166534;
-            font-weight: bold;
+            border: 2px solid #d1d5db;
+            background: #eee;
+        }
+
+        .school-map {
+            display: block;
+            width: 100%;
+            height: auto;
         }
 
         /* จุดถังขยะ */
+
         .bin {
             position: absolute;
-            width: 45px;
-            height: 45px;
+
+            width: 42px;
+            height: 42px;
+
             border-radius: 50%;
-            border: 4px solid white;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.25);
-            cursor: pointer;
+
+            border: 3px solid white;
+
+            box-shadow:
+                0 3px 8px rgba(0,0,0,0.35);
+
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
-            z-index: 5;
+
+            font-size: 21px;
+
+            cursor: pointer;
+
+            transform: translate(-50%, -50%);
+
+            z-index: 10;
+
+            transition: 0.2s;
+        }
+
+        .bin:hover {
+            transform: translate(-50%, -50%) scale(1.15);
         }
 
         .normal {
@@ -159,45 +126,43 @@
             background: #dc2626;
         }
 
-        .bin:hover {
-            transform: scale(1.12);
+        /* =========================
+           กล่องข้อมูล
+        ========================= */
+
+        .info-box {
+            display: none;
+
+            margin-top: 20px;
+
+            padding: 18px;
+
+            background: #ecfdf5;
+
+            border-left: 5px solid #16a34a;
+
+            border-radius: 10px;
         }
 
-        .bin1 {
-            left: 210px;
-            top: 105px;
+        .info-box h2 {
+            color: #166534;
+            margin-bottom: 8px;
         }
 
-        .bin2 {
-            right: 210px;
-            top: 105px;
+        .info-box p {
+            margin-top: 6px;
+            line-height: 1.6;
         }
 
-        .bin3 {
-            left: 210px;
-            bottom: 105px;
-        }
+        /* =========================
+           สถานะ
+        ========================= */
 
-        .bin4 {
-            right: 210px;
-            bottom: 105px;
-        }
-
-        .bin5 {
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .bin5:hover {
-            transform: translate(-50%, -50%) scale(1.12);
-        }
-
-        /* คำอธิบายสี */
         .legend {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 18px;
+
             margin-top: 20px;
         }
 
@@ -205,12 +170,13 @@
             display: flex;
             align-items: center;
             gap: 7px;
+
             font-size: 14px;
         }
 
         .dot {
-            width: 15px;
-            height: 15px;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
         }
 
@@ -226,18 +192,28 @@
             background: #dc2626;
         }
 
-        /* รายการ */
+        /* =========================
+           รายการถังขยะ
+        ========================= */
+
         .bin-list {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
             gap: 12px;
+
             margin-top: 15px;
         }
 
         .bin-card {
             border: 1px solid #e5e7eb;
+
             border-radius: 12px;
+
             padding: 15px;
+
             background: #fafafa;
         }
 
@@ -247,9 +223,13 @@
 
         .status {
             display: inline-block;
+
             padding: 5px 10px;
+
             border-radius: 20px;
+
             font-size: 13px;
+
             font-weight: bold;
         }
 
@@ -268,60 +248,20 @@
             color: #991b1b;
         }
 
-        /* กล่องข้อมูล */
-        .info-box {
-            display: none;
-            margin-top: 20px;
-            padding: 18px;
-            background: #ecfdf5;
-            border-left: 5px solid #16a34a;
-            border-radius: 10px;
-        }
-
-        .info-box h2 {
-            margin-bottom: 8px;
-            color: #166534;
-        }
-
         @media (max-width: 650px) {
 
-            .map {
-                height: 430px;
+            .card {
+                padding: 18px;
             }
 
-            .building {
-                width: 130px;
-                height: 80px;
-                font-size: 13px;
-            }
-
-            .building1,
-            .building3 {
-                left: 15px;
-            }
-
-            .building2,
-            .building4 {
-                right: 15px;
-            }
-
-            .bin1,
-            .bin3 {
-                left: 145px;
-            }
-
-            .bin2,
-            .bin4 {
-                right: 145px;
+            .bin {
+                width: 36px;
+                height: 36px;
+                font-size: 18px;
             }
 
             .bin-list {
                 grid-template-columns: 1fr;
-            }
-
-            .field {
-                width: 160px;
-                height: 120px;
             }
         }
     </style>
@@ -330,9 +270,17 @@
 <body>
 
 <header>
-    <div class="logo">BINCARE</div>
-    <div>ระบบดูแลและแจ้งปัญหาภายในโรงเรียน</div>
+
+    <div class="logo">
+        BINCARE
+    </div>
+
+    <div>
+        ระบบดูแลและแจ้งปัญหาภายในโรงเรียน
+    </div>
+
 </header>
+
 
 <div class="container">
 
@@ -340,155 +288,248 @@
         ← กลับหน้าหลัก
     </a>
 
+
     <div class="card">
 
         <h1>🚮 แผนที่ถังขยะ</h1>
 
         <p class="subtitle">
-            ดูตำแหน่งและสถานะถังขยะภายในโรงเรียน
+            คลิกที่จุด 🚮 เพื่อดูตำแหน่งและสถานะของถังขยะ
         </p>
 
-        <div class="map">
 
-            <div class="building building1">
-                🏫<br>อาคาร 1
-            </div>
+        <!-- =========================
+             แผนที่โรงเรียนจริง
+        ========================== -->
 
-            <div class="building building2">
-                🏫<br>อาคาร 2
-            </div>
+        <div class="map-wrapper">
 
-            <div class="building building3">
-                🏫<br>อาคาร 3
-            </div>
+            <img
+                src="school-map.jpg"
+                class="school-map"
+                alt="แผนผังโรงเรียน"
+            >
 
-            <div class="building building4">
-                🏫<br>อาคาร 4
-            </div>
 
-            <div class="field">
-                🌳<br>สนามโรงเรียน
-            </div>
-
-            <div class="bin normal bin1"
-                 onclick="showBin('ถังขยะ อาคาร 1', 'ปกติ', 'บริเวณหน้าอาคาร 1')">
+            <!-- ถังขยะจุดที่ 1 -->
+            <div
+                class="bin normal"
+                style="left: 27%; top: 30%;"
+                onclick="showBin(
+                    'ถังขยะ จุดที่ 1',
+                    'ปกติ',
+                    'บริเวณอาคารเรียน 1'
+                )"
+            >
                 🚮
             </div>
 
-            <div class="bin almost bin2"
-                 onclick="showBin('ถังขยะ อาคาร 2', 'ใกล้เต็ม', 'บริเวณหน้าอาคาร 2')">
+
+            <!-- ถังขยะจุดที่ 2 -->
+            <div
+                class="bin almost"
+                style="left: 61%; top: 31%;"
+                onclick="showBin(
+                    'ถังขยะ จุดที่ 2',
+                    'ใกล้เต็ม',
+                    'บริเวณอาคารเรียน 2'
+                )"
+            >
                 🚮
             </div>
 
-            <div class="bin full bin3"
-                 onclick="showBin('ถังขยะ อาคาร 3', 'เต็ม', 'บริเวณหน้าอาคาร 3')">
+
+            <!-- ถังขยะจุดที่ 3 -->
+            <div
+                class="bin full"
+                style="left: 78%; top: 48%;"
+                onclick="showBin(
+                    'ถังขยะ จุดที่ 3',
+                    'เต็ม',
+                    'บริเวณอาคารเรียน 3'
+                )"
+            >
                 🚮
             </div>
 
-            <div class="bin normal bin4"
-                 onclick="showBin('ถังขยะ อาคาร 4', 'ปกติ', 'บริเวณหน้าอาคาร 4')">
+
+            <!-- ถังขยะจุดที่ 4 -->
+            <div
+                class="bin normal"
+                style="left: 45%; top: 72%;"
+                onclick="showBin(
+                    'ถังขยะ จุดที่ 4',
+                    'ปกติ',
+                    'บริเวณสนามฟุตบอล'
+                )"
+            >
                 🚮
             </div>
 
-            <div class="bin normal bin5"
-                 onclick="showBin('ถังขยะสนามโรงเรียน', 'ปกติ', 'บริเวณข้างสนามโรงเรียน')">
+
+            <!-- ถังขยะจุดที่ 5 -->
+            <div
+                class="bin normal"
+                style="left: 83%; top: 76%;"
+                onclick="showBin(
+                    'ถังขยะ จุดที่ 5',
+                    'ปกติ',
+                    'บริเวณด้านหน้าโรงเรียน'
+                )"
+            >
                 🚮
             </div>
 
         </div>
+
+
+        <!-- คำอธิบายสี -->
 
         <div class="legend">
 
             <div class="legend-item">
                 <div class="dot green"></div>
-                ปกติ
+                🟢 ปกติ
             </div>
 
             <div class="legend-item">
                 <div class="dot orange"></div>
-                ใกล้เต็ม
+                🟠 ใกล้เต็ม
             </div>
 
             <div class="legend-item">
                 <div class="dot red"></div>
-                เต็ม
+                🔴 เต็ม
             </div>
 
         </div>
 
+
+        <!-- กล่องข้อมูล -->
+
         <div id="infoBox" class="info-box">
 
-            <h2 id="infoName"></h2>
+            <h2 id="infoName">
+                -
+            </h2>
 
             <p>
                 <strong>สถานะ:</strong>
-                <span id="infoStatus"></span>
+                <span id="infoStatus">
+                    -
+                </span>
             </p>
 
-            <p style="margin-top:6px;">
+            <p>
                 <strong>ตำแหน่ง:</strong>
-                <span id="infoLocation"></span>
+                <span id="infoLocation">
+                    -
+                </span>
             </p>
 
         </div>
 
     </div>
 
+
+    <!-- =========================
+         รายการถังขยะ
+    ========================== -->
+
     <div class="card">
 
-        <h2>📋 รายการถังขยะ</h2>
+        <h2>
+            📋 รายการถังขยะ
+        </h2>
+
 
         <div class="bin-list">
 
+
             <div class="bin-card">
-                <h3>🚮 ถังขยะ อาคาร 1</h3>
+
+                <h3>
+                    🚮 ถังขยะ จุดที่ 1
+                </h3>
+
                 <span class="status status-normal">
                     🟢 ปกติ
                 </span>
+
                 <p style="margin-top:8px;">
-                    หน้าอาคาร 1
+                    อาคารเรียน 1
                 </p>
+
             </div>
 
+
             <div class="bin-card">
-                <h3>🚮 ถังขยะ อาคาร 2</h3>
+
+                <h3>
+                    🚮 ถังขยะ จุดที่ 2
+                </h3>
+
                 <span class="status status-almost">
                     🟠 ใกล้เต็ม
                 </span>
+
                 <p style="margin-top:8px;">
-                    หน้าอาคาร 2
+                    อาคารเรียน 2
                 </p>
+
             </div>
 
+
             <div class="bin-card">
-                <h3>🚮 ถังขยะ อาคาร 3</h3>
+
+                <h3>
+                    🚮 ถังขยะ จุดที่ 3
+                </h3>
+
                 <span class="status status-full">
                     🔴 เต็ม
                 </span>
+
                 <p style="margin-top:8px;">
-                    หน้าอาคาร 3
+                    อาคารเรียน 3
                 </p>
+
             </div>
 
+
             <div class="bin-card">
-                <h3>🚮 ถังขยะ อาคาร 4</h3>
+
+                <h3>
+                    🚮 ถังขยะ จุดที่ 4
+                </h3>
+
                 <span class="status status-normal">
                     🟢 ปกติ
                 </span>
+
                 <p style="margin-top:8px;">
-                    หน้าอาคาร 4
+                    สนามฟุตบอล
                 </p>
+
             </div>
 
+
             <div class="bin-card">
-                <h3>🚮 ถังขยะสนามโรงเรียน</h3>
+
+                <h3>
+                    🚮 ถังขยะ จุดที่ 5
+                </h3>
+
                 <span class="status status-normal">
                     🟢 ปกติ
                 </span>
+
                 <p style="margin-top:8px;">
-                    ข้างสนามโรงเรียน
+                    ด้านหน้าโรงเรียน
                 </p>
+
             </div>
+
 
         </div>
 
@@ -496,25 +537,32 @@
 
 </div>
 
+
 <script>
 
 function showBin(name, status, location) {
 
-    document.getElementById("infoName").textContent = name;
+    document.getElementById("infoName").textContent =
+        name;
 
-    document.getElementById("infoStatus").textContent = status;
+    document.getElementById("infoStatus").textContent =
+        status;
 
-    document.getElementById("infoLocation").textContent = location;
+    document.getElementById("infoLocation").textContent =
+        location;
 
-    document.getElementById("infoBox").style.display = "block";
+    document.getElementById("infoBox").style.display =
+        "block";
 
     document.getElementById("infoBox").scrollIntoView({
         behavior: "smooth",
         block: "nearest"
     });
+
 }
 
 </script>
+
 
 </body>
 </html>
