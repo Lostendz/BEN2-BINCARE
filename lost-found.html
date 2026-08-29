@@ -18,8 +18,8 @@
 
 body {
     font-family: Arial, sans-serif;
-    background: #f5f8ff;
-    color: #24324a;
+    background: #f4f8ff;
+    color: #172554;
 }
 
 /* =========================
@@ -27,21 +27,22 @@ body {
 ========================= */
 
 header {
-    background: linear-gradient(135deg, #1769c2, #3184d8);
+    background: linear-gradient(135deg, #0759d7, #1687ff);
     color: white;
     padding: 22px 20px;
-    box-shadow: 0 4px 15px rgba(23,105,194,.18);
+    box-shadow: 0 4px 18px rgba(7, 89, 215, .25);
+    border-bottom: 5px solid #ffd21f;
 }
 
 .logo {
     font-size: 28px;
-    font-weight: bold;
+    font-weight: 900;
     letter-spacing: .5px;
 }
 
 header div:last-child {
     margin-top: 3px;
-    color: #fff4bd;
+    color: #fff9d6;
     font-weight: bold;
 }
 
@@ -62,13 +63,13 @@ header div:last-child {
 .back {
     display: inline-block;
     margin-bottom: 15px;
-    color: #1769c2;
+    color: #0759d7;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 800;
 }
 
 .back:hover {
-    color: #0f55a0;
+    color: #ffb800;
 }
 
 /* =========================
@@ -77,10 +78,10 @@ header div:last-child {
 
 .card {
     background: white;
-    border-radius: 22px;
+    border-radius: 24px;
     padding: 28px;
-    box-shadow: 0 5px 18px rgba(31,76,135,.09);
-    border: 1px solid #e2ebf8;
+    box-shadow: 0 8px 30px rgba(30, 64, 175, .10);
+    border: 1px solid #dbeafe;
 }
 
 /* =========================
@@ -89,7 +90,7 @@ header div:last-child {
 
 h1 {
     margin-bottom: 8px;
-    color: #1769c2;
+    color: #123b8f;
 }
 
 .subtitle {
@@ -104,10 +105,10 @@ h1 {
 
 label {
     display: block;
-    font-weight: bold;
+    font-weight: 800;
     margin-top: 18px;
     margin-bottom: 7px;
-    color: #334765;
+    color: #123b8f;
 }
 
 input,
@@ -115,12 +116,12 @@ select,
 textarea {
     width: 100%;
     padding: 13px;
-    border: 1px solid #cbd8e8;
+    border: 2px solid #dbeafe;
     border-radius: 11px;
     font-size: 16px;
     font-family: inherit;
-    color: #24324a;
-    background: #fbfdff;
+    color: #172554;
+    background: #f4f8ff;
     outline: none;
     transition: .2s;
 }
@@ -128,8 +129,8 @@ textarea {
 input:focus,
 select:focus,
 textarea:focus {
-    border-color: #3184d8;
-    box-shadow: 0 0 0 3px rgba(49,132,216,.12);
+    border-color: #1687ff;
+    box-shadow: 0 0 0 3px rgba(22, 135, 255, .12);
     background: white;
 }
 
@@ -148,17 +149,17 @@ button {
     padding: 15px;
     border: none;
     border-radius: 12px;
-    background: #f6c945;
-    color: #24324a;
+    background: linear-gradient(135deg, #ffd21f, #ffb800);
+    color: #172554;
     font-size: 18px;
-    font-weight: bold;
+    font-weight: 900;
     cursor: pointer;
-    box-shadow: 0 4px 10px rgba(246,201,69,.22);
+    box-shadow: 0 4px 12px rgba(255, 210, 31, .28);
     transition: .2s;
 }
 
 button:hover {
-    background: #f3bd22;
+    background: linear-gradient(135deg, #ffca00, #ffb000);
     transform: translateY(-1px);
 }
 
@@ -182,15 +183,15 @@ button:disabled {
 }
 
 .success {
-    background: #e8f7ed;
-    color: #187044;
-    border: 1px solid #bce8cb;
+    background: #dcfce7;
+    color: #087443;
+    border: 1px solid #86efac;
 }
 
 .error {
-    background: #fff0f0;
-    color: #b42323;
-    border: 1px solid #f4c4c4;
+    background: #ffe4e2;
+    color: #c62828;
+    border: 1px solid #ffaaa5;
 }
 
 /* =========================
@@ -199,12 +200,13 @@ button:disabled {
 
 .ticket {
     font-size: 24px;
-    font-weight: bold;
+    font-weight: 900;
     margin-top: 10px;
-    color: #1769c2;
-    background: #eef5ff;
+    color: #765900;
+    background: #fff8cc;
     padding: 10px 13px;
     border-radius: 10px;
+    border: 1px solid #ffe066;
     display: inline-block;
 }
 
@@ -228,6 +230,7 @@ button:disabled {
 
     .card {
         padding: 22px;
+        border-radius: 20px;
     }
 
 }
