@@ -9,6 +9,10 @@
 
 <style>
 
+/* =========================
+   BASE
+========================= */
+
 * {
     box-sizing: border-box;
 }
@@ -16,114 +20,382 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #f4f7f5;
+    background:
+        linear-gradient(
+            135deg,
+            #eff6ff 0%,
+            #f8fbff 55%,
+            #fffbeb 100%
+        );
     min-height: 100vh;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
+    color: #1e293b;
 }
 
-.card {
-    background: white;
-    width: min(92%, 420px);
-    padding: 30px;
-    border-radius: 22px;
-    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+
+/* =========================
+   DECORATION
+========================= */
+
+body::before {
+    content: "";
+    position: fixed;
+
+    width: 280px;
+    height: 280px;
+
+    background: #dbeafe;
+
+    border-radius: 50%;
+
+    top: -120px;
+    left: -100px;
+
+    z-index: -1;
 }
+
+body::after {
+    content: "";
+    position: fixed;
+
+    width: 240px;
+    height: 240px;
+
+    background: #fef3c7;
+
+    border-radius: 50%;
+
+    bottom: -100px;
+    right: -80px;
+
+    z-index: -1;
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.card {
+    background: rgba(255,255,255,.96);
+
+    width: min(92%, 420px);
+
+    padding: 32px;
+
+    border-radius: 24px;
+
+    border: 1px solid #e0e7ff;
+
+    box-shadow:
+        0 15px 40px rgba(37,99,235,.10);
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+/* แถบด้านบน */
+
+.card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 6px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #2563eb,
+            #3b82f6,
+            #fbbf24
+        );
+}
+
+
+/* =========================
+   LOGO
+========================= */
 
 .logo {
     text-align: center;
+
     font-size: 32px;
-    font-weight: bold;
-    color: #166534;
+
+    font-weight: 800;
+
+    color: #2563eb;
+
+    letter-spacing: .3px;
+
+    margin-top: 5px;
 }
+
+.logo::after {
+    content: "";
+
+    display: block;
+
+    width: 48px;
+    height: 4px;
+
+    background: #fbbf24;
+
+    border-radius: 10px;
+
+    margin: 8px auto 0;
+}
+
+
+/* =========================
+   SUBTITLE
+========================= */
 
 .subtitle {
     text-align: center;
-    color: #6b7280;
-    margin: 8px 0 28px;
+
+    color: #64748b;
+
+    margin:
+        12px 0 28px;
+
+    font-size: 15px;
+
+    line-height: 1.5;
 }
+
+
+/* =========================
+   FORM
+========================= */
 
 label {
     display: block;
+
     font-weight: bold;
-    margin: 15px 0 7px;
+
+    margin:
+        16px 0 8px;
+
+    color: #334155;
 }
+
 
 input {
     width: 100%;
-    padding: 14px;
-    border: 1px solid #d1d5db;
-    border-radius: 10px;
+
+    padding: 14px 15px;
+
+    border:
+        1px solid #cbd5e1;
+
+    border-radius: 11px;
+
     font-size: 16px;
+
+    background: #f8fafc;
+
+    outline: none;
+
+    transition:
+        .2s ease;
 }
+
+
+input:focus {
+    border-color: #3b82f6;
+
+    background: white;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(59,130,246,.12);
+}
+
+
+input::placeholder {
+    color: #94a3b8;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
 
 button {
     width: 100%;
-    margin-top: 22px;
+
+    margin-top: 24px;
+
     padding: 14px;
+
     border: 0;
+
     border-radius: 11px;
-    background: #166534;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #3b82f6
+        );
+
     color: white;
+
     font-size: 17px;
+
     font-weight: bold;
+
     cursor: pointer;
+
+    box-shadow:
+        0 6px 15px
+        rgba(37,99,235,.20);
+
+    transition:
+        transform .15s ease,
+        box-shadow .15s ease;
 }
 
-button:disabled {
-    background: #9ca3af;
+
+button:hover {
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 8px 18px
+        rgba(37,99,235,.28);
 }
+
+
+button:active {
+    transform: translateY(0);
+}
+
+
+button:disabled {
+    background: #94a3b8;
+
+    box-shadow: none;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* =========================
+   ERROR
+========================= */
 
 #error {
     display: none;
+
     margin-top: 15px;
-    padding: 12px;
-    background: #fee2e2;
-    color: #991b1b;
+
+    padding: 12px 14px;
+
+    background: #fef2f2;
+
+    color: #b91c1c;
+
+    border:
+        1px solid #fecaca;
+
     border-radius: 10px;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px) {
+
+    .card {
+        padding: 28px 22px;
+    }
+
+    .logo {
+        font-size: 29px;
+    }
+
 }
 
 </style>
 </head>
 
+
 <body>
+
 
 <div class="card">
 
-    <div class="logo">BINCARE</div>
+    <div class="logo">
+        BEN2 BINCARE
+    </div>
+
 
     <div class="subtitle">
         🔐 เข้าสู่ระบบเจ้าหน้าที่
+        <br>
+        ระบบจัดการ BEN2 BINCARE
     </div>
+
 
     <form id="loginForm">
 
-        <label>อีเมล</label>
+        <label>
+            อีเมล
+        </label>
+
 
         <input
             id="email"
             type="email"
             placeholder="อีเมลเจ้าหน้าที่"
+            autocomplete="email"
             required
         >
 
-        <label>รหัสผ่าน</label>
+
+        <label>
+            รหัสผ่าน
+        </label>
+
 
         <input
             id="password"
             type="password"
             placeholder="รหัสผ่าน"
+            autocomplete="current-password"
             required
         >
+
 
         <button
             id="loginButton"
             type="submit">
+
             เข้าสู่ระบบ
+
         </button>
 
     </form>
+
 
     <div id="error"></div>
 
@@ -132,10 +404,16 @@ button:disabled {
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+
 <script>
+
+/* =====================================================
+   SUPABASE
+===================================================== */
 
 const SUPABASE_URL =
 "https://pbjeyvupzbhxodlibjuh.supabase.co";
+
 
 const SUPABASE_KEY =
 "sb_publishable_paiTf1uzpiCAPR1oWQMlDg_PfVzT2p6";
@@ -155,9 +433,9 @@ supabase.createClient(
 );
 
 
-/* =========================
+/* =====================================================
    ตรวจสอบว่าล็อกอินอยู่แล้ว
-========================= */
+===================================================== */
 
 async function checkExistingLogin() {
 
@@ -173,13 +451,11 @@ async function checkExistingLogin() {
         console.error(error);
 
         return;
+
     }
 
 
     if (data.session) {
-
-        // ถ้ามี Session อยู่แล้ว
-        // ไม่ต้องกรอกรหัสใหม่
 
         window.location.href =
             "admin.html";
@@ -189,9 +465,9 @@ async function checkExistingLogin() {
 }
 
 
-/* =========================
+/* =====================================================
    เข้าสู่ระบบ
-========================= */
+===================================================== */
 
 document
 .getElementById("loginForm")
@@ -229,6 +505,7 @@ document
 
         button.textContent =
             "กำลังเข้าสู่ระบบ...";
+
 
         errorBox.style.display =
             "none";
@@ -283,9 +560,9 @@ document
 );
 
 
-/* =========================
-   เริ่มต้น
-========================= */
+/* =====================================================
+   START
+===================================================== */
 
 checkExistingLogin();
 
