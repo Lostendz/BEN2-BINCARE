@@ -4,10 +4,7 @@
 <head>
 
 <meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>แผนที่โรงเรียน | BEN2 BINCARE</title>
 
@@ -23,50 +20,83 @@
 
 body {
     font-family: Arial, sans-serif;
-    background: #f4f7f5;
-    color: #1f2937;
+    background: #f4f8ff;
+    color: #172554;
 }
 
+/* =========================
+   HEADER
+========================= */
+
 header {
-    background: #166534;
+    background: linear-gradient(135deg, #0759d7, #1687ff);
     color: white;
-    padding: 20px;
+    padding: 22px 20px;
+    box-shadow: 0 4px 18px rgba(7, 89, 215, .25);
+    border-bottom: 5px solid #ffd21f;
 }
 
 .logo {
-    font-size: 26px;
-    font-weight: bold;
+    font-size: 29px;
+    font-weight: 900;
+    letter-spacing: .5px;
 }
+
+header > div:last-child {
+    margin-top: 3px;
+    font-size: 15px;
+    opacity: .95;
+}
+
+/* =========================
+   CONTAINER
+========================= */
 
 .container {
     max-width: 1100px;
     margin: auto;
-    padding: 25px 18px;
+    padding: 25px 18px 40px;
 }
 
 .back {
     display: inline-block;
-    margin-bottom: 15px;
-    color: #166534;
+    margin-bottom: 16px;
+    color: #0759d7;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 800;
 }
+
+.back:hover {
+    color: #ffb800;
+}
+
+/* =========================
+   CARD
+========================= */
 
 .card {
     background: white;
-    border-radius: 20px;
-    padding: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 0 8px 30px rgba(30, 64, 175, .10);
+    border: 1px solid #dbeafe;
 }
 
 h1 {
     margin-bottom: 8px;
+    color: #123b8f;
+    font-size: 28px;
 }
 
 .subtitle {
-    color: #6b7280;
+    color: #64748b;
     margin-bottom: 20px;
+    line-height: 1.6;
 }
+
+/* =========================
+   CONTROLS
+========================= */
 
 .controls {
     display: flex;
@@ -77,54 +107,90 @@ h1 {
 
 button {
     border: none;
-    border-radius: 10px;
+    border-radius: 12px;
     padding: 12px 18px;
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 800;
     cursor: pointer;
+    transition: .2s;
+}
+
+button:hover {
+    transform: translateY(-1px);
 }
 
 button:disabled {
-    opacity: 0.6;
+    opacity: .6;
     cursor: not-allowed;
+    transform: none;
 }
 
 .add-btn {
-    background: #16a34a;
-    color: white;
+    background: #ffd21f;
+    color: #172554;
+    box-shadow: 0 4px 12px rgba(255, 210, 31, .28);
+}
+
+.add-btn:hover {
+    background: #ffca00;
 }
 
 .admin-btn {
-    background: #1d4ed8;
+    background: #0759d7;
     color: white;
+    box-shadow: 0 4px 12px rgba(7, 89, 215, .22);
+}
+
+.admin-btn:hover {
+    background: #0049bd;
 }
 
 .refresh-btn {
-    background: #6b7280;
-    color: white;
+    background: #e8f1ff;
+    color: #0759d7;
 }
 
-.login-btn {
-    background: #7c3aed;
-    color: white;
+.refresh-btn:hover {
+    background: #dbeafe;
 }
+
+/* =========================
+   HINT
+========================= */
 
 .hint {
-    background: #f0fdf4;
-    color: #166534;
-    padding: 12px;
-    border-radius: 10px;
+    background: linear-gradient(
+        135deg,
+        #fff9d6,
+        #fff4a8
+    );
+
+    color: #765900;
+
+    padding: 14px 16px;
+
+    border-radius: 13px;
+
     margin-bottom: 15px;
+
+    border-left: 5px solid #ffd21f;
+
+    font-weight: 700;
 }
+
+/* =========================
+   MAP
+========================= */
 
 .map-wrapper {
     position: relative;
     width: 100%;
     overflow: hidden;
-    border-radius: 15px;
-    border: 2px solid #d1d5db;
-    background: #eee;
+    border-radius: 18px;
+    border: 3px solid #b8d5ff;
+    background: #eef5ff;
     touch-action: none;
+    box-shadow: 0 6px 20px rgba(30, 64, 175, .12);
 }
 
 #schoolMap {
@@ -134,7 +200,6 @@ button:disabled {
     user-select: none;
     pointer-events: none;
 }
-
 
 /* =========================
    หมุดถังขยะ
@@ -150,8 +215,8 @@ button:disabled {
 }
 
 .bin-icon {
-    width: 44px;
-    height: 44px;
+    width: 46px;
+    height: 46px;
 
     border-radius: 50%;
 
@@ -163,28 +228,28 @@ button:disabled {
 
     background: white;
 
-    border: 4px solid #16a34a;
+    border: 4px solid #18b96f;
 
     box-shadow:
-        0 3px 10px rgba(0,0,0,0.25);
+        0 4px 12px rgba(15, 23, 42, .25);
 }
 
 .bin.normal .bin-icon {
-    border-color: #16a34a;
+    border-color: #18b96f;
 }
 
 .bin.near_full .bin-icon {
-    border-color: #eab308;
+    border-color: #ffc400;
 }
 
 .bin.full .bin-icon {
-    border-color: #dc2626;
+    border-color: #ff3b30;
 }
 
 .bin-label {
     position: absolute;
 
-    top: 48px;
+    top: 50px;
     left: 50%;
 
     transform: translateX(-50%);
@@ -193,21 +258,24 @@ button:disabled {
 
     background: white;
 
-    padding: 5px 9px;
+    padding: 6px 10px;
 
-    border-radius: 8px;
+    border-radius: 9px;
 
     font-size: 12px;
 
-    font-weight: bold;
+    font-weight: 800;
+
+    color: #172554;
 
     box-shadow:
-        0 2px 7px rgba(0,0,0,0.2);
+        0 3px 10px rgba(15, 23, 42, .18);
+
+    border: 1px solid #dbeafe;
 }
 
-
 /* =========================
-   หน้าต่างแก้ไข
+   MODAL
 ========================= */
 
 .modal-bg {
@@ -217,14 +285,16 @@ button:disabled {
 
     inset: 0;
 
-    background: rgba(0,0,0,0.45);
+    background: rgba(15, 23, 42, .55);
 
     z-index: 100;
-    
+
     align-items: center;
     justify-content: center;
 
     padding: 20px;
+
+    backdrop-filter: blur(3px);
 }
 
 .modal-bg.show {
@@ -237,26 +307,31 @@ button:disabled {
     width: 100%;
     max-width: 420px;
 
-    border-radius: 20px;
+    border-radius: 24px;
 
     padding: 25px;
 
     box-shadow:
-        0 10px 40px rgba(0,0,0,0.25);
+        0 15px 50px rgba(15, 23, 42, .25);
+
+    border-top: 6px solid #ffd21f;
 }
 
 .modal h2 {
     margin-bottom: 20px;
+    color: #123b8f;
 }
 
 .modal label {
     display: block;
 
-    font-weight: bold;
+    font-weight: 800;
 
     margin-top: 15px;
 
     margin-bottom: 7px;
+
+    color: #172554;
 }
 
 .modal input,
@@ -265,11 +340,21 @@ button:disabled {
 
     padding: 12px;
 
-    border: 1px solid #d1d5db;
+    border: 2px solid #dbeafe;
 
-    border-radius: 10px;
+    border-radius: 11px;
 
     font-size: 16px;
+
+    color: #172554;
+
+    outline: none;
+}
+
+.modal input:focus,
+.modal select:focus {
+    border-color: #1687ff;
+    box-shadow: 0 0 0 3px rgba(22, 135, 255, .12);
 }
 
 .modal-buttons {
@@ -283,62 +368,71 @@ button:disabled {
 .save-btn {
     flex: 1;
 
-    background: #16a34a;
+    background: #0759d7;
 
     color: white;
+}
+
+.save-btn:hover {
+    background: #0049bd;
 }
 
 .delete-btn {
     flex: 1;
 
-    background: #dc2626;
+    background: #ff3b30;
 
     color: white;
+}
+
+.delete-btn:hover {
+    background: #dc2626;
 }
 
 .cancel-btn {
     flex: 1;
 
-    background: #6b7280;
+    background: #e8f1ff;
 
-    color: white;
+    color: #0759d7;
 }
 
-
 /* =========================
-   สถานะ
+   STATUS
 ========================= */
 
 .status-box {
     margin-top: 18px;
 
-    padding: 12px;
+    padding: 13px;
 
-    border-radius: 10px;
+    border-radius: 11px;
 
     text-align: center;
 
-    font-weight: bold;
+    font-weight: 800;
 }
 
 .status-normal {
     background: #dcfce7;
-    color: #166534;
+    color: #087443;
+    border: 1px solid #86efac;
 }
 
 .status-near {
-    background: #fef9c3;
-    color: #854d0e;
+    background: #fff8cc;
+    color: #806000;
+    border: 1px solid #ffe066;
 }
 
 .status-full {
-    background: #fee2e2;
-    color: #991b1b;
+    background: #ffe4e2;
+    color: #c62828;
+    border: 1px solid #ffaaa5;
 }
 
-
 /* =========================
-   ข้อความ
+   MESSAGE
 ========================= */
 
 .message {
@@ -346,11 +440,11 @@ button:disabled {
 
     margin-top: 15px;
 
-    padding: 12px;
+    padding: 13px;
 
-    border-radius: 10px;
+    border-radius: 11px;
 
-    font-weight: bold;
+    font-weight: 800;
 }
 
 .message.show {
@@ -359,50 +453,101 @@ button:disabled {
 
 .message.success {
     background: #dcfce7;
-    color: #166534;
+    color: #087443;
+    border: 1px solid #86efac;
 }
 
 .message.error {
-    background: #fee2e2;
-    color: #991b1b;
+    background: #ffe4e2;
+    color: #c62828;
+    border: 1px solid #ffaaa5;
 }
 
-
 /* =========================
-   Admin
+   ADMIN
 ========================= */
 
 .admin-panel {
     display: none;
 
-    background: #eff6ff;
+    background: linear-gradient(
+        135deg,
+        #e8f1ff,
+        #dbeafe
+    );
 
-    padding: 15px;
+    padding: 16px;
 
-    border-radius: 12px;
+    border-radius: 14px;
 
     margin-bottom: 15px;
+
+    border: 1px solid #b8d5ff;
 }
 
 .admin-panel.show {
     display: block;
 }
 
+.admin-panel strong {
+    color: #0759d7;
+}
+
 .admin-info {
     margin-top: 7px;
 
-    color: #1e40af;
+    color: #2454a6;
+
+    font-weight: 600;
 }
 
-
 /* =========================
-   Responsive
+   MOBILE
 ========================= */
 
 @media(max-width:600px) {
 
+    header {
+        padding: 18px;
+    }
+
+    .logo {
+        font-size: 25px;
+    }
+
+    .card {
+        padding: 18px;
+        border-radius: 20px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .controls {
+        flex-direction: column;
+    }
+
+    .controls button {
+        width: 100%;
+    }
+
     .modal-buttons {
         flex-direction: column;
+    }
+
+    .modal-buttons button {
+        width: 100%;
+    }
+
+    .bin-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 22px;
+    }
+
+    .bin-label {
+        top: 43px;
     }
 
 }
@@ -418,7 +563,7 @@ button:disabled {
 <header>
 
     <div class="logo">
-        BINCARE
+        BEN2 BINCARE
     </div>
 
     <div>
