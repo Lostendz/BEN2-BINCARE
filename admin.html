@@ -51,6 +51,7 @@ header {
     padding: 9px 14px;
     border-radius: 9px;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .container {
@@ -63,12 +64,56 @@ h1 {
     margin-bottom: 20px;
 }
 
+/* =========================
+   TABS
+========================= */
+
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.tab {
+    border: none;
+    background: white;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #374151;
+    box-shadow: 0 3px 10px rgba(0,0,0,.06);
+}
+
+.tab.active {
+    background: #166534;
+    color: white;
+}
+
+/* =========================
+   SECTION
+========================= */
+
+.section {
+    display: none;
+}
+
+.section.active {
+    display: block;
+}
+
+/* =========================
+   STATS
+========================= */
+
 .stats {
     display: grid;
     grid-template-columns:
         repeat(3, 1fr);
 
     gap: 15px;
+    margin-bottom: 20px;
 }
 
 .stat {
@@ -96,7 +141,12 @@ h1 {
     color: #16a34a;
 }
 
-.report {
+/* =========================
+   REPORT / ITEM CARD
+========================= */
+
+.report,
+.item-card {
     background: white;
     margin-top: 15px;
     padding: 20px;
@@ -107,11 +157,13 @@ h1 {
 .ticket {
     font-weight: bold;
     color: #166534;
+    margin-bottom: 8px;
 }
 
 .meta {
     color: #6b7280;
     margin: 7px 0;
+    line-height: 1.5;
 }
 
 .status {
@@ -122,12 +174,151 @@ select {
     padding: 10px;
     border-radius: 9px;
     border: 1px solid #d1d5db;
+    background: white;
 }
+
+/* =========================
+   LOST FOUND
+========================= */
+
+.item-type {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.type-lost {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.type-found {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.item-card h2 {
+    margin: 5px 0 15px;
+}
+
+.item-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 18px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    border: none;
+    border-radius: 9px;
+    padding: 11px 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-success {
+    background: #16a34a;
+    color: white;
+}
+
+.btn-danger {
+    background: #dc2626;
+    color: white;
+}
+
+.btn-secondary {
+    background: #e5e7eb;
+    color: #374151;
+}
+
+.btn:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+/* =========================
+   TOP BAR
+========================= */
+
+.section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.section-head h2 {
+    margin: 0;
+}
+
+.refresh {
+    border: none;
+    background: white;
+    padding: 10px 15px;
+    border-radius: 9px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0,0,0,.06);
+}
+
+/* =========================
+   EMPTY / LOADING
+========================= */
 
 .loading {
     text-align: center;
     padding: 30px;
+    color: #6b7280;
 }
+
+.empty {
+    background: white;
+    padding: 35px;
+    border-radius: 16px;
+    text-align: center;
+    color: #6b7280;
+    margin-top: 15px;
+}
+
+.message {
+    display: none;
+    padding: 13px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.message.success {
+    display: block;
+    background: #dcfce7;
+    color: #166534;
+}
+
+.message.error {
+    display: block;
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* =========================
+   REALTIME
+========================= */
+
+.live {
+    color: #16a34a;
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:700px) {
 
@@ -137,6 +328,14 @@ select {
 
     .header-inner {
         align-items: flex-start;
+    }
+
+    .item-actions {
+        flex-direction: column;
+    }
+
+    .item-actions .btn {
+        width: 100%;
     }
 
 }
@@ -153,14 +352,24 @@ select {
 <div class="header-inner">
 
 <div>
-<div class="logo">BINCARE</div>
-<div>📊 Dashboard เจ้าหน้าที่</div>
+
+<div class="logo">
+BINCARE
 </div>
+
+<div>
+📊 Dashboard เจ้าหน้าที่
+</div>
+
+</div>
+
 
 <button
 class="logout"
 onclick="logout()">
+
 ออกจากระบบ
+
 </button>
 
 </div>
@@ -170,10 +379,80 @@ onclick="logout()">
 
 <div class="container">
 
-<h1>รายการแจ้งปัญหา</h1>
+<h1>
+🛠️ ระบบจัดการ BINCARE
+</h1>
+
+
+<!-- =========================
+     TABS
+========================= -->
+
+<div class="tabs">
+
+<button
+class="tab active"
+onclick="showTab('reports', this)">
+
+🚨 แจ้งปัญหา
+
+</button>
+
+
+<button
+class="tab"
+onclick="showTab('lostfound', this)">
+
+📦 ของหาย / พบของ
+
+</button>
+
+</div>
+
+
+<div
+id="message"
+class="message">
+</div>
+
+
+<!-- =====================================================
+     REPORT SECTION
+===================================================== -->
+
+<div
+id="reportsSection"
+class="section active">
+
+
+<div class="section-head">
+
+<div>
+
+<h2>
+🚨 รายการแจ้งปัญหา
+</h2>
+
+<div class="live">
+🟢 Real-time
+</div>
+
+</div>
+
+
+<button
+class="refresh"
+onclick="loadReports()">
+
+🔄 รีเฟรช
+
+</button>
+
+</div>
 
 
 <div class="stats">
+
 
 <div class="stat">
 
@@ -182,7 +461,9 @@ onclick="logout()">
 <div
 id="pendingCount"
 class="stat-number pending">
+
 0
+
 </div>
 
 </div>
@@ -195,7 +476,9 @@ class="stat-number pending">
 <div
 id="progressCount"
 class="stat-number progress">
+
 0
+
 </div>
 
 </div>
@@ -208,10 +491,13 @@ class="stat-number progress">
 <div
 id="resolvedCount"
 class="stat-number resolved">
+
 0
+
 </div>
 
 </div>
+
 
 </div>
 
@@ -219,24 +505,87 @@ class="stat-number resolved">
 <div id="reports">
 
 <div class="loading">
+
 กำลังโหลดข้อมูล...
-</div>
 
 </div>
 
 </div>
 
+
+</div>
+
+
+<!-- =====================================================
+     LOST FOUND SECTION
+===================================================== -->
+
+<div
+id="lostfoundSection"
+class="section">
+
+
+<div class="section-head">
+
+<div>
+
+<h2>
+📦 ของหาย / พบของ
+</h2>
+
+<div class="live">
+🟢 Real-time
+</div>
+
+</div>
+
+
+<button
+class="refresh"
+onclick="loadLostFound()">
+
+🔄 รีเฟรช
+
+</button>
+
+</div>
+
+
+<div id="lostFoundList">
+
+<div class="loading">
+
+กำลังโหลดข้อมูล...
+
+</div>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+<!-- SUPABASE -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
 <script>
 
+/* =====================================================
+   SUPABASE
+===================================================== */
+
 const SUPABASE_URL =
 "https://pbjeyvupzbhxodlibjuh.supabase.co";
 
+
 const SUPABASE_KEY =
 "sb_publishable_paiTf1uzpiCAPR1oWQMlDg_PfVzT2p6";
+
 
 const supabaseClient =
 supabase.createClient(
@@ -245,13 +594,19 @@ supabase.createClient(
 );
 
 
+/* =====================================================
+   LOGIN
+===================================================== */
+
 async function checkLogin() {
 
     const {
         data: { session }
-    } = await supabaseClient
+    } =
+    await supabaseClient
         .auth
         .getSession();
+
 
     if (!session) {
 
@@ -259,11 +614,95 @@ async function checkLogin() {
             "admin-login.html";
 
         return false;
+
     }
 
+
     return true;
+
 }
 
+
+/* =====================================================
+   TAB
+===================================================== */
+
+function showTab(tab, button) {
+
+    document
+        .querySelectorAll(".tab")
+        .forEach(btn => {
+
+            btn.classList.remove("active");
+
+        });
+
+
+    button.classList.add("active");
+
+
+    document
+        .querySelectorAll(".section")
+        .forEach(section => {
+
+            section.classList.remove("active");
+
+        });
+
+
+    if (tab === "reports") {
+
+        document
+            .getElementById("reportsSection")
+            .classList.add("active");
+
+        loadReports();
+
+    }
+
+
+    if (tab === "lostfound") {
+
+        document
+            .getElementById("lostfoundSection")
+            .classList.add("active");
+
+        loadLostFound();
+
+    }
+
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+function showMessage(text, type) {
+
+    const box =
+        document.getElementById("message");
+
+
+    box.textContent = text;
+
+    box.className =
+        "message " + type;
+
+
+    setTimeout(() => {
+
+        box.className =
+            "message";
+
+    }, 4000);
+
+}
+
+
+/* =====================================================
+   LOAD REPORTS
+===================================================== */
 
 async function loadReports() {
 
@@ -271,6 +710,17 @@ async function loadReports() {
         await checkLogin();
 
     if (!loggedIn) return;
+
+
+    const container =
+        document.getElementById("reports");
+
+
+    container.innerHTML = `
+        <div class="loading">
+            กำลังโหลดข้อมูล...
+        </div>
+    `;
 
 
     const {
@@ -290,14 +740,25 @@ async function loadReports() {
 
     if (error) {
 
-        document
-        .getElementById("reports")
-        .innerHTML =
-        "<p>ไม่สามารถโหลดข้อมูลได้</p>";
-
         console.error(error);
 
+
+        container.innerHTML = `
+
+            <div class="empty">
+
+                ❌ ไม่สามารถโหลดข้อมูลได้
+
+                <br><br>
+
+                ${escapeHtml(error.message)}
+
+            </div>
+
+        `;
+
         return;
+
     }
 
 
@@ -321,30 +782,34 @@ async function loadReports() {
 
 
     document
-    .getElementById("pendingCount")
-    .textContent = pending;
+        .getElementById("pendingCount")
+        .textContent = pending;
 
 
     document
-    .getElementById("progressCount")
-    .textContent = progress;
+        .getElementById("progressCount")
+        .textContent = progress;
 
 
     document
-    .getElementById("resolvedCount")
-    .textContent = resolved;
+        .getElementById("resolvedCount")
+        .textContent = resolved;
 
 
-    const container =
-        document.getElementById("reports");
+    if (!data || data.length === 0) {
 
+        container.innerHTML = `
 
-    if (data.length === 0) {
+            <div class="empty">
 
-        container.innerHTML =
-            "<p>ยังไม่มีรายการแจ้งปัญหา</p>";
+                🎉 ยังไม่มีรายการแจ้งปัญหา
+
+            </div>
+
+        `;
 
         return;
+
     }
 
 
@@ -354,32 +819,61 @@ async function loadReports() {
         <div class="report">
 
             <div class="ticket">
-                ${escapeHtml(report.ticket_number)}
+
+                🎫 ${escapeHtml(
+                    report.ticket_number
+                )}
+
             </div>
+
 
             <h2>
-                ${escapeHtml(report.title)}
+
+                ${escapeHtml(
+                    report.title
+                )}
+
             </h2>
 
-            <div class="meta">
-                📌 ${escapeHtml(report.category)}
-            </div>
 
             <div class="meta">
-                📍 ${escapeHtml(report.location)}
+
+                📌 หมวดหมู่:
+                ${escapeHtml(
+                    report.category
+                )}
+
             </div>
 
+
             <div class="meta">
-                📝 ${escapeHtml(
+
+                📍 สถานที่:
+                ${escapeHtml(
+                    report.location
+                )}
+
+            </div>
+
+
+            <div class="meta">
+
+                📝 รายละเอียด:
+                ${escapeHtml(
                     report.description || "-"
                 )}
+
             </div>
+
 
             <div class="status">
 
                 <label>
-                    สถานะ:
+
+                    <b>สถานะ:</b>
+
                 </label>
+
 
                 <select
                     onchange="updateStatus(
@@ -387,26 +881,36 @@ async function loadReports() {
                         this.value
                     )">
 
+
                     <option
                     value="pending"
                     ${report.status === "pending"
                     ? "selected" : ""}>
+
                     🟡 รอตรวจสอบ
+
                     </option>
+
 
                     <option
                     value="in_progress"
                     ${report.status === "in_progress"
                     ? "selected" : ""}>
+
                     🔵 กำลังดำเนินการ
+
                     </option>
+
 
                     <option
                     value="resolved"
                     ${report.status === "resolved"
                     ? "selected" : ""}>
+
                     🟢 แก้ไขแล้ว
+
                     </option>
+
 
                 </select>
 
@@ -419,6 +923,10 @@ async function loadReports() {
 }
 
 
+/* =====================================================
+   UPDATE REPORT STATUS
+===================================================== */
+
 async function updateStatus(id, status) {
 
     const {
@@ -427,23 +935,34 @@ async function updateStatus(id, status) {
     await supabaseClient
         .from("reports")
         .update({
+
             status: status,
+
             updated_at:
                 new Date().toISOString()
+
         })
         .eq("id", id);
 
 
     if (error) {
 
-        alert(
-            "ไม่สามารถเปลี่ยนสถานะได้"
-        );
-
         console.error(error);
 
+        alert(
+            "❌ ไม่สามารถเปลี่ยนสถานะได้\n\n" +
+            error.message
+        );
+
         return;
+
     }
+
+
+    showMessage(
+        "✅ เปลี่ยนสถานะเรียบร้อย",
+        "success"
+    );
 
 
     loadReports();
@@ -451,11 +970,484 @@ async function updateStatus(id, status) {
 }
 
 
+/* =====================================================
+   LOAD LOST FOUND
+===================================================== */
+
+async function loadLostFound() {
+
+    const loggedIn =
+        await checkLogin();
+
+    if (!loggedIn) return;
+
+
+    const container =
+        document.getElementById(
+            "lostFoundList"
+        );
+
+
+    container.innerHTML = `
+
+        <div class="loading">
+
+            กำลังโหลดข้อมูล...
+
+        </div>
+
+    `;
+
+
+    const {
+        data,
+        error
+    } =
+    await supabaseClient
+        .from("lost_found")
+        .select("*")
+        .order(
+            "created_at",
+            {
+                ascending: false
+            }
+        );
+
+
+    if (error) {
+
+        console.error(error);
+
+
+        container.innerHTML = `
+
+            <div class="empty">
+
+                ❌ ไม่สามารถโหลดข้อมูลได้
+
+                <br><br>
+
+                ${escapeHtml(
+                    error.message
+                )}
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    if (!data || data.length === 0) {
+
+        container.innerHTML = `
+
+            <div class="empty">
+
+                📦 ยังไม่มีรายการของหายหรือพบของ
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML = "";
+
+
+    data.forEach(item => {
+
+        const card =
+            document.createElement("div");
+
+
+        card.className =
+            "item-card";
+
+
+        const isFound =
+            item.type === "พบของ";
+
+
+        const claimed =
+            item.is_claimed === true;
+
+
+        card.innerHTML = `
+
+            <div class="item-type ${
+                isFound
+                ? "type-found"
+                : "type-lost"
+            }">
+
+                ${
+                    isFound
+                    ? "🟢 พบของ"
+                    : "🔴 ของหาย"
+                }
+
+            </div>
+
+
+            <div class="ticket">
+
+                🎫 เลขรายการ:
+                ${escapeHtml(
+                    item.ticket_number
+                )}
+
+            </div>
+
+
+            <h2>
+
+                📦 ${escapeHtml(
+                    item.item
+                )}
+
+            </h2>
+
+
+            <div class="meta">
+
+                📍 สถานที่:
+                ${escapeHtml(
+                    item.location
+                )}
+
+            </div>
+
+
+            <div class="meta">
+
+                📝 รายละเอียด:
+                ${escapeHtml(
+                    item.description || "-"
+                )}
+
+            </div>
+
+
+            <div class="meta">
+
+                📅 วันที่แจ้ง:
+                ${formatDate(
+                    item.created_at
+                )}
+
+            </div>
+
+
+            <div class="meta">
+
+                📌 สถานะ:
+
+                ${
+                    claimed
+                    ? "✅ เจ้าของมารับแล้ว"
+                    : "🟢 ยังอยู่ในระบบ"
+                }
+
+            </div>
+
+
+            <div class="item-actions">
+
+
+                ${
+                    isFound && !claimed
+
+                    ? `
+
+                    <button
+                        class="btn btn-success"
+                        onclick="claimItem(
+                            ${item.id}
+                        )">
+
+                        ✅ เจ้าของมารับแล้ว
+
+                    </button>
+
+                    `
+
+                    : ""
+
+                }
+
+
+                ${
+                    isFound && claimed
+
+                    ? `
+
+                    <button
+                        class="btn btn-secondary"
+                        disabled>
+
+                        ✅ รับของเรียบร้อยแล้ว
+
+                    </button>
+
+                    `
+
+                    : ""
+
+                }
+
+
+                <button
+                    class="btn btn-danger"
+                    onclick="deleteLostFound(
+                        ${item.id}
+                    )">
+
+                    🗑️ ลบรายการ
+
+                </button>
+
+
+            </div>
+
+        `;
+
+
+        container.appendChild(card);
+
+    });
+
+}
+
+
+/* =====================================================
+   CLAIM ITEM
+===================================================== */
+
+async function claimItem(id) {
+
+    const confirmed =
+        confirm(
+            "ยืนยันว่าของชิ้นนี้เจ้าของมารับแล้วใช่หรือไม่?"
+        );
+
+
+    if (!confirmed) return;
+
+
+    const {
+        error
+    } =
+    await supabaseClient
+        .from("lost_found")
+        .update({
+
+            is_claimed: true,
+
+            status: "resolved"
+
+        })
+        .eq("id", id);
+
+
+    if (error) {
+
+        console.error(error);
+
+
+        alert(
+            "❌ ไม่สามารถบันทึกสถานะได้\n\n" +
+            error.message
+        );
+
+        return;
+
+    }
+
+
+    showMessage(
+        "✅ บันทึกว่าเจ้าของมารับแล้ว",
+        "success"
+    );
+
+
+    loadLostFound();
+
+}
+
+
+/* =====================================================
+   DELETE LOST FOUND
+===================================================== */
+
+async function deleteLostFound(id) {
+
+    const confirmed =
+        confirm(
+            "ยืนยันลบรายการนี้หรือไม่?\n\nข้อมูลจะถูกลบออกจากระบบ"
+        );
+
+
+    if (!confirmed) return;
+
+
+    const {
+        error
+    } =
+    await supabaseClient
+        .from("lost_found")
+        .delete()
+        .eq("id", id);
+
+
+    if (error) {
+
+        console.error(error);
+
+
+        alert(
+            "❌ ไม่สามารถลบรายการได้\n\n" +
+            error.message
+        );
+
+        return;
+
+    }
+
+
+    showMessage(
+        "🗑️ ลบรายการเรียบร้อย",
+        "success"
+    );
+
+
+    loadLostFound();
+
+}
+
+
+/* =====================================================
+   REALTIME
+===================================================== */
+
+supabaseClient
+    .channel("admin-dashboard-live")
+
+    .on(
+        "postgres_changes",
+        {
+            event: "*",
+            schema: "public",
+            table: "reports"
+        },
+
+        function() {
+
+            loadReports();
+
+        }
+
+    )
+
+    .on(
+        "postgres_changes",
+        {
+            event: "*",
+            schema: "public",
+            table: "lost_found"
+        },
+
+        function() {
+
+            loadLostFound();
+
+        }
+
+    )
+
+    .subscribe();
+
+
+/* =====================================================
+   DATE
+===================================================== */
+
+function formatDate(date) {
+
+    if (!date) return "-";
+
+
+    return new Date(date)
+        .toLocaleString(
+            "th-TH",
+            {
+                dateStyle: "medium",
+                timeStyle: "short"
+            }
+        );
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHtml(value) {
+
+    if (value === null ||
+        value === undefined) {
+
+        return "";
+
+    }
+
+
+    return String(value)
+
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
 async function logout() {
 
     await supabaseClient
         .auth
         .signOut();
+
 
     window.location.href =
         "admin-login.html";
@@ -463,19 +1455,19 @@ async function logout() {
 }
 
 
-function escapeHtml(value) {
+/* =====================================================
+   START
+===================================================== */
 
-    return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+checkLogin()
+    .then(loggedIn => {
 
-}
+        if (!loggedIn) return;
 
+        loadReports();
+        loadLostFound();
 
-loadReports();
+    });
 
 </script>
 
