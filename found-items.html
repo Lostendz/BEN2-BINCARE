@@ -13,13 +13,48 @@
 
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
+/* =========================
+   THEME — เหมือน index.html
+========================= */
+
+:root {
+
+    --blue: #0759d7;
+    --blue-dark: #123b8f;
+    --blue-light: #e8f1ff;
+
+    --yellow: #ffd21f;
+    --yellow-light: #fff9d6;
+
+    --text: #172554;
+    --muted: #64748b;
+
+    --bg: #f4f8ff;
+    --white: #ffffff;
+
+    --border: #dbeafe;
+}
+
+/* =========================
+   BODY
+========================= */
+
 body {
-    margin: 0;
-    font-family: Arial, "Noto Sans Thai", sans-serif;
-    background: linear-gradient(135deg, #eef6ff, #fff9db);
-    color: #172554;
+
+    font-family:
+        Arial,
+        "Noto Sans Thai",
+        sans-serif;
+
+    background: #f4f8ff;
+
+    color: var(--text);
+
+    min-height: 100vh;
 }
 
 /* =========================
@@ -27,21 +62,39 @@ body {
 ========================= */
 
 header {
-    background: linear-gradient(135deg, #075985, #2563eb);
+
+    background:
+        linear-gradient(
+            135deg,
+            #0759d7,
+            #1687ff
+        );
+
     color: white;
-    padding: 22px 20px;
-    box-shadow: 0 5px 18px rgba(37, 99, 235, .25);
+
+    padding: 18px 20px;
+
+    box-shadow:
+        0 4px 18px rgba(7, 89, 215, .25);
+
+    border-bottom: 5px solid #ffd21f;
 }
 
 .logo {
-    font-size: 28px;
-    font-weight: 900;
+
+    font-size: 26px;
+
+    font-weight: bold;
+
     letter-spacing: .5px;
 }
 
 header div:last-child {
-    margin-top: 4px;
-    color: #fef08a;
+
+    margin-top: 3px;
+
+    color: #fff4a8;
+
     font-weight: bold;
 }
 
@@ -50,9 +103,12 @@ header div:last-child {
 ========================= */
 
 .container {
+
     max-width: 900px;
+
     margin: auto;
-    padding: 28px 18px 40px;
+
+    padding: 35px 18px 50px;
 }
 
 /* =========================
@@ -60,23 +116,38 @@ header div:last-child {
 ========================= */
 
 .back {
+
     display: inline-flex;
+
     align-items: center;
+
     gap: 5px;
+
     margin-bottom: 18px;
-    color: #1d4ed8;
+
+    color: #0759d7;
+
     text-decoration: none;
-    font-weight: 800;
+
+    font-weight: bold;
+
     background: white;
-    padding: 9px 14px;
+
+    padding: 10px 14px;
+
     border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(30,64,175,.08);
+
+    box-shadow:
+        0 3px 10px rgba(30,64,175,.08);
+
     transition: .2s;
 }
 
 .back:hover {
+
     transform: translateX(-3px);
-    background: #eff6ff;
+
+    background: var(--yellow-light);
 }
 
 /* =========================
@@ -84,37 +155,61 @@ header div:last-child {
 ========================= */
 
 .hero {
-    background: rgba(255,255,255,.96);
+
+    background: white;
+
     border-radius: 24px;
-    padding: 28px;
-    margin-bottom: 20px;
-    border: 2px solid #dbeafe;
-    box-shadow: 0 12px 35px rgba(30,64,175,.12);
+
+    padding: 30px;
+
+    margin-bottom: 25px;
+
+    border: 2px solid var(--border);
+
+    box-shadow:
+        0 12px 35px rgba(30,64,175,.10);
+
     position: relative;
+
     overflow: hidden;
 }
 
 .hero::before {
+
     content: "";
+
     position: absolute;
+
     width: 100px;
+
     height: 100px;
-    background: #fff9db;
+
+    background: var(--yellow-light);
+
     border-radius: 50%;
+
     right: -35px;
+
     top: -35px;
+
     opacity: .9;
 }
 
 .hero h1 {
-    margin: 0 0 8px;
-    color: #1e3a8a;
+
+    margin: 0 0 10px;
+
+    color: var(--blue-dark);
+
     position: relative;
 }
 
 .hero p {
-    color: #64748b;
-    line-height: 1.6;
+
+    color: var(--muted);
+
+    line-height: 1.7;
+
     position: relative;
 }
 
@@ -123,21 +218,45 @@ header div:last-child {
 ========================= */
 
 .report-button {
+
     display: inline-block;
-    margin-top: 15px;
-    background: linear-gradient(135deg, #facc15, #f59e0b);
-    color: #172554;
+
+    margin-top: 16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffd21f,
+            #f6b900
+        );
+
+    color: var(--text);
+
     padding: 12px 18px;
+
     border-radius: 11px;
+
     text-decoration: none;
-    font-weight: 900;
+
+    font-weight: bold;
+
     transition: .2s;
-    box-shadow: 0 5px 14px rgba(245,158,11,.25);
+
+    box-shadow:
+        0 5px 14px rgba(246,201,69,.25);
+
     position: relative;
 }
 
 .report-button:hover {
-    background: linear-gradient(135deg, #f59e0b, #d97706);
+
+    background:
+        linear-gradient(
+            135deg,
+            #f6c000,
+            #e6a900
+        );
+
     transform: translateY(-2px);
 }
 
@@ -146,10 +265,15 @@ header div:last-child {
 ========================= */
 
 .live {
+
     display: inline-block;
+
     margin-top: 14px;
+
     font-size: 14px;
-    color: #1d4ed8;
+
+    color: #0759d7;
+
     font-weight: bold;
 }
 
@@ -158,7 +282,9 @@ header div:last-child {
 ========================= */
 
 .list {
+
     display: grid;
+
     gap: 16px;
 }
 
@@ -167,18 +293,29 @@ header div:last-child {
 ========================= */
 
 .item {
-    background: rgba(255,255,255,.96);
+
+    background: white;
+
     border-radius: 18px;
+
     padding: 21px;
-    box-shadow: 0 8px 25px rgba(30,64,175,.08);
-    border: 2px solid #dbeafe;
+
+    box-shadow:
+        0 8px 25px rgba(30,64,175,.08);
+
+    border: 2px solid var(--border);
+
     transition: .2s;
 }
 
 .item:hover {
+
     transform: translateY(-3px);
-    border-color: #93c5fd;
-    box-shadow: 0 10px 25px rgba(30,64,175,.12);
+
+    border-color: #b8d5ff;
+
+    box-shadow:
+        0 10px 25px rgba(30,64,175,.12);
 }
 
 /* =========================
@@ -186,15 +323,24 @@ header div:last-child {
 ========================= */
 
 .badge {
+
     display: inline-block;
+
     padding: 7px 12px;
+
     border-radius: 20px;
-    background: #fff9db;
-    color: #713f12;
+
+    background: var(--yellow-light);
+
+    color: #765900;
+
     font-weight: bold;
+
     font-size: 14px;
+
     margin-bottom: 10px;
-    border: 1px solid #f0df9b;
+
+    border: 1px solid #ffe066;
 }
 
 /* =========================
@@ -202,8 +348,10 @@ header div:last-child {
 ========================= */
 
 .item h2 {
+
     margin: 5px 0 12px;
-    color: #1e3a8a;
+
+    color: var(--blue-dark);
 }
 
 /* =========================
@@ -211,13 +359,17 @@ header div:last-child {
 ========================= */
 
 .info {
+
     margin: 8px 0;
+
     line-height: 1.6;
-    color: #64748b;
+
+    color: var(--muted);
 }
 
 .info b {
-    color: #1e3a8a;
+
+    color: var(--blue-dark);
 }
 
 /* =========================
@@ -225,10 +377,15 @@ header div:last-child {
 ========================= */
 
 .ticket {
+
     margin-top: 15px;
+
     padding-top: 13px;
-    border-top: 1px solid #dbeafe;
-    color: #1d4ed8;
+
+    border-top: 1px solid var(--border);
+
+    color: #0759d7;
+
     font-weight: bold;
 }
 
@@ -237,30 +394,60 @@ header div:last-child {
 ========================= */
 
 .claim-button {
+
     width: 100%;
+
     margin-top: 18px;
+
     border: none;
+
     border-radius: 11px;
+
     padding: 13px 16px;
-    background: linear-gradient(135deg, #facc15, #f59e0b);
-    color: #172554;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffd21f,
+            #f6b900
+        );
+
+    color: var(--text);
+
     font-size: 16px;
-    font-weight: 900;
+
+    font-weight: bold;
+
     cursor: pointer;
+
     transition: .2s;
-    box-shadow: 0 5px 14px rgba(245,158,11,.22);
+
+    box-shadow:
+        0 5px 14px rgba(246,201,69,.22);
 }
 
 .claim-button:hover {
-    background: linear-gradient(135deg, #f59e0b, #d97706);
+
+    background:
+        linear-gradient(
+            135deg,
+            #f6c000,
+            #e6a900
+        );
+
     transform: translateY(-2px);
 }
 
 .claim-button:disabled {
+
     background: #cbd5e1;
+
     color: #64748b;
+
     cursor: not-allowed;
+
     transform: none;
+
     box-shadow: none;
 }
 
@@ -269,13 +456,21 @@ header div:last-child {
 ========================= */
 
 .empty {
-    background: rgba(255,255,255,.96);
+
+    background: white;
+
     padding: 38px;
+
     border-radius: 18px;
+
     text-align: center;
-    color: #64748b;
-    border: 2px solid #dbeafe;
-    box-shadow: 0 8px 25px rgba(30,64,175,.06);
+
+    color: var(--muted);
+
+    border: 2px solid var(--border);
+
+    box-shadow:
+        0 8px 25px rgba(30,64,175,.06);
 }
 
 /* =========================
@@ -283,9 +478,12 @@ header div:last-child {
 ========================= */
 
 .loading {
+
     text-align: center;
+
     padding: 35px;
-    color: #64748b;
+
+    color: var(--muted);
 }
 
 /* =========================
@@ -293,24 +491,37 @@ header div:last-child {
 ========================= */
 
 .message {
+
     display: none;
+
     padding: 14px 16px;
+
     border-radius: 12px;
+
     margin-bottom: 15px;
+
     font-weight: bold;
 }
 
 .message.success {
+
     display: block;
-    background: #ecfeff;
-    color: #155e75;
-    border: 2px solid #22d3ee;
+
+    background: #e8f7ed;
+
+    color: #187044;
+
+    border: 2px solid #bce8cb;
 }
 
 .message.error {
+
     display: block;
+
     background: #fff1f2;
+
     color: #9f1239;
+
     border: 2px solid #fb7185;
 }
 
@@ -321,23 +532,29 @@ header div:last-child {
 @media(max-width:600px) {
 
     header {
+
         padding: 19px 17px;
     }
 
     .logo {
+
         font-size: 25px;
     }
 
     .container {
+
         padding: 20px 14px 35px;
     }
 
     .hero {
+
         padding: 22px;
+
         border-radius: 20px;
     }
 
     .item {
+
         padding: 18px;
     }
 
