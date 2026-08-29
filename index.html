@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ตรวจสอบสถานะ | BINCARE</title>
+<title>BINCARE | ระบบดูแลโรงเรียน</title>
 
 <style>
 
@@ -22,31 +22,25 @@
 
 
 /* =====================================================
-   COLOR THEME
-   น้ำเงิน - เหลือง แบบนุ่ม
+   THEME
 ===================================================== */
 
 :root {
 
-    --blue: #4A78A8;
-    --blue-dark: #3E6792;
-    --blue-light: #EAF2F9;
+    --blue: #3f6fa8;
+    --blue-dark: #315b8c;
+    --blue-light: #eaf2fb;
 
-    --yellow: #F4C95D;
-    --yellow-light: #FFF7DD;
+    --yellow: #e9c95d;
+    --yellow-light: #fff8dc;
 
-    --green: #5FA777;
-    --green-light: #EAF6EE;
+    --text: #26364a;
+    --muted: #6b7280;
 
-    --red: #D96B6B;
-    --red-light: #FDECEC;
+    --bg: #f5f8fc;
+    --white: #ffffff;
 
-    --text: #263445;
-    --text-light: #6B7280;
-
-    --background: #F5F7FA;
-    --white: #FFFFFF;
-    --border: #E1E7EF;
+    --border: #dce5ef;
 
 }
 
@@ -57,15 +51,12 @@
 
 body {
 
-    font-family: Arial, sans-serif;
+    font-family:
+        Arial,
+        "Noto Sans Thai",
+        sans-serif;
 
-    background:
-        linear-gradient(
-            180deg,
-            #EEF4FA 0%,
-            #F5F7FA 35%,
-            #F5F7FA 100%
-        );
+    background: var(--bg);
 
     color: var(--text);
 
@@ -80,21 +71,76 @@ body {
 
 header {
 
-    background: var(--blue);
+    background:
+        linear-gradient(
+            135deg,
+            #3f6fa8,
+            #527fb5
+        );
 
     color: white;
 
-    padding: 20px;
+    padding: 18px 20px;
 
     box-shadow:
-        0 3px 12px rgba(60, 90, 120, .12);
+        0 3px 15px rgba(49,91,140,.15);
+
+}
+
+
+.header-inner {
+
+    max-width: 1100px;
+
+    margin: auto;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+}
+
+
+.brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+
+.logo-box {
+
+    width: 48px;
+    height: 48px;
+
+    background: #fff9df;
+
+    color: var(--blue);
+
+    border-radius: 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 25px;
 
 }
 
 
 .logo {
 
-    font-size: 27px;
+    font-size: 26px;
 
     font-weight: bold;
 
@@ -103,490 +149,597 @@ header {
 }
 
 
-.header-subtitle {
+.subtitle {
 
-    margin-top: 4px;
+    font-size: 14px;
 
-    font-size: 15px;
+    opacity: .9;
 
-    opacity: .95;
+    margin-top: 3px;
+
+}
+
+
+.admin-button {
+
+    text-decoration: none;
+
+    color: var(--blue-dark);
+
+    background: white;
+
+    padding: 10px 15px;
+
+    border-radius: 10px;
+
+    font-weight: bold;
+
+    font-size: 14px;
+
+    transition: .2s;
+
+}
+
+
+.admin-button:hover {
+
+    background: var(--yellow-light);
 
 }
 
 
 /* =====================================================
-   CONTAINER
+   MAIN
 ===================================================== */
 
 .container {
 
-    max-width: 700px;
+    max-width: 1100px;
 
     margin: auto;
 
-    padding: 25px 18px 40px;
+    padding: 35px 18px 50px;
 
 }
 
 
 /* =====================================================
-   BACK
+   HERO
 ===================================================== */
 
-.back {
+.hero {
 
-    display: inline-block;
+    background: white;
 
-    margin-bottom: 15px;
+    border-radius: 24px;
 
-    color: var(--blue);
+    padding: 35px 30px;
 
-    text-decoration: none;
+    border: 1px solid var(--border);
 
-    font-weight: bold;
+    box-shadow:
+        0 5px 20px rgba(49,91,140,.07);
+
+    margin-bottom: 25px;
 
 }
 
 
-.back:hover {
+.hero-badge {
+
+    display: inline-block;
+
+    background: var(--yellow-light);
+
+    color: #806b1d;
+
+    padding: 7px 13px;
+
+    border-radius: 20px;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    margin-bottom: 13px;
+
+}
+
+
+.hero h1 {
+
+    font-size: 32px;
+
+    line-height: 1.25;
+
+    color: var(--blue-dark);
+
+    margin-bottom: 10px;
+
+}
+
+
+.hero p {
+
+    color: var(--muted);
+
+    line-height: 1.7;
+
+    max-width: 700px;
+
+}
+
+
+/* =====================================================
+   QUICK SYSTEMS
+===================================================== */
+
+.section-title {
+
+    margin-bottom: 15px;
+
+}
+
+
+.section-title h2 {
+
+    font-size: 22px;
 
     color: var(--blue-dark);
 
 }
 
 
-/* =====================================================
-   MAIN CARD
-===================================================== */
+.section-title p {
 
-.card {
+    color: var(--muted);
 
-    background: var(--white);
+    margin-top: 5px;
 
-    border-radius: 22px;
-
-    padding: 28px;
-
-    box-shadow:
-        0 5px 20px rgba(50, 70, 90, .08);
-
-    border: 1px solid rgba(225, 231, 239, .8);
+    font-size: 14px;
 
 }
 
 
-/* =====================================================
-   TITLE
-===================================================== */
+.system-grid {
 
-h1 {
+    display: grid;
 
-    margin-bottom: 9px;
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 16px;
+
+}
+
+
+.system-card {
+
+    text-decoration: none;
+
+    color: var(--text);
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 18px;
+
+    padding: 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 17px;
+
+    transition:
+        transform .2s,
+        box-shadow .2s,
+        border-color .2s;
+
+}
+
+
+.system-card:hover {
+
+    transform: translateY(-3px);
+
+    border-color: #b8cce2;
+
+    box-shadow:
+        0 8px 22px rgba(49,91,140,.10);
+
+}
+
+
+.icon {
+
+    width: 54px;
+    height: 54px;
+
+    flex-shrink: 0;
+
+    border-radius: 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
 
     font-size: 27px;
 
 }
 
 
-.subtitle {
+.icon-blue {
 
-    color: var(--text-light);
-
-    margin-bottom: 25px;
-
-    line-height: 1.6;
+    background: var(--blue-light);
 
 }
 
 
-/* =====================================================
-   SEARCH
-===================================================== */
+.icon-yellow {
 
-.search-box {
-
-    display: flex;
-
-    gap: 10px;
+    background: var(--yellow-light);
 
 }
 
 
-input {
+.system-info {
 
     flex: 1;
 
-    padding: 14px;
+}
 
-    border:
-        1px solid var(--border);
 
-    border-radius: 11px;
+.system-info h3 {
 
-    font-size: 16px;
+    color: var(--blue-dark);
 
-    outline: none;
+    font-size: 18px;
 
-    color: var(--text);
-
-    background: #FCFDFE;
-
-    transition: .2s;
+    margin-bottom: 5px;
 
 }
 
 
-input:focus {
+.system-info p {
 
-    border-color: var(--blue);
+    color: var(--muted);
 
-    box-shadow:
-        0 0 0 3px rgba(74, 120, 168, .12);
+    font-size: 14px;
 
-    background: white;
+    line-height: 1.5;
 
 }
 
 
-input::placeholder {
+.arrow {
 
-    color: #9CA3AF;
+    color: #91a6bc;
+
+    font-size: 22px;
 
 }
 
 
 /* =====================================================
-   SEARCH BUTTON
+   MAP CARD
 ===================================================== */
 
-button {
+.map-card {
 
-    border: none;
+    margin-top: 25px;
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 20px;
+
+    padding: 23px;
+
+    box-shadow:
+        0 5px 18px rgba(49,91,140,.06);
+
+}
+
+
+.map-head {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.map-head h2 {
+
+    color: var(--blue-dark);
+
+    font-size: 21px;
+
+}
+
+
+.map-head p {
+
+    color: var(--muted);
+
+    font-size: 14px;
+
+    margin-top: 4px;
+
+}
+
+
+.map-button {
+
+    text-decoration: none;
 
     background: var(--blue);
 
     color: white;
 
-    padding: 14px 20px;
+    padding: 10px 15px;
 
-    border-radius: 11px;
-
-    font-size: 16px;
+    border-radius: 10px;
 
     font-weight: bold;
 
-    cursor: pointer;
-
-    transition: .2s;
+    font-size: 14px;
 
 }
 
 
-button:hover {
+.map-button:hover {
 
     background: var(--blue-dark);
 
-    transform: translateY(-1px);
-
-}
-
-
-button:active {
-
-    transform: translateY(0);
-
-}
-
-
-button:disabled {
-
-    background: #AAB6C4;
-
-    cursor: not-allowed;
-
-    transform: none;
-
 }
 
 
 /* =====================================================
-   HINT
+   MAP PREVIEW
 ===================================================== */
 
-.hint {
+.map-preview {
 
-    margin-top: 15px;
+    width: 100%;
 
-    padding: 13px 15px;
+    min-height: 220px;
 
-    border-radius: 11px;
+    background: var(--blue-light);
 
-    background: var(--yellow-light);
+    border-radius: 15px;
 
-    color: #80651D;
+    display: flex;
 
-    font-size: 14px;
+    align-items: center;
 
-    line-height: 1.6;
+    justify-content: center;
 
-    border-left:
-        4px solid var(--yellow);
+    overflow: hidden;
+
+    border: 1px solid #d6e3f1;
 
 }
 
 
-/* =====================================================
-   LOADING
-===================================================== */
+.map-preview img {
 
-.loading {
+    width: 100%;
 
-    display: none;
+    max-height: 400px;
 
-    margin-top: 22px;
-
-    text-align: center;
-
-    color: var(--text-light);
-
-    padding: 10px;
-
-}
-
-
-/* =====================================================
-   NOT FOUND
-===================================================== */
-
-.not-found {
-
-    display: none;
-
-    margin-top: 25px;
-
-    padding: 18px;
-
-    border-radius: 12px;
-
-    background: var(--red-light);
-
-    color: #9B4545;
-
-    line-height: 1.6;
-
-}
-
-
-/* =====================================================
-   RESULT
-===================================================== */
-
-.result {
-
-    display: none;
-
-    margin-top: 25px;
-
-    border-top:
-        1px solid var(--border);
-
-    padding-top: 25px;
-
-}
-
-
-.result.show {
+    object-fit: contain;
 
     display: block;
 
 }
 
 
-/* =====================================================
-   RESULT CARD
-===================================================== */
+.map-placeholder {
 
-.result-card {
+    text-align: center;
 
-    border:
-        1px solid var(--border);
+    padding: 30px;
 
-    border-radius: 16px;
+    color: var(--muted);
 
-    padding: 21px;
+}
 
-    background: #FCFDFE;
+
+.map-placeholder .map-icon {
+
+    font-size: 45px;
+
+    margin-bottom: 10px;
 
 }
 
 
 /* =====================================================
-   TYPE
+   NOTICE
 ===================================================== */
 
-.type {
+.notice {
 
-    display: inline-block;
-
-    background: var(--blue-light);
-
-    color: var(--blue-dark);
-
-    padding: 7px 13px;
-
-    border-radius: 20px;
-
-    font-weight: bold;
-
-    margin-bottom: 12px;
-
-}
-
-
-/* =====================================================
-   TICKET
-===================================================== */
-
-.ticket {
-
-    font-size: 22px;
-
-    font-weight: bold;
-
-    color: var(--blue-dark);
-
-    margin-bottom: 17px;
-
-    word-break: break-word;
-
-}
-
-
-/* =====================================================
-   INFO
-===================================================== */
-
-.info {
-
-    margin: 11px 0;
-
-    line-height: 1.6;
-
-    color: var(--text);
-
-}
-
-
-/* =====================================================
-   STATUS
-===================================================== */
-
-.status {
-
-    display: inline-block;
-
-    margin-top: 15px;
-
-    padding: 9px 15px;
-
-    border-radius: 20px;
-
-    font-weight: bold;
-
-}
-
-
-/* รอตรวจสอบ */
-
-.pending {
+    margin-top: 25px;
 
     background: var(--yellow-light);
 
-    color: #80651D;
+    border: 1px solid #f0df9b;
+
+    border-radius: 17px;
+
+    padding: 18px 20px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 13px;
 
 }
 
 
-/* กำลังดำเนินการ */
+.notice-icon {
 
-.in_progress {
-
-    background: var(--blue-light);
-
-    color: var(--blue-dark);
+    font-size: 23px;
 
 }
 
 
-/* ดำเนินการแล้ว */
+.notice h3 {
 
-.resolved {
+    color: #75621d;
 
-    background: var(--green-light);
+    margin-bottom: 4px;
 
-    color: #39764E;
+    font-size: 16px;
 
 }
 
 
-/* เจ้าของรับแล้ว */
+.notice p {
 
-.claimed {
+    color: #756b4a;
 
-    background: var(--green-light);
+    font-size: 14px;
 
-    color: #39764E;
+    line-height: 1.6;
 
 }
 
 
 /* =====================================================
-   RESPONSIVE
+   FOOTER
 ===================================================== */
 
-@media(max-width:600px) {
+footer {
 
-    .container {
+    margin-top: 35px;
 
-        padding:
-            20px 14px 35px;
+    text-align: center;
+
+    color: #8a98a8;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:700px) {
+
+    .header-inner {
+
+        align-items: flex-start;
 
     }
 
 
-    .card {
+    .admin-button {
 
-        padding: 22px 18px;
+        font-size: 13px;
 
-        border-radius: 18px;
-
-    }
-
-
-    h1 {
-
-        font-size: 23px;
+        padding: 9px 11px;
 
     }
 
 
-    .search-box {
+    .hero {
+
+        padding: 28px 22px;
+
+    }
+
+
+    .hero h1 {
+
+        font-size: 27px;
+
+    }
+
+
+    .system-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .map-head {
 
         flex-direction: column;
 
+        align-items: flex-start;
+
     }
 
 
-    button {
+    .map-button {
 
         width: 100%;
 
+        text-align: center;
+
+    }
+
+}
+
+
+@media(max-width:450px) {
+
+    .logo-box {
+
+        width: 42px;
+        height: 42px;
+
+        font-size: 21px;
+
     }
 
 
-    .ticket {
+    .logo {
 
-        font-size: 19px;
+        font-size: 22px;
+
+    }
+
+
+    .subtitle {
+
+        font-size: 12px;
+
+    }
+
+
+    .admin-button {
+
+        display: none;
+
+    }
+
+
+    .hero h1 {
+
+        font-size: 24px;
 
     }
 
@@ -606,12 +759,37 @@ button:disabled {
 
 <header>
 
+<div class="header-inner">
+
+<div class="brand">
+
+<div class="logo-box">
+🗑️
+</div>
+
+<div>
+
 <div class="logo">
 BINCARE
 </div>
 
-<div class="header-subtitle">
-🔎 ระบบตรวจสอบสถานะ
+<div class="subtitle">
+ระบบดูแลโรงเรียน
+</div>
+
+</div>
+
+</div>
+
+
+<a
+href="admin-login.html"
+class="admin-button">
+
+🔐 เจ้าหน้าที่
+
+</a>
+
 </div>
 
 </header>
@@ -621,757 +799,289 @@ BINCARE
      MAIN
 ===================================================== -->
 
-<div class="container">
+<main class="container">
 
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="hero-badge">
+🏫 ระบบบริการภายในโรงเรียน
+</div>
+
+
+<h1>
+ดูแลโรงเรียนให้น่าอยู่<br>
+ง่ายขึ้นในที่เดียว
+</h1>
+
+
+<p>
+BINCARE ช่วยให้การแจ้งปัญหา
+การจัดการของหาย–พบของ
+และการดูแลจุดต่าง ๆ ภายในโรงเรียน
+เป็นเรื่องง่ายและตรวจสอบได้
+</p>
+
+</section>
+
+
+
+<!-- =====================================================
+     QUICK ACCESS
+===================================================== -->
+
+<section>
+
+<div class="section-title">
+
+<h2>
+⚡ ทางลัดระบบ
+</h2>
+
+<p>
+เลือกเมนูที่ต้องการใช้งานได้ทันที
+</p>
+
+</div>
+
+
+<div class="system-grid">
+
+
+<!-- REPORT -->
 
 <a
-href="index.html"
-class="back">
+href="report.html"
+class="system-card">
 
-← กลับหน้าหลัก
+<div class="icon icon-yellow">
+🚨
+</div>
+
+<div class="system-info">
+
+<h3>
+แจ้งปัญหา
+</h3>
+
+<p>
+แจ้งปัญหาหรือสิ่งที่ต้องการให้โรงเรียนแก้ไข
+</p>
+
+</div>
+
+<div class="arrow">
+›
+</div>
 
 </a>
 
 
-<div class="card">
 
+<!-- STATUS -->
 
-<h1>
-🔎 ตรวจสอบสถานะรายการ
-</h1>
+<a
+href="status.html"
+class="system-card">
 
+<div class="icon icon-blue">
+🔎
+</div>
 
-<p class="subtitle">
+<div class="system-info">
 
-กรอกหมายเลขรายการที่ได้รับหลังจาก
-แจ้งปัญหา หรือแจ้งของหาย / พบของ
+<h3>
+ตรวจสอบสถานะ
+</h3>
 
+<p>
+ตรวจสอบความคืบหน้าด้วยเลขรายการ
 </p>
 
+</div>
 
-<!-- =================================================
-     SEARCH
-================================================= -->
+<div class="arrow">
+›
+</div>
 
-<div class="search-box">
-
-
-<input
-id="ticketInput"
-type="text"
-placeholder="เช่น LOST-745003 หรือ REPORT-123456"
-autocomplete="off"
->
+</a>
 
 
-<button
-id="searchButton"
-onclick="searchTicket()">
 
-🔍 ตรวจสอบ
+<!-- LOST FOUND -->
 
-</button>
+<a
+href="lost-found.html"
+class="system-card">
+
+<div class="icon icon-yellow">
+📦
+</div>
+
+<div class="system-info">
+
+<h3>
+ของหาย / พบของ
+</h3>
+
+<p>
+แจ้งของหายหรือดูรายการของที่มีผู้พบ
+</p>
+
+</div>
+
+<div class="arrow">
+›
+</div>
+
+</a>
+
+
+
+<!-- FOUND ITEMS -->
+
+<a
+href="found-items.html"
+class="system-card">
+
+<div class="icon icon-blue">
+🧳
+</div>
+
+<div class="system-info">
+
+<h3>
+รายการของที่พบ
+</h3>
+
+<p>
+ดูรายการสิ่งของที่มีผู้พบภายในโรงเรียน
+</p>
+
+</div>
+
+<div class="arrow">
+›
+</div>
+
+</a>
 
 
 </div>
 
+</section>
 
-<!-- =================================================
-     HINT
-================================================= -->
-
-<div class="hint">
-
-💡 ตัวอย่างหมายเลขรายการ:
-<strong>LOST-345018</strong>
-หรือ
-<strong>REPORT-123456</strong>
-
-</div>
-
-
-<!-- =================================================
-     LOADING
-================================================= -->
-
-<div
-id="loading"
-class="loading">
-
-กำลังค้นหาข้อมูล...
-
-</div>
-
-
-<!-- =================================================
-     NOT FOUND
-================================================= -->
-
-<div
-id="notFound"
-class="not-found">
-
-❌ ไม่พบหมายเลขรายการนี้
-<br>
-กรุณาตรวจสอบหมายเลขอีกครั้ง
-
-</div>
-
-
-<!-- =================================================
-     RESULT
-================================================= -->
-
-<div
-id="result"
-class="result">
-
-
-<div class="result-card">
-
-
-<div
-id="type"
-class="type">
-</div>
-
-
-<div
-id="ticket"
-class="ticket">
-</div>
-
-
-<div id="details">
-</div>
-
-
-<div id="status">
-</div>
-
-
-</div>
-
-</div>
-
-
-</div>
-
-</div>
 
 
 <!-- =====================================================
-     SUPABASE
+     MAP
 ===================================================== -->
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<section class="map-card">
 
+<div class="map-head">
 
-<script>
+<div>
 
-/* =====================================================
-   SUPABASE
-===================================================== */
+<h2>
+🗺️ แผนที่โรงเรียน
+</h2>
 
-const SUPABASE_URL =
-"https://pbjeyvupzbhxodlibjuh.supabase.co";
+<p>
+ดูตำแหน่งถังขยะและจุดต่าง ๆ ภายในโรงเรียน
+</p>
 
+</div>
 
-const SUPABASE_KEY =
-"sb_publishable_paiTf1uzpiCAPR1oWQMlDg_PfVzT2p6";
 
+<a
+href="map.html"
+class="map-button">
 
-const supabaseClient =
-supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
+เปิดแผนที่ →
 
+</a>
 
-/* =====================================================
-   SEARCH
-===================================================== */
+</div>
 
-async function searchTicket() {
 
+<div class="map-preview">
 
-    const input =
-        document.getElementById(
-            "ticketInput"
-        );
+<img
+src="school-map.jpg"
+alt="แผนที่โรงเรียน"
+onerror="this.style.display='none'; document.getElementById('mapPlaceholder').style.display='block';"
+>
 
 
-    const button =
-        document.getElementById(
-            "searchButton"
-        );
+<div
+id="mapPlaceholder"
+class="map-placeholder"
+style="display:none;">
 
+<div class="map-icon">
+🗺️
+</div>
 
-    const ticket =
-        input.value
-            .trim()
-            .toUpperCase();
+<div>
+ยังไม่มีภาพแผนที่
+</div>
 
+</div>
 
-    const result =
-        document.getElementById(
-            "result"
-        );
+</div>
 
+</section>
 
-    const notFound =
-        document.getElementById(
-            "notFound"
-        );
 
 
-    const loading =
-        document.getElementById(
-            "loading"
-        );
+<!-- =====================================================
+     NOTICE
+===================================================== -->
 
+<section class="notice">
 
-    /* ซ่อนผลเดิม */
+<div class="notice-icon">
+💡
+</div>
 
-    result.classList.remove(
-        "show"
-    );
+<div>
 
+<h3>
+คำแนะนำ
+</h3>
 
-    notFound.style.display =
-        "none";
+<p>
+หลังจากแจ้งปัญหาหรือแจ้งของหาย / พบของ
+ระบบจะแสดงหมายเลขรายการ
+ให้เก็บหมายเลขนั้นไว้สำหรับตรวจสอบสถานะภายหลัง
+</p>
 
+</div>
 
-    /* ตรวจสอบช่องว่าง */
+</section>
 
-    if (!ticket) {
 
 
-        notFound.innerHTML =
-            "⚠️ กรุณากรอกหมายเลขรายการ";
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
+<footer>
 
-        notFound.style.display =
-            "block";
+BINCARE | ระบบดูแลโรงเรียน
 
+<br>
 
-        input.focus();
+ระบบสำหรับอำนวยความสะดวก
+ในการแจ้งปัญหาและดูแลโรงเรียน
 
+</footer>
 
-        return;
 
-    }
-
-
-    /* เริ่มค้นหา */
-
-    loading.style.display =
-        "block";
-
-
-    button.disabled =
-        true;
-
-
-    button.textContent =
-        "กำลังค้นหา...";
-
-
-    try {
-
-
-        /* =================================================
-           ค้นหา REPORTS
-        ================================================= */
-
-        const {
-            data: reports,
-            error: reportError
-        } =
-        await supabaseClient
-
-            .from("reports")
-
-            .select("*")
-
-            .eq(
-                "ticket_number",
-                ticket
-            )
-
-            .limit(1);
-
-
-        if (reportError) {
-
-            console.error(
-                "Report Error:",
-                reportError
-            );
-
-        }
-
-
-        if (
-            reports &&
-            reports.length > 0
-        ) {
-
-
-            showReport(
-                reports[0]
-            );
-
-
-            return;
-
-        }
-
-
-        /* =================================================
-           ค้นหา LOST FOUND
-        ================================================= */
-
-        const {
-            data: lostFound,
-            error: lostError
-        } =
-        await supabaseClient
-
-            .from("lost_found")
-
-            .select("*")
-
-            .eq(
-                "ticket_number",
-                ticket
-            )
-
-            .limit(1);
-
-
-        if (lostError) {
-
-            console.error(
-                "Lost Found Error:",
-                lostError
-            );
-
-        }
-
-
-        if (
-            lostFound &&
-            lostFound.length > 0
-        ) {
-
-
-            showLostFound(
-                lostFound[0]
-            );
-
-
-            return;
-
-        }
-
-
-        /* =================================================
-           ไม่พบข้อมูล
-        ================================================= */
-
-        notFound.innerHTML = `
-
-            ❌ ไม่พบหมายเลขรายการนี้
-
-            <br>
-
-            กรุณาตรวจสอบหมายเลขอีกครั้ง
-
-        `;
-
-
-        notFound.style.display =
-            "block";
-
-
-    }
-
-    catch (error) {
-
-
-        console.error(
-            error
-        );
-
-
-        notFound.innerHTML = `
-
-            ❌ เกิดข้อผิดพลาดในการค้นหา
-
-            <br>
-
-            กรุณาลองใหม่อีกครั้ง
-
-        `;
-
-
-        notFound.style.display =
-            "block";
-
-    }
-
-
-    finally {
-
-
-        loading.style.display =
-            "none";
-
-
-        button.disabled =
-            false;
-
-
-        button.textContent =
-            "🔍 ตรวจสอบ";
-
-    }
-
-}
-
-
-/* =====================================================
-   SHOW REPORT
-===================================================== */
-
-function showReport(report) {
-
-
-    document
-        .getElementById("type")
-        .textContent =
-            "🚨 แจ้งปัญหา";
-
-
-    document
-        .getElementById("ticket")
-        .textContent =
-            report.ticket_number;
-
-
-    document
-        .getElementById("details")
-        .innerHTML = `
-
-        <div class="info">
-
-            📌 <b>หัวข้อ:</b>
-
-            ${escapeHtml(
-                report.title
-            )}
-
-        </div>
-
-
-        <div class="info">
-
-            📂 <b>ประเภท:</b>
-
-            ${escapeHtml(
-                report.category
-            )}
-
-        </div>
-
-
-        <div class="info">
-
-            📍 <b>สถานที่:</b>
-
-            ${escapeHtml(
-                report.location
-            )}
-
-        </div>
-
-
-        <div class="info">
-
-            📝 <b>รายละเอียด:</b>
-
-            <br>
-
-            ${escapeHtml(
-                report.description || "-"
-            )}
-
-        </div>
-
-    `;
-
-
-    showStatus(
-        report.status
-    );
-
-}
-
-
-/* =====================================================
-   SHOW LOST / FOUND
-===================================================== */
-
-function showLostFound(item) {
-
-
-    const isLost =
-        item.type === "ของหาย";
-
-
-    document
-        .getElementById("type")
-        .textContent =
-
-        isLost
-        ? "🔴 ของหาย"
-        : "🟢 พบของ";
-
-
-    document
-        .getElementById("ticket")
-        .textContent =
-            item.ticket_number;
-
-
-    document
-        .getElementById("details")
-        .innerHTML = `
-
-        <div class="info">
-
-            📦 <b>สิ่งของ:</b>
-
-            ${escapeHtml(
-                item.item
-            )}
-
-        </div>
-
-
-        <div class="info">
-
-            📍 <b>สถานที่:</b>
-
-            ${escapeHtml(
-                item.location
-            )}
-
-        </div>
-
-
-        <div class="info">
-
-            📝 <b>รายละเอียด:</b>
-
-            <br>
-
-            ${escapeHtml(
-                item.description || "-"
-            )}
-
-        </div>
-
-    `;
-
-
-    /* =================================================
-       ถ้าเจ้าของรับของแล้ว
-    ================================================= */
-
-    if (
-        item.is_claimed === true
-    ) {
-
-
-        showClaimedStatus();
-
-
-        return;
-
-    }
-
-
-    showStatus(
-        item.status
-    );
-
-}
-
-
-/* =====================================================
-   SHOW STATUS
-===================================================== */
-
-function showStatus(status) {
-
-
-    const statusElement =
-        document.getElementById(
-            "status"
-        );
-
-
-    const statusClass =
-        status || "pending";
-
-
-    const statusText = {
-
-
-        pending:
-            "🟡 รอตรวจสอบ",
-
-
-        in_progress:
-            "🔵 กำลังดำเนินการ",
-
-
-        resolved:
-            "🟢 ดำเนินการเรียบร้อย"
-
-    };
-
-
-    statusElement.className =
-        "status " +
-        statusClass;
-
-
-    statusElement.textContent =
-
-        statusText[statusClass] ||
-
-        "📌 " +
-        statusClass;
-
-
-    document
-        .getElementById(
-            "result"
-        )
-        .classList.add(
-            "show"
-        );
-
-}
-
-
-/* =====================================================
-   CLAIMED
-===================================================== */
-
-function showClaimedStatus() {
-
-
-    const statusElement =
-        document.getElementById(
-            "status"
-        );
-
-
-    statusElement.className =
-        "status claimed";
-
-
-    statusElement.textContent =
-        "✅ เจ้าของมารับของแล้ว";
-
-
-    document
-        .getElementById(
-            "result"
-        )
-        .classList.add(
-            "show"
-        );
-
-}
-
-
-/* =====================================================
-   ESCAPE HTML
-===================================================== */
-
-function escapeHtml(value) {
-
-
-    if (
-        value === null ||
-        value === undefined
-    ) {
-
-        return "";
-
-    }
-
-
-    return String(value)
-
-        .replaceAll(
-            "&",
-            "&amp;"
-        )
-
-        .replaceAll(
-            "<",
-            "&lt;"
-        )
-
-        .replaceAll(
-            ">",
-            "&gt;"
-        )
-
-        .replaceAll(
-            '"',
-            "&quot;"
-        )
-
-        .replaceAll(
-            "'",
-            "&#039;"
-        );
-
-}
-
-
-/* =====================================================
-   ENTER TO SEARCH
-===================================================== */
-
-document
-    .getElementById(
-        "ticketInput"
-    )
-    .addEventListener(
-        "keydown",
-        function(event) {
-
-
-            if (
-                event.key === "Enter"
-            ) {
-
-                searchTicket();
-
-            }
-
-        }
-    );
-
-</script>
+</main>
 
 
 </body>
