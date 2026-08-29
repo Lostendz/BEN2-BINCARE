@@ -20,9 +20,9 @@
 
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f5f9ff;
-    color: #26344d;
+    font-family: Arial, "Noto Sans Thai", sans-serif;
+    background: #f4f8ff;
+    color: #172554;
 }
 
 
@@ -33,13 +33,17 @@ body {
 header {
     background: linear-gradient(
         135deg,
-        #2878d4,
-        #3d8ee5
+        #0759d7,
+        #1687ff
     );
 
     color: white;
-    padding: 20px;
-    box-shadow: 0 4px 15px rgba(40,120,212,.18);
+    padding: 18px 20px;
+
+    box-shadow:
+        0 4px 18px rgba(7, 89, 215, .25);
+
+    border-bottom: 5px solid #ffd21f;
 }
 
 .header-inner {
@@ -56,39 +60,69 @@ header {
 .logo {
     font-size: 27px;
     font-weight: bold;
-    letter-spacing: .3px;
+    letter-spacing: .5px;
 }
 
 .header-subtitle {
     margin-top: 4px;
-    opacity: .95;
+    color: #fff4a8;
+    font-weight: bold;
 }
 
 
 /* =====================================================
-   LOGOUT
+   HEADER BUTTONS
 ===================================================== */
 
+.header-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.home-button {
+    border: none;
+    text-decoration: none;
+
+    background: white;
+    color: #123b8f;
+
+    padding: 10px 15px;
+
+    border-radius: 10px;
+
+    font-weight: bold;
+    font-size: 14px;
+
+    transition: .2s;
+
+    box-shadow:
+        0 3px 8px rgba(0,0,0,.08);
+}
+
+.home-button:hover {
+    background: #fff9d6;
+    transform: translateY(-1px);
+}
+
 .logout {
-    border: 0;
+    border: none;
 
-    background: #ffd84d;
-    color: #26344d;
+    background: #ffd21f;
+    color: #172554;
 
-    padding: 11px 17px;
+    padding: 10px 15px;
 
-    border-radius: 11px;
+    border-radius: 10px;
 
     font-weight: bold;
     cursor: pointer;
-
-    box-shadow: 0 3px 8px rgba(0,0,0,.08);
 
     transition: .2s;
 }
 
 .logout:hover {
-    background: #ffe477;
+    background: #f5c400;
     transform: translateY(-1px);
 }
 
@@ -100,7 +134,7 @@ header {
 .container {
     max-width: 1100px;
     margin: auto;
-    padding: 25px 18px;
+    padding: 35px 18px 50px;
 }
 
 
@@ -111,17 +145,15 @@ header {
 .tabs {
     display: flex;
     gap: 10px;
-
     margin-bottom: 20px;
-
     flex-wrap: wrap;
 }
 
 .tab {
-    border: none;
+    border: 2px solid #dbeafe;
 
     background: white;
-    color: #42526b;
+    color: #172554;
 
     padding: 13px 19px;
 
@@ -130,7 +162,8 @@ header {
     font-weight: bold;
     cursor: pointer;
 
-    box-shadow: 0 4px 12px rgba(40,90,150,.08);
+    box-shadow:
+        0 4px 12px rgba(30,64,175,.08);
 
     transition: .2s;
 }
@@ -140,11 +173,12 @@ header {
 }
 
 .tab.active {
-    background: #327fd8;
+    background: #0759d7;
     color: white;
+    border-color: #0759d7;
 
     box-shadow:
-        0 4px 12px rgba(50,127,216,.25);
+        0 4px 12px rgba(7,89,215,.25);
 }
 
 
@@ -172,7 +206,6 @@ header {
     align-items: center;
 
     gap: 10px;
-
     flex-wrap: wrap;
 
     margin-bottom: 15px;
@@ -180,12 +213,13 @@ header {
 
 .section-head h2 {
     margin: 0;
+    color: #123b8f;
 }
 
 .live {
     margin-top: 6px;
 
-    color: #3b9c68;
+    color: #15803d;
 
     font-size: 14px;
     font-weight: bold;
@@ -195,7 +229,7 @@ header {
     border: none;
 
     background: white;
-    color: #327fd8;
+    color: #0759d7;
 
     padding: 10px 15px;
 
@@ -205,13 +239,13 @@ header {
     cursor: pointer;
 
     box-shadow:
-        0 4px 12px rgba(40,90,150,.08);
+        0 4px 12px rgba(30,64,175,.08);
 
     transition: .2s;
 }
 
 .refresh:hover {
-    background: #edf6ff;
+    background: #e8f1ff;
 }
 
 
@@ -238,9 +272,11 @@ header {
     border-radius: 17px;
 
     box-shadow:
-        0 5px 16px rgba(40,90,150,.08);
+        0 8px 25px rgba(30,64,175,.08);
 
-    border-top: 4px solid #ffd84d;
+    border: 2px solid #dbeafe;
+
+    border-top: 5px solid #ffd21f;
 }
 
 .stat-number {
@@ -252,15 +288,15 @@ header {
 }
 
 .pending {
-    color: #d59b18;
+    color: #d97706;
 }
 
 .progress {
-    color: #327fd8;
+    color: #0759d7;
 }
 
 .resolved {
-    color: #3b9c68;
+    color: #15803d;
 }
 
 
@@ -279,21 +315,38 @@ header {
     border-radius: 17px;
 
     box-shadow:
-        0 5px 16px rgba(40,90,150,.08);
+        0 8px 25px rgba(30,64,175,.08);
 
-    border-left: 4px solid #5b9be6;
+    border: 2px solid #dbeafe;
+
+    border-left: 5px solid #0759d7;
 }
 
+.report:hover,
+.item-card:hover {
+    border-color: #93c5fd;
+}
+
+
+/* =====================================================
+   TICKET
+===================================================== */
+
 .ticket {
-    color: #327fd8;
+    color: #0759d7;
 
     font-weight: bold;
 
     margin-bottom: 8px;
 }
 
+
+/* =====================================================
+   META
+===================================================== */
+
 .meta {
-    color: #68778e;
+    color: #64748b;
 
     margin: 8px 0;
 
@@ -314,11 +367,11 @@ select {
 
     border-radius: 10px;
 
-    border: 1px solid #cbd9ea;
+    border: 2px solid #dbeafe;
 
     background: white;
 
-    color: #26344d;
+    color: #172554;
 
     font-size: 15px;
 
@@ -326,10 +379,10 @@ select {
 }
 
 select:focus {
-    border-color: #327fd8;
+    border-color: #0759d7;
 
     box-shadow:
-        0 0 0 3px rgba(50,127,216,.12);
+        0 0 0 3px rgba(7,89,215,.12);
 }
 
 
@@ -350,17 +403,19 @@ select:focus {
 }
 
 .type-found {
-    background: #e2f7ec;
-    color: #318158;
+    background: #dcfce7;
+    color: #166534;
 }
 
 .type-lost {
-    background: #fff0c2;
-    color: #a87908;
+    background: #fff9d6;
+    color: #765900;
 }
 
 .item-card h2 {
     margin: 12px 0;
+
+    color: #123b8f;
 }
 
 
@@ -397,21 +452,21 @@ select:focus {
 }
 
 .btn-success {
-    background: #4caf78;
+    background: #16a34a;
     color: white;
 }
 
 .btn-success:hover {
-    background: #429968;
+    background: #15803d;
 }
 
 .btn-danger {
-    background: #ee7373;
+    background: #ef4444;
     color: white;
 }
 
 .btn-danger:hover {
-    background: #dc6060;
+    background: #dc2626;
 }
 
 .btn-secondary {
@@ -445,19 +500,19 @@ select:focus {
 .message.success {
     display: block;
 
-    background: #e2f7ec;
-    color: #318158;
+    background: #ecfdf5;
+    color: #166534;
 
-    border-left: 4px solid #4caf78;
+    border: 2px solid #86efac;
 }
 
 .message.error {
     display: block;
 
-    background: #fff0f0;
-    color: #c45454;
+    background: #fff1f2;
+    color: #9f1239;
 
-    border-left: 4px solid #ee7373;
+    border: 2px solid #fb7185;
 }
 
 
@@ -470,7 +525,7 @@ select:focus {
 
     padding: 30px;
 
-    color: #718096;
+    color: #64748b;
 }
 
 .empty {
@@ -482,12 +537,14 @@ select:focus {
 
     text-align: center;
 
-    color: #718096;
+    color: #64748b;
 
     margin-top: 15px;
 
+    border: 2px solid #dbeafe;
+
     box-shadow:
-        0 5px 16px rgba(40,90,150,.06);
+        0 8px 25px rgba(30,64,175,.06);
 }
 
 
@@ -505,8 +562,15 @@ select:focus {
         align-items: flex-start;
     }
 
+    .header-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .home-button,
     .logout {
         padding: 9px 13px;
+        white-space: nowrap;
     }
 
     .item-actions {
@@ -544,6 +608,17 @@ BEN2 BINCARE
 </div>
 
 
+<div class="header-buttons">
+
+<a
+href="index.html"
+class="home-button">
+
+🏠 หน้าหลัก
+
+</a>
+
+
 <button
 class="logout"
 onclick="logout()">
@@ -551,6 +626,8 @@ onclick="logout()">
 ออกจากระบบ
 
 </button>
+
+</div>
 
 </div>
 
@@ -748,10 +825,6 @@ onclick="loadLostFound()">
 
 <script>
 
-/* =====================================================
-   SUPABASE
-===================================================== */
-
 const SUPABASE_URL =
 "https://pbjeyvupzbhxodlibjuh.supabase.co";
 
@@ -853,12 +926,10 @@ function showMessage(text, type) {
     const box =
         document.getElementById("message");
 
-
     box.textContent = text;
 
     box.className =
         "message " + type;
-
 
     setTimeout(() => {
 
@@ -878,17 +949,14 @@ async function loadReports() {
 
     if (!await checkLogin()) return;
 
-
     const container =
         document.getElementById("reports");
-
 
     container.innerHTML = `
         <div class="loading">
             กำลังโหลดข้อมูล...
         </div>
     `;
-
 
     const {
         data,
@@ -977,35 +1045,29 @@ async function loadReports() {
                 🎫 ${escapeHtml(report.ticket_number)}
             </div>
 
-
             <h2>
                 ${escapeHtml(report.title)}
             </h2>
-
 
             <div class="meta">
                 📌 หมวดหมู่:
                 ${escapeHtml(report.category)}
             </div>
 
-
             <div class="meta">
                 📍 สถานที่:
                 ${escapeHtml(report.location)}
             </div>
-
 
             <div class="meta">
                 📝 รายละเอียด:
                 ${escapeHtml(report.description || "-")}
             </div>
 
-
             <div class="meta">
                 📅 วันที่แจ้ง:
                 ${formatDate(report.created_at)}
             </div>
-
 
             <div class="status">
 
@@ -1026,7 +1088,6 @@ async function loadReports() {
 
                     </option>
 
-
                     <option
                         value="in_progress"
                         ${report.status === "in_progress"
@@ -1035,7 +1096,6 @@ async function loadReports() {
                         🔵 กำลังดำเนินการ
 
                     </option>
-
 
                     <option
                         value="resolved"
@@ -1113,7 +1173,6 @@ async function updateStatus(id, status) {
         "success"
     );
 
-
     await loadReports();
 
 }
@@ -1127,17 +1186,14 @@ async function loadLostFound() {
 
     if (!await checkLogin()) return;
 
-
     const container =
         document.getElementById("lostFoundList");
-
 
     container.innerHTML = `
         <div class="loading">
             กำลังโหลดข้อมูล...
         </div>
     `;
-
 
     const {
         data,
@@ -1196,14 +1252,12 @@ async function loadLostFound() {
         const card =
             document.createElement("div");
 
-
         card.className =
             "item-card";
 
 
         const isFound =
             item.type === "พบของ";
-
 
         const claimed =
             item.is_claimed === true;
@@ -1280,7 +1334,6 @@ async function loadLostFound() {
 
             <div class="item-actions">
 
-
                 ${
                     isFound && !claimed
                     ? `
@@ -1323,11 +1376,9 @@ async function loadLostFound() {
 
                 </button>
 
-
             </div>
 
         `;
-
 
         container.appendChild(card);
 
@@ -1346,7 +1397,6 @@ async function claimItem(id) {
         confirm(
             "ยืนยันว่าของชิ้นนี้เจ้าของมารับแล้วใช่หรือไม่?"
         );
-
 
     if (!confirmed) return;
 
@@ -1399,7 +1449,6 @@ async function claimItem(id) {
         "success"
     );
 
-
     await loadLostFound();
 
 }
@@ -1416,7 +1465,6 @@ async function deleteLostFound(id) {
             "ยืนยันลบรายการนี้หรือไม่?\n\n" +
             "ข้อมูลจะถูกลบออกจากระบบ"
         );
-
 
     if (!confirmed) return;
 
@@ -1438,7 +1486,6 @@ async function deleteLostFound(id) {
             "DELETE ERROR:",
             error
         );
-
 
         alert(
             "❌ ไม่สามารถลบรายการได้\n\n" +
@@ -1468,7 +1515,6 @@ async function deleteLostFound(id) {
         "success"
     );
 
-
     await loadLostFound();
 
 }
@@ -1481,7 +1527,6 @@ async function deleteLostFound(id) {
 supabaseClient
     .channel("admin-dashboard-live")
 
-
     .on(
         "postgres_changes",
         {
@@ -1491,12 +1536,9 @@ supabaseClient
         },
 
         function() {
-
             loadReports();
-
         }
     )
-
 
     .on(
         "postgres_changes",
@@ -1507,12 +1549,9 @@ supabaseClient
         },
 
         function() {
-
             loadLostFound();
-
         }
     )
-
 
     .subscribe();
 
@@ -1524,7 +1563,6 @@ supabaseClient
 function formatDate(date) {
 
     if (!date) return "-";
-
 
     return new Date(date)
         .toLocaleString(
@@ -1548,38 +1586,16 @@ function escapeHtml(value) {
         value === null ||
         value === undefined
     ) {
-
         return "";
-
     }
-
 
     return String(value)
 
-        .replaceAll(
-            "&",
-            "&amp;"
-        )
-
-        .replaceAll(
-            "<",
-            "&lt;"
-        )
-
-        .replaceAll(
-            ">",
-            "&gt;"
-        )
-
-        .replaceAll(
-            '"',
-            "&quot;"
-        )
-
-        .replaceAll(
-            "'",
-            "&#039;"
-        );
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
 
 }
 
@@ -1593,7 +1609,6 @@ async function logout() {
     await supabaseClient
         .auth
         .signOut();
-
 
     window.location.href =
         "admin-login.html";
