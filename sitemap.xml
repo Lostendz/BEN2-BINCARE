@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <url>
+        <loc>https://lostendz.github.io/BEN2-BINCARE/</loc>
+        <priority>1.0</priority>
+    </url>
+
+    <url>
+        <loc>https://lostendz.github.io/BEN2-BINCARE/report.html</loc>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://lostendz.github.io/BEN2-BINCARE/status.html</loc>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://lostendz.github.io/BEN2-BINCARE/lost-found.html</loc>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://lostendz.github.io/BEN2-BINCARE/found-items.html</loc>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://lostendz.github.io/BEN2-BINCARE/map.html</loc>
+        <priority>0.7</priority>
+    </url>
+
+</urlset>
