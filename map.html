@@ -1,368 +1,870 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>แผนที่โรงเรียน | BINCARE</title>
+<meta charset="UTF-8">
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f7f5;
-            color: #1f2937;
-        }
+<title>แผนที่โรงเรียน | BINCARE</title>
 
-        header {
-            background: #166534;
-            color: white;
-            padding: 20px;
-        }
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-        .logo {
-            font-size: 26px;
-            font-weight: bold;
-        }
+<style>
 
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 25px 18px;
-        }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-        .back {
-            display: inline-block;
-            margin-bottom: 15px;
-            color: #166534;
-            text-decoration: none;
-            font-weight: bold;
-        }
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #1f2937;
+}
 
-        .card {
-            background: white;
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        }
+header {
+    background: #166534;
+    color: white;
+    padding: 20px;
+}
 
-        h1 {
-            margin-bottom: 8px;
-        }
+.logo {
+    font-size: 26px;
+    font-weight: bold;
+}
 
-        .subtitle {
-            color: #6b7280;
-            margin-bottom: 20px;
-        }
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 25px 18px;
+}
 
-        .controls {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
+.back {
+    display: inline-block;
+    margin-bottom: 15px;
+    color: #166534;
+    text-decoration: none;
+    font-weight: bold;
+}
 
-        button {
-            border: none;
-            border-radius: 10px;
-            padding: 12px 18px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+.card {
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
 
-        .add-btn {
-            background: #16a34a;
-            color: white;
-        }
+h1 {
+    margin-bottom: 8px;
+}
 
-        .admin-btn {
-            background: #1d4ed8;
-            color: white;
-        }
+.subtitle {
+    color: #6b7280;
+    margin-bottom: 20px;
+}
 
-        .delete-btn {
-            background: #dc2626;
-            color: white;
-            padding: 7px 10px;
-            font-size: 13px;
-        }
+.controls {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
 
-        .hint {
-            background: #f0fdf4;
-            color: #166534;
-            padding: 12px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-        }
+button {
+    border: none;
+    border-radius: 10px;
+    padding: 12px 18px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
 
-        .map-wrapper {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-            border-radius: 15px;
-            border: 2px solid #d1d5db;
-            background: #eee;
-        }
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
 
-        #schoolMap {
-            display: block;
-            width: 100%;
-            height: auto;
-            user-select: none;
-        }
+.add-btn {
+    background: #16a34a;
+    color: white;
+}
 
-        .bin {
-            position: absolute;
-            transform: translate(-50%, -100%);
-            font-size: 30px;
-            cursor: grab;
-            z-index: 10;
-            user-select: none;
-        }
+.admin-btn {
+    background: #1d4ed8;
+    color: white;
+}
 
-        .bin:active {
-            cursor: grabbing;
-        }
+.refresh-btn {
+    background: #6b7280;
+    color: white;
+}
 
-        .bin-label {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            top: 30px;
-            white-space: nowrap;
-            background: white;
-            padding: 4px 8px;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: bold;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-        }
+.login-btn {
+    background: #7c3aed;
+    color: white;
+}
 
-        .admin-panel {
-            display: none;
-            background: #eff6ff;
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 15px;
-        }
+.hint {
+    background: #f0fdf4;
+    color: #166534;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
 
-        .admin-panel.show {
-            display: block;
-        }
+.map-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 15px;
+    border: 2px solid #d1d5db;
+    background: #eee;
+    touch-action: none;
+}
 
-        .status-message {
-            margin-top: 15px;
-            padding: 12px;
-            border-radius: 10px;
-            display: none;
-        }
-
-        .success {
-            display: block;
-            background: #dcfce7;
-            color: #166534;
-        }
-
-        .error {
-            display: block;
-            background: #fee2e2;
-            color: #991b1b;
-        }
-    </style>
-</head>
-
-<body>
-
-<header>
-    <div class="logo">BINCARE</div>
-    <div>ระบบดูแลโรงเรียน</div>
-</header>
-
-<div class="container">
-
-    <a href="index.html" class="back">
-        ← กลับหน้าหลัก
-    </a>
-
-    <div class="card">
-
-        <h1>🗺️ แผนที่โรงเรียน</h1>
-
-        <p class="subtitle">
-            แสดงตำแหน่งถังขยะภายในโรงเรียน
-        </p>
-
-        <div class="controls">
-
-            <button
-                class="add-btn"
-                id="addBinButton"
-                onclick="startAddBin()">
-                ➕ เพิ่มถังขยะ
-            </button>
-
-            <button
-                class="admin-btn"
-                id="adminButton"
-                onclick="toggleAdmin()">
-                🔐 โหมดแอดมิน
-            </button>
-
-        </div>
-
-        <div id="adminPanel" class="admin-panel">
-
-            <strong>🛠️ โหมดแอดมินเปิดอยู่</strong>
-
-            <p style="margin-top:8px;">
-                สามารถลากหมุด 🗑️ ไปยังตำแหน่งที่ถูกต้องได้
-                และสามารถลบหมุดได้
-            </p>
-
-        </div>
-
-        <div id="hint" class="hint">
-            💡 กด "เพิ่มถังขยะ" แล้วกดตำแหน่งบนแผนที่
-        </div>
-
-        <div class="map-wrapper" id="mapWrapper">
-
-            <img
-                id="schoolMap"
-                src="school-map.png"
-                alt="แผนผังโรงเรียน">
-
-        </div>
-
-        <div id="message" class="status-message"></div>
-
-    </div>
-
-</div>
-
-<script>
-
-const SUPABASE_URL =
-    "https://pbjeyvupzbhxodlibjuh.supabase.co";
-
-const SUPABASE_KEY =
-    "sb_publishable_paiTf1uzpiCAPR1oWQMlDg_PfVzT2p6";
-
-let adminMode = false;
-let addingBin = false;
-
-
-/* =========================
-   แสดงข้อความ
-========================= */
-
-function showMessage(text, type) {
-
-    const message =
-        document.getElementById("message");
-
-    message.textContent = text;
-
-    message.className =
-        "status-message " + type;
-
-    setTimeout(() => {
-        message.className =
-            "status-message";
-    }, 3000);
+#schoolMap {
+    display: block;
+    width: 100%;
+    height: auto;
+    user-select: none;
+    pointer-events: none;
 }
 
 
 /* =========================
-   เปิด/ปิดโหมดแอดมิน
+   หมุดถังขยะ
 ========================= */
 
-function toggleAdmin() {
+.bin {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    cursor: pointer;
+    user-select: none;
+    touch-action: none;
+}
 
-    adminMode = !adminMode;
+.bin-icon {
+    width: 44px;
+    height: 44px;
 
-    const panel =
-        document.getElementById("adminPanel");
+    border-radius: 50%;
 
-    const button =
-        document.getElementById("adminButton");
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    if (adminMode) {
+    font-size: 25px;
 
-        panel.classList.add("show");
+    background: white;
 
-        button.textContent =
-            "🔓 ปิดโหมดแอดมิน";
+    border: 4px solid #16a34a;
+
+    box-shadow:
+        0 3px 10px rgba(0,0,0,0.25);
+}
+
+.bin.normal .bin-icon {
+    border-color: #16a34a;
+}
+
+.bin.near_full .bin-icon {
+    border-color: #eab308;
+}
+
+.bin.full .bin-icon {
+    border-color: #dc2626;
+}
+
+.bin-label {
+    position: absolute;
+
+    top: 48px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    white-space: nowrap;
+
+    background: white;
+
+    padding: 5px 9px;
+
+    border-radius: 8px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    box-shadow:
+        0 2px 7px rgba(0,0,0,0.2);
+}
+
+
+/* =========================
+   หน้าต่างแก้ไข
+========================= */
+
+.modal-bg {
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,0.45);
+
+    z-index: 100;
+    
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+}
+
+.modal-bg.show {
+    display: flex;
+}
+
+.modal {
+    background: white;
+
+    width: 100%;
+    max-width: 420px;
+
+    border-radius: 20px;
+
+    padding: 25px;
+
+    box-shadow:
+        0 10px 40px rgba(0,0,0,0.25);
+}
+
+.modal h2 {
+    margin-bottom: 20px;
+}
+
+.modal label {
+    display: block;
+
+    font-weight: bold;
+
+    margin-top: 15px;
+
+    margin-bottom: 7px;
+}
+
+.modal input,
+.modal select {
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+}
+
+.modal-buttons {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+.save-btn {
+    flex: 1;
+
+    background: #16a34a;
+
+    color: white;
+}
+
+.delete-btn {
+    flex: 1;
+
+    background: #dc2626;
+
+    color: white;
+}
+
+.cancel-btn {
+    flex: 1;
+
+    background: #6b7280;
+
+    color: white;
+}
+
+
+/* =========================
+   สถานะ
+========================= */
+
+.status-box {
+    margin-top: 18px;
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+    text-align: center;
+
+    font-weight: bold;
+}
+
+.status-normal {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.status-near {
+    background: #fef9c3;
+    color: #854d0e;
+}
+
+.status-full {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+
+/* =========================
+   ข้อความ
+========================= */
+
+.message {
+    display: none;
+
+    margin-top: 15px;
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+    font-weight: bold;
+}
+
+.message.show {
+    display: block;
+}
+
+.message.success {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.message.error {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+
+/* =========================
+   Admin
+========================= */
+
+.admin-panel {
+    display: none;
+
+    background: #eff6ff;
+
+    padding: 15px;
+
+    border-radius: 12px;
+
+    margin-bottom: 15px;
+}
+
+.admin-panel.show {
+    display: block;
+}
+
+.admin-info {
+    margin-top: 7px;
+
+    color: #1e40af;
+}
+
+
+/* =========================
+   Responsive
+========================= */
+
+@media(max-width:600px) {
+
+    .modal-buttons {
+        flex-direction: column;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="logo">
+        BINCARE
+    </div>
+
+    <div>
+        ระบบดูแลโรงเรียน
+    </div>
+
+</header>
+
+
+<div class="container">
+
+
+<a
+    href="index.html"
+    class="back">
+
+    ← กลับหน้าหลัก
+
+</a>
+
+
+<div class="card">
+
+
+<h1>
+    🗺️ แผนที่โรงเรียน
+</h1>
+
+
+<p class="subtitle">
+    แสดงตำแหน่งและสถานะถังขยะภายในโรงเรียน
+</p>
+
+
+<div class="controls">
+
+
+<button
+    class="add-btn"
+    id="addBinButton"
+    onclick="startAddBin()">
+
+    ➕ เพิ่มถังขยะ
+
+</button>
+
+
+<button
+    class="admin-btn"
+    id="adminButton"
+    onclick="toggleAdmin()">
+
+    🔐 โหมดแอดมิน
+
+</button>
+
+
+<button
+    class="refresh-btn"
+    onclick="loadBins()">
+
+    🔄 รีเฟรช
+
+</button>
+
+
+</div>
+
+
+<div
+    id="adminPanel"
+    class="admin-panel">
+
+    <strong>
+        🛠️ โหมดแอดมินเปิดอยู่
+    </strong>
+
+    <div
+        id="adminInfo"
+        class="admin-info">
+    </div>
+
+    <p style="margin-top:8px;">
+        💡 กดหมุด 🗑️ เพื่อแก้ไขสถานะ
+        และลากหมุดเพื่อย้ายตำแหน่ง
+    </p>
+
+</div>
+
+
+<div
+    id="hint"
+    class="hint">
+
+    💡 เปิดโหมดแอดมินก่อน
+    หากต้องการจัดการถังขยะ
+
+</div>
+
+
+<div
+    class="map-wrapper"
+    id="mapWrapper">
+
+
+<img
+    id="schoolMap"
+    src="school-map.png"
+    alt="แผนผังโรงเรียน">
+
+
+</div>
+
+
+<div
+    id="message"
+    class="message">
+</div>
+
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     Modal แก้ไขถังขยะ
+========================= -->
+
+<div
+    id="modalBg"
+    class="modal-bg">
+
+
+<div class="modal">
+
+
+<h2>
+    🗑️ แก้ไขถังขยะ
+</h2>
+
+
+<label>
+    ชื่อถังขยะ
+</label>
+
+
+<input
+    id="binName"
+    type="text"
+    placeholder="ชื่อถังขยะ">
+
+
+<label>
+    สถานะ
+</label>
+
+
+<select id="binStatus">
+
+    <option value="normal">
+        🟢 ปกติ
+    </option>
+
+    <option value="near_full">
+        🟡 ใกล้เต็ม
+    </option>
+
+    <option value="full">
+        🔴 เต็ม
+    </option>
+
+</select>
+
+
+<div
+    id="statusPreview"
+    class="status-box status-normal">
+
+    🟢 ปกติ
+
+</div>
+
+
+<div class="modal-buttons">
+
+
+<button
+    class="save-btn"
+    onclick="saveBin()">
+
+    💾 บันทึก
+
+</button>
+
+
+<button
+    class="delete-btn"
+    onclick="deleteCurrentBin()">
+
+    🗑️ ลบ
+
+</button>
+
+
+<button
+    class="cancel-btn"
+    onclick="closeModal()">
+
+    ยกเลิก
+
+</button>
+
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<script>
+
+
+/* =========================
+   Supabase
+========================= */
+
+const SUPABASE_URL =
+"https://pbjeyvupzbhxodlibjuh.supabase.co";
+
+
+const SUPABASE_KEY =
+"sb_publishable_paiTf1uzpiCAPR1oWQMlDg_PfVzT2p6";
+
+
+const supabaseClient =
+supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+/* =========================
+   ตัวแปร
+========================= */
+
+let adminMode = false;
+
+let addingBin = false;
+
+let currentBin = null;
+
+let draggingBin = null;
+
+
+/* =========================
+   ตรวจสอบ Login
+========================= */
+
+async function checkLogin() {
+
+    const {
+        data: { session }
+    } =
+    await supabaseClient
+        .auth
+        .getSession();
+
+
+    return session;
+
+}
+
+
+/* =========================
+   เปิดโหมดแอดมิน
+========================= */
+
+async function toggleAdmin() {
+
+    if (!adminMode) {
+
+        const session =
+            await checkLogin();
+
+
+        if (!session) {
+
+            alert(
+                "🔐 กรุณาเข้าสู่ระบบเจ้าหน้าที่ก่อน"
+            );
+
+            window.location.href =
+                "admin-login.html";
+
+            return;
+
+        }
+
+
+        adminMode = true;
+
+
+        document
+            .getElementById("adminPanel")
+            .classList.add("show");
+
+
+        document
+            .getElementById("adminButton")
+            .textContent =
+                "🔓 ปิดโหมดแอดมิน";
+
+
+        document
+            .getElementById("hint")
+            .textContent =
+                "🛠️ โหมดแอดมิน: กดหมุดเพื่อแก้ไข หรือกด 'เพิ่มถังขยะ'";
+
 
         showMessage(
             "เปิดโหมดแอดมินแล้ว",
             "success"
         );
 
+
     } else {
 
-        panel.classList.remove("show");
+        adminMode = false;
 
-        button.textContent =
-            "🔐 โหมดแอดมิน";
+        addingBin = false;
+
+
+        document
+            .getElementById("adminPanel")
+            .classList.remove("show");
+
+
+        document
+            .getElementById("adminButton")
+            .textContent =
+                "🔐 โหมดแอดมิน";
+
+
+        document
+            .getElementById("hint")
+            .textContent =
+                "💡 เปิดโหมดแอดมินก่อน หากต้องการจัดการถังขยะ";
+
 
         showMessage(
             "ปิดโหมดแอดมินแล้ว",
             "success"
         );
+
     }
 
+
     loadBins();
+
 }
 
 
 /* =========================
-   เริ่มเพิ่มถังขยะ
+   เพิ่มถัง
 ========================= */
 
 function startAddBin() {
 
+    if (!adminMode) {
+
+        alert(
+            "🔐 กรุณาเปิดโหมดแอดมินก่อน"
+        );
+
+        return;
+
+    }
+
+
     addingBin = true;
 
-    document.getElementById("hint").textContent =
-        "📍 ตอนนี้ให้กดตำแหน่งที่ต้องการวางถังขยะบนแผนที่";
+
+    document
+        .getElementById("hint")
+        .textContent =
+        "📍 กดตำแหน่งบนแผนที่เพื่อวางถังขยะ";
+
+
+    document
+        .getElementById("addBinButton")
+        .disabled = true;
 
 }
 
 
 /* =========================
-   คลิกแผนที่เพื่อเพิ่ม
+   คลิกแผนที่
 ========================= */
 
 document
     .getElementById("mapWrapper")
-    .addEventListener("click", async function(event) {
+    .addEventListener(
+        "click",
+        async function(event) {
 
-        if (!addingBin) return;
 
-        if (event.target.classList.contains("bin")) {
+        if (!addingBin)
             return;
-        }
+
+
+        if (
+            event.target.closest(".bin")
+        )
+            return;
+
 
         const rect =
             this.getBoundingClientRect();
 
+
         const x =
-            ((event.clientX - rect.left) / rect.width) * 100;
+            ((event.clientX - rect.left)
+            / rect.width) * 100;
+
 
         const y =
-            ((event.clientY - rect.top) / rect.height) * 100;
+            ((event.clientY - rect.top)
+            / rect.height) * 100;
+
 
         addingBin = false;
 
-        document.getElementById("hint").textContent =
-            "💡 กด 'เพิ่มถังขยะ' แล้วกดตำแหน่งบนแผนที่";
+
+        document
+            .getElementById("addBinButton")
+            .disabled = false;
+
+
+        document
+            .getElementById("hint")
+            .textContent =
+            "🛠️ กดหมุดเพื่อแก้ไข หรือกด 'เพิ่มถังขยะ'";
+
 
         await addBin(x, y);
 
@@ -370,132 +872,102 @@ document
 
 
 /* =========================
-   เพิ่มข้อมูลถังขยะ
+   เพิ่มข้อมูล
 ========================= */
 
 async function addBin(x, y) {
 
-    try {
+    const {
+        data,
+        error
+    } =
+    await supabaseClient
+        .from("trash_bins")
+        .insert({
 
-        const response = await fetch(
-            SUPABASE_URL + "/rest/v1/trash_bins",
-            {
+            name: "ถังขยะ",
 
-                method: "POST",
+            x: x,
 
-                headers: {
+            y: y,
 
-                    "Content-Type":
-                        "application/json",
+            status: "normal"
 
-                    "apikey":
-                        SUPABASE_KEY,
+        })
+        .select()
+        .single();
 
-                    "Authorization":
-                        "Bearer " + SUPABASE_KEY,
 
-                    "Prefer":
-                        "return=representation"
-
-                },
-
-                body: JSON.stringify({
-
-                    name: "ถังขยะ",
-                    x: x,
-                    y: y,
-                    status: "normal"
-
-                })
-
-            }
-        );
-
-        if (!response.ok) {
-
-            throw new Error(
-                await response.text()
-            );
-
-        }
-
-        showMessage(
-            "✅ เพิ่มถังขยะเรียบร้อย",
-            "success"
-        );
-
-        loadBins();
-
-    } catch (error) {
+    if (error) {
 
         console.error(error);
 
         showMessage(
-            "❌ ไม่สามารถเพิ่มถังขยะได้",
+            "❌ เพิ่มถังขยะไม่สำเร็จ: " +
+            error.message,
             "error"
         );
 
+        return;
+
     }
+
+
+    showMessage(
+        "✅ เพิ่มถังขยะเรียบร้อย",
+        "success"
+    );
+
+
+    loadBins();
+
 }
 
 
 /* =========================
-   โหลดถังขยะจาก Supabase
+   โหลดถัง
 ========================= */
 
 async function loadBins() {
 
-    try {
+    const {
+        data,
+        error
+    } =
+    await supabaseClient
+        .from("trash_bins")
+        .select("*")
+        .order("id");
 
-        const response = await fetch(
-            SUPABASE_URL +
-            "/rest/v1/trash_bins?select=*",
-            {
 
-                headers: {
-
-                    "apikey":
-                        SUPABASE_KEY,
-
-                    "Authorization":
-                        "Bearer " + SUPABASE_KEY
-
-                }
-
-            }
-        );
-
-        if (!response.ok) {
-
-            throw new Error(
-                await response.text()
-            );
-
-        }
-
-        const bins =
-            await response.json();
-
-        document
-            .querySelectorAll(".bin")
-            .forEach(bin => bin.remove());
-
-        bins.forEach(bin => {
-
-            createBinMarker(bin);
-
-        });
-
-    } catch (error) {
+    if (error) {
 
         console.error(error);
 
         showMessage(
-            "❌ ไม่สามารถโหลดตำแหน่งถังขยะได้",
+            "❌ โหลดข้อมูลถังขยะไม่สำเร็จ: " +
+            error.message,
             "error"
         );
 
+        return;
+
     }
+
+
+    document
+        .querySelectorAll(".bin")
+        .forEach(
+            bin => bin.remove()
+        );
+
+
+    data.forEach(bin => {
+
+        createBinMarker(bin);
+
+    });
+
 }
 
 
@@ -508,31 +980,77 @@ function createBinMarker(binData) {
     const wrapper =
         document.getElementById("mapWrapper");
 
+
     const marker =
         document.createElement("div");
 
-    marker.className = "bin";
 
-    marker.innerHTML =
-        "🗑️";
+    marker.className =
+        "bin " +
+        getStatusClass(
+            binData.status
+        );
+
 
     marker.style.left =
-        binData.x + "%";
+        Number(binData.x) + "%";
+
 
     marker.style.top =
-        binData.y + "%";
+        Number(binData.y) + "%";
+
+
+    const icon =
+        document.createElement("div");
+
+
+    icon.className =
+        "bin-icon";
+
+
+    icon.textContent =
+        "🗑️";
+
+
+    marker.appendChild(icon);
 
 
     const label =
         document.createElement("div");
 
+
     label.className =
         "bin-label";
 
+
     label.textContent =
-        binData.name || "ถังขยะ";
+        getStatusEmoji(binData.status)
+        + " "
+        + (binData.name || "ถังขยะ");
+
 
     marker.appendChild(label);
+
+
+    /* =====================
+       คลิกหมุด
+    ===================== */
+
+    marker.addEventListener(
+        "click",
+        function(event) {
+
+            event.stopPropagation();
+
+
+            if (!adminMode)
+                return;
+
+
+            openBinModal(binData);
+
+        }
+    );
 
 
     /* =====================
@@ -543,6 +1061,7 @@ function createBinMarker(binData) {
 
         let dragging = false;
 
+
         marker.addEventListener(
             "pointerdown",
             function(event) {
@@ -550,6 +1069,8 @@ function createBinMarker(binData) {
                 event.stopPropagation();
 
                 dragging = true;
+
+                draggingBin = binData;
 
                 marker.setPointerCapture(
                     event.pointerId
@@ -563,26 +1084,39 @@ function createBinMarker(binData) {
             "pointermove",
             function(event) {
 
-                if (!dragging) return;
+                if (!dragging)
+                    return;
+
 
                 const rect =
                     wrapper.getBoundingClientRect();
 
+
                 let x =
-                    ((event.clientX - rect.left) /
-                    rect.width) * 100;
+                    ((event.clientX - rect.left)
+                    / rect.width) * 100;
+
 
                 let y =
-                    ((event.clientY - rect.top) /
-                    rect.height) * 100;
+                    ((event.clientY - rect.top)
+                    / rect.height) * 100;
 
 
-                x = Math.max(0, Math.min(100, x));
-                y = Math.max(0, Math.min(100, y));
+                x = Math.max(
+                    0,
+                    Math.min(100, x)
+                );
+
+
+                y = Math.max(
+                    0,
+                    Math.min(100, y)
+                );
 
 
                 marker.style.left =
                     x + "%";
+
 
                 marker.style.top =
                     y + "%";
@@ -595,115 +1129,253 @@ function createBinMarker(binData) {
             "pointerup",
             async function(event) {
 
-                if (!dragging) return;
+                if (!dragging)
+                    return;
+
 
                 dragging = false;
+
 
                 const rect =
                     wrapper.getBoundingClientRect();
 
-                const x =
-                    ((event.clientX - rect.left) /
-                    rect.width) * 100;
 
-                const y =
-                    ((event.clientY - rect.top) /
-                    rect.height) * 100;
+                let x =
+                    ((event.clientX - rect.left)
+                    / rect.width) * 100;
 
-                await updateBin(
+
+                let y =
+                    ((event.clientY - rect.top)
+                    / rect.height) * 100;
+
+
+                x = Math.max(
+                    0,
+                    Math.min(100, x)
+                );
+
+
+                y = Math.max(
+                    0,
+                    Math.min(100, y)
+                );
+
+
+                await updatePosition(
                     binData.id,
                     x,
                     y
                 );
 
-            }
-        );
 
-
-        /* =====================
-           ดับเบิลคลิกเพื่อลบ
-        ===================== */
-
-        marker.addEventListener(
-            "dblclick",
-            async function(event) {
-
-                event.stopPropagation();
-
-                const confirmDelete =
-                    confirm(
-                        "ต้องการลบถังขยะนี้หรือไม่?"
-                    );
-
-                if (!confirmDelete) return;
-
-                await deleteBin(binData.id);
+                draggingBin = null;
 
             }
         );
 
     }
 
+
     wrapper.appendChild(marker);
+
 }
 
 
 /* =========================
-   อัปเดตตำแหน่ง
+   เปิดหน้าต่างแก้ไข
 ========================= */
 
-async function updateBin(id, x, y) {
+function openBinModal(binData) {
 
-    try {
+    currentBin = binData;
 
-        const response = await fetch(
 
-            SUPABASE_URL +
-            "/rest/v1/trash_bins?id=eq." +
-            id,
+    document
+        .getElementById("binName")
+        .value =
+        binData.name || "ถังขยะ";
 
-            {
 
-                method: "PATCH",
+    document
+        .getElementById("binStatus")
+        .value =
+        binData.status || "normal";
 
-                headers: {
 
-                    "Content-Type":
-                        "application/json",
+    updateStatusPreview();
 
-                    "apikey":
-                        SUPABASE_KEY,
 
-                    "Authorization":
-                        "Bearer " + SUPABASE_KEY
+    document
+        .getElementById("modalBg")
+        .classList.add("show");
 
-                },
+}
 
-                body: JSON.stringify({
 
-                    x: x,
-                    y: y
+/* =========================
+   ปิดหน้าต่าง
+========================= */
 
-                })
+function closeModal() {
 
-            }
+    currentBin = null;
 
+
+    document
+        .getElementById("modalBg")
+        .classList.remove("show");
+
+}
+
+
+/* =========================
+   Preview สถานะ
+========================= */
+
+document
+    .getElementById("binStatus")
+    .addEventListener(
+        "change",
+        updateStatusPreview
+    );
+
+
+function updateStatusPreview() {
+
+    const status =
+        document
+            .getElementById("binStatus")
+            .value;
+
+
+    const preview =
+        document
+            .getElementById("statusPreview");
+
+
+    preview.className =
+        "status-box " +
+        getStatusBoxClass(status);
+
+
+    preview.textContent =
+        getStatusEmoji(status)
+        + " "
+        + getStatusText(status);
+
+}
+
+
+/* =========================
+   บันทึกถัง
+========================= */
+
+async function saveBin() {
+
+    if (!currentBin)
+        return;
+
+
+    const name =
+        document
+            .getElementById("binName")
+            .value
+            .trim();
+
+
+    const status =
+        document
+            .getElementById("binStatus")
+            .value;
+
+
+    if (!name) {
+
+        alert(
+            "กรุณาใส่ชื่อถังขยะ"
         );
 
-        if (!response.ok) {
+        return;
 
-            throw new Error(
-                await response.text()
-            );
+    }
 
-        }
 
-        showMessage(
-            "✅ บันทึกตำแหน่งใหม่แล้ว",
-            "success"
+    const {
+        error
+    } =
+    await supabaseClient
+        .from("trash_bins")
+        .update({
+
+            name: name,
+
+            status: status
+
+        })
+        .eq(
+            "id",
+            currentBin.id
         );
 
-    } catch (error) {
+
+    if (error) {
+
+        console.error(error);
+
+        alert(
+            "❌ บันทึกไม่สำเร็จ\n" +
+            error.message
+        );
+
+        return;
+
+    }
+
+
+    closeModal();
+
+
+    showMessage(
+        "✅ บันทึกข้อมูลถังขยะแล้ว",
+        "success"
+    );
+
+
+    loadBins();
+
+}
+
+
+/* =========================
+   เปลี่ยนตำแหน่ง
+========================= */
+
+async function updatePosition(
+    id,
+    x,
+    y
+) {
+
+    const {
+        error
+    } =
+    await supabaseClient
+        .from("trash_bins")
+        .update({
+
+            x: x,
+
+            y: y
+
+        })
+        .eq(
+            "id",
+            id
+        );
+
+
+    if (error) {
 
         console.error(error);
 
@@ -714,67 +1386,167 @@ async function updateBin(id, x, y) {
 
         loadBins();
 
+        return;
+
     }
+
+
+    showMessage(
+        "✅ บันทึกตำแหน่งใหม่แล้ว",
+        "success"
+    );
+
 }
 
 
 /* =========================
-   ลบถังขยะ
+   ลบถัง
 ========================= */
 
-async function deleteBin(id) {
+async function deleteCurrentBin() {
 
-    try {
+    if (!currentBin)
+        return;
 
-        const response = await fetch(
 
-            SUPABASE_URL +
-            "/rest/v1/trash_bins?id=eq." +
-            id,
-
-            {
-
-                method: "DELETE",
-
-                headers: {
-
-                    "apikey":
-                        SUPABASE_KEY,
-
-                    "Authorization":
-                        "Bearer " + SUPABASE_KEY
-
-                }
-
-            }
-
+    const confirmDelete =
+        confirm(
+            "⚠️ ต้องการลบถังขยะนี้ใช่หรือไม่?"
         );
 
-        if (!response.ok) {
 
-            throw new Error(
-                await response.text()
-            );
+    if (!confirmDelete)
+        return;
 
-        }
 
-        showMessage(
-            "🗑️ ลบถังขยะแล้ว",
-            "success"
+    const {
+        error
+    } =
+    await supabaseClient
+        .from("trash_bins")
+        .delete()
+        .eq(
+            "id",
+            currentBin.id
         );
 
-        loadBins();
 
-    } catch (error) {
+    if (error) {
 
         console.error(error);
 
-        showMessage(
-            "❌ ไม่สามารถลบถังขยะได้",
-            "error"
+        alert(
+            "❌ ลบถังขยะไม่สำเร็จ\n" +
+            error.message
         );
 
+        return;
+
     }
+
+
+    closeModal();
+
+
+    showMessage(
+        "🗑️ ลบถังขยะเรียบร้อย",
+        "success"
+    );
+
+
+    loadBins();
+
+}
+
+
+/* =========================
+   สถานะ
+========================= */
+
+function getStatusText(status) {
+
+    if (status === "near_full")
+        return "ใกล้เต็ม";
+
+    if (status === "full")
+        return "เต็ม";
+
+    return "ปกติ";
+
+}
+
+
+function getStatusEmoji(status) {
+
+    if (status === "near_full")
+        return "🟡";
+
+    if (status === "full")
+        return "🔴";
+
+    return "🟢";
+
+}
+
+
+function getStatusClass(status) {
+
+    if (status === "near_full")
+        return "near_full";
+
+    if (status === "full")
+        return "full";
+
+    return "normal";
+
+}
+
+
+function getStatusBoxClass(status) {
+
+    if (status === "near_full")
+        return "status-near";
+
+    if (status === "full")
+        return "status-full";
+
+    return "status-normal";
+
+}
+
+
+/* =========================
+   ข้อความแจ้งเตือน
+========================= */
+
+function showMessage(
+    text,
+    type
+) {
+
+    const message =
+        document.getElementById("message");
+
+
+    message.textContent =
+        text;
+
+
+    message.className =
+        "message show " +
+        type;
+
+
+    setTimeout(
+        function() {
+
+            message.className =
+                "message";
+
+        },
+        3000
+    );
+
 }
 
 
@@ -782,9 +1554,31 @@ async function deleteBin(id) {
    เริ่มต้น
 ========================= */
 
-loadBins();
+async function initialize() {
+
+    const session =
+        await checkLogin();
+
+
+    if (session) {
+
+        document
+            .getElementById("adminInfo")
+            .textContent =
+            "👤 เจ้าหน้าที่เข้าสู่ระบบแล้ว";
+
+    }
+
+
+    loadBins();
+
+}
+
+
+initialize();
 
 </script>
 
 </body>
+
 </html>
