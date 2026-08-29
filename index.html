@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BEN2 BINCARE | ระบบดูแลโรงเรียน</title>
+
 <style>
 
 /* =====================================================
@@ -10,30 +20,28 @@
     padding: 0;
 }
 
-
 /* =====================================================
    THEME
 ===================================================== */
 
 :root {
 
-    --green: #16a34a;
-    --green-dark: #166534;
-    --green-light: #ecfdf5;
+    --blue: #2563eb;
+    --blue-dark: #1e3a8a;
+    --blue-light: #eff6ff;
 
-    --yellow: #eab308;
-    --yellow-light: #fef9c3;
+    --yellow: #facc15;
+    --yellow-light: #fff9db;
 
-    --text: #1f2937;
-    --muted: #6b7280;
+    --text: #172554;
+    --muted: #64748b;
 
-    --bg: #f4f7f5;
+    --bg: #f5f8fc;
     --white: #ffffff;
 
-    --border: #d1d5db;
+    --border: #dbeafe;
 
 }
-
 
 /* =====================================================
    BODY
@@ -46,14 +54,18 @@ body {
         "Noto Sans Thai",
         sans-serif;
 
-    background: var(--bg);
+    background:
+        linear-gradient(
+            135deg,
+            #eef6ff,
+            #fff9db
+        );
 
     color: var(--text);
 
     min-height: 100vh;
 
 }
-
 
 /* =====================================================
    HEADER
@@ -64,8 +76,8 @@ header {
     background:
         linear-gradient(
             135deg,
-            #166534,
-            #16a34a
+            #075985,
+            #2563eb
         );
 
     color: white;
@@ -73,10 +85,9 @@ header {
     padding: 18px 20px;
 
     box-shadow:
-        0 3px 15px rgba(22,101,52,.15);
+        0 5px 18px rgba(37, 99, 235, .25);
 
 }
-
 
 .header-inner {
 
@@ -94,7 +105,6 @@ header {
 
 }
 
-
 .brand {
 
     display: flex;
@@ -105,15 +115,14 @@ header {
 
 }
 
-
 .logo-box {
 
     width: 48px;
     height: 48px;
 
-    background: #fef9c3;
+    background: #fff9db;
 
-    color: var(--green-dark);
+    color: var(--blue);
 
     border-radius: 14px;
 
@@ -127,7 +136,6 @@ header {
 
 }
 
-
 .logo {
 
     font-size: 26px;
@@ -138,7 +146,6 @@ header {
 
 }
 
-
 .subtitle {
 
     font-size: 14px;
@@ -147,14 +154,17 @@ header {
 
     margin-top: 3px;
 
-}
+    color: #fef08a;
 
+    font-weight: bold;
+
+}
 
 .admin-button {
 
     text-decoration: none;
 
-    color: var(--green-dark);
+    color: var(--blue-dark);
 
     background: white;
 
@@ -170,13 +180,11 @@ header {
 
 }
 
-
 .admin-button:hover {
 
     background: var(--yellow-light);
 
 }
-
 
 /* =====================================================
    MAIN
@@ -192,7 +200,6 @@ header {
 
 }
 
-
 /* =====================================================
    HERO
 ===================================================== */
@@ -205,15 +212,14 @@ header {
 
     padding: 35px 30px;
 
-    border: 1px solid var(--border);
+    border: 2px solid var(--border);
 
     box-shadow:
-        0 5px 20px rgba(22,101,52,.07);
+        0 12px 35px rgba(30,64,175,.12);
 
     margin-bottom: 25px;
 
 }
-
 
 .hero-badge {
 
@@ -221,7 +227,7 @@ header {
 
     background: var(--yellow-light);
 
-    color: #854d0e;
+    color: #713f12;
 
     padding: 7px 13px;
 
@@ -235,19 +241,17 @@ header {
 
 }
 
-
 .hero h1 {
 
     font-size: 32px;
 
     line-height: 1.25;
 
-    color: var(--green-dark);
+    color: var(--blue-dark);
 
     margin-bottom: 10px;
 
 }
-
 
 .hero p {
 
@@ -259,7 +263,6 @@ header {
 
 }
 
-
 /* =====================================================
    QUICK SYSTEMS
 ===================================================== */
@@ -270,15 +273,13 @@ header {
 
 }
 
-
 .section-title h2 {
 
     font-size: 22px;
 
-    color: var(--green-dark);
+    color: var(--blue-dark);
 
 }
-
 
 .section-title p {
 
@@ -289,7 +290,6 @@ header {
     font-size: 14px;
 
 }
-
 
 .system-grid {
 
@@ -302,7 +302,6 @@ header {
 
 }
 
-
 .system-card {
 
     text-decoration: none;
@@ -311,7 +310,7 @@ header {
 
     background: white;
 
-    border: 1px solid var(--border);
+    border: 2px solid var(--border);
 
     border-radius: 18px;
 
@@ -330,18 +329,16 @@ header {
 
 }
 
-
 .system-card:hover {
 
     transform: translateY(-3px);
 
-    border-color: #86efac;
+    border-color: #93c5fd;
 
     box-shadow:
-        0 8px 22px rgba(22,101,52,.10);
+        0 8px 22px rgba(30,64,175,.12);
 
 }
-
 
 .icon {
 
@@ -362,13 +359,11 @@ header {
 
 }
 
-
 .icon-blue {
 
-    background: var(--green-light);
+    background: var(--blue-light);
 
 }
-
 
 .icon-yellow {
 
@@ -376,24 +371,21 @@ header {
 
 }
 
-
 .system-info {
 
     flex: 1;
 
 }
 
-
 .system-info h3 {
 
-    color: var(--green-dark);
+    color: var(--blue-dark);
 
     font-size: 18px;
 
     margin-bottom: 5px;
 
 }
-
 
 .system-info p {
 
@@ -405,15 +397,13 @@ header {
 
 }
 
-
 .arrow {
 
-    color: #86a58f;
+    color: #64748b;
 
     font-size: 22px;
 
 }
-
 
 /* =====================================================
    MAP CARD
@@ -425,17 +415,16 @@ header {
 
     background: white;
 
-    border: 1px solid var(--border);
+    border: 2px solid var(--border);
 
     border-radius: 20px;
 
     padding: 23px;
 
     box-shadow:
-        0 5px 18px rgba(22,101,52,.06);
+        0 8px 25px rgba(30,64,175,.08);
 
 }
-
 
 .map-head {
 
@@ -451,15 +440,13 @@ header {
 
 }
 
-
 .map-head h2 {
 
-    color: var(--green-dark);
+    color: var(--blue-dark);
 
     font-size: 21px;
 
 }
-
 
 .map-head p {
 
@@ -471,12 +458,16 @@ header {
 
 }
 
-
 .map-button {
 
     text-decoration: none;
 
-    background: var(--green);
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #1d4ed8
+        );
 
     color: white;
 
@@ -488,15 +479,22 @@ header {
 
     font-size: 14px;
 
-}
+    transition: .2s;
 
+}
 
 .map-button:hover {
 
-    background: var(--green-dark);
+    background:
+        linear-gradient(
+            135deg,
+            #1d4ed8,
+            #1e3a8a
+        );
+
+    transform: translateY(-2px);
 
 }
-
 
 /* =====================================================
    MAP PREVIEW
@@ -508,7 +506,7 @@ header {
 
     min-height: 220px;
 
-    background: var(--green-light);
+    background: var(--blue-light);
 
     border-radius: 15px;
 
@@ -520,10 +518,9 @@ header {
 
     overflow: hidden;
 
-    border: 1px solid #bbf7d0;
+    border: 2px solid #dbeafe;
 
 }
-
 
 .map-preview img {
 
@@ -537,7 +534,6 @@ header {
 
 }
 
-
 .map-placeholder {
 
     text-align: center;
@@ -548,7 +544,6 @@ header {
 
 }
 
-
 .map-placeholder .map-icon {
 
     font-size: 45px;
@@ -556,7 +551,6 @@ header {
     margin-bottom: 10px;
 
 }
-
 
 /* =====================================================
    NOTICE
@@ -568,7 +562,7 @@ header {
 
     background: var(--yellow-light);
 
-    border: 1px solid #fde68a;
+    border: 2px solid #f0df9b;
 
     border-radius: 17px;
 
@@ -582,17 +576,15 @@ header {
 
 }
 
-
 .notice-icon {
 
     font-size: 23px;
 
 }
 
-
 .notice h3 {
 
-    color: #854d0e;
+    color: #713f12;
 
     margin-bottom: 4px;
 
@@ -600,17 +592,15 @@ header {
 
 }
 
-
 .notice p {
 
-    color: #78716c;
+    color: #756b4a;
 
     font-size: 14px;
 
     line-height: 1.6;
 
 }
-
 
 /* =====================================================
    FOOTER
@@ -622,14 +612,13 @@ footer {
 
     text-align: center;
 
-    color: #7c8f82;
+    color: #64748b;
 
     font-size: 13px;
 
     line-height: 1.7;
 
 }
-
 
 /* =====================================================
    MOBILE
@@ -643,7 +632,6 @@ footer {
 
     }
 
-
     .admin-button {
 
         font-size: 13px;
@@ -652,13 +640,11 @@ footer {
 
     }
 
-
     .hero {
 
         padding: 28px 22px;
 
     }
-
 
     .hero h1 {
 
@@ -666,13 +652,11 @@ footer {
 
     }
 
-
     .system-grid {
 
         grid-template-columns: 1fr;
 
     }
-
 
     .map-head {
 
@@ -681,7 +665,6 @@ footer {
         align-items: flex-start;
 
     }
-
 
     .map-button {
 
@@ -692,7 +675,6 @@ footer {
     }
 
 }
-
 
 @media(max-width:450px) {
 
@@ -705,13 +687,11 @@ footer {
 
     }
 
-
     .logo {
 
         font-size: 22px;
 
     }
-
 
     .subtitle {
 
@@ -719,13 +699,11 @@ footer {
 
     }
 
-
     .admin-button {
 
         display: none;
 
     }
-
 
     .hero h1 {
 
@@ -736,3 +714,314 @@ footer {
 }
 
 </style>
+
+</head>
+
+<body>
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header>
+
+<div class="header-inner">
+
+<div class="brand">
+
+<div class="logo-box">
+🗑️
+</div>
+
+<div>
+
+<div class="logo">
+BEN2 BINCARE
+</div>
+
+<div class="subtitle">
+ระบบดูแลโรงเรียน
+</div>
+
+</div>
+
+</div>
+
+<a
+href="admin-login.html"
+class="admin-button">
+
+🔐 เจ้าหน้าที่
+
+</a>
+
+</div>
+
+</header>
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="container">
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="hero-badge">
+🏫 ระบบบริการภายในโรงเรียน
+</div>
+
+<h1>
+ดูแลโรงเรียนให้น่าอยู่<br>
+ง่ายขึ้นในที่เดียว
+</h1>
+
+<p>
+BINCARE ช่วยให้การแจ้งปัญหา
+การจัดการของหาย–พบของ
+และการดูแลจุดต่าง ๆ ภายในโรงเรียน
+เป็นเรื่องง่ายและตรวจสอบได้
+</p>
+
+</section>
+
+<!-- =====================================================
+     QUICK ACCESS
+===================================================== -->
+
+<section>
+
+<div class="section-title">
+
+<h2>
+⚡ ทางลัดระบบ
+</h2>
+
+<p>
+เลือกเมนูที่ต้องการใช้งานได้ทันที
+</p>
+
+</div>
+
+<div class="system-grid">
+
+<!-- REPORT -->
+
+<a
+href="report.html"
+class="system-card">
+
+<div class="icon icon-yellow">
+🚨
+</div>
+
+<div class="system-info">
+
+<h3>
+แจ้งปัญหา
+</h3>
+
+<p>
+แจ้งปัญหาหรือสิ่งที่ต้องการให้โรงเรียนแก้ไข
+</p>
+
+</div>
+
+<div class="arrow">
+›
+</div>
+
+</a>
+
+<!-- STATUS -->
+
+<a
+href="status.html"
+class="system-card">
+
+<div class="icon icon-blue">
+🔎
+</div>
+
+<div class="system-info">
+
+<h3>
+ตรวจสอบสถานะ
+</h3>
+
+<p>
+ตรวจสอบความคืบหน้าด้วยเลขรายการ
+</p>
+
+</div>
+
+<div class="arrow">
+›
+</div>
+
+</a>
+
+<!-- LOST FOUND -->
+
+<a
+href="lost-found.html"
+class="system-card">
+
+<div class="icon icon-yellow">
+📦
+</div>
+
+<div class="system-info">
+
+<h3>
+ของหาย / พบของ
+</h3>
+
+<p>
+แจ้งของหายหรือดูรายการของที่มีผู้พบ
+</p>
+
+</div>
+
+<div class="arrow">
+›
+</div>
+
+</a>
+
+<!-- FOUND ITEMS -->
+
+<a
+href="found-items.html"
+class="system-card">
+
+<div class="icon icon-blue">
+🧳
+</div>
+
+<div class="system-info">
+
+<h3>
+รายการของที่พบ
+</h3>
+
+<p>
+ดูรายการสิ่งของที่มีผู้พบภายในโรงเรียน
+</p>
+
+</div>
+
+<div class="arrow">
+›
+</div>
+
+</a>
+
+</div>
+
+</section>
+
+<!-- =====================================================
+     MAP
+===================================================== -->
+
+<section class="map-card">
+
+<div class="map-head">
+
+<div>
+
+<h2>
+🗺️ แผนที่โรงเรียน
+</h2>
+
+<p>
+ดูตำแหน่งถังขยะและจุดต่าง ๆ ภายในโรงเรียน
+</p>
+
+</div>
+
+<a
+href="map.html"
+class="map-button">
+
+เปิดแผนที่ →
+
+</a>
+
+</div>
+
+<div class="map-preview">
+
+<img
+    src="school-map.png"
+    alt="แผนที่โรงเรียน"
+>
+
+<div
+id="mapPlaceholder"
+class="map-placeholder"
+style="display:none;">
+
+<div class="map-icon">
+🗺️
+</div>
+
+<div>
+ยังไม่มีภาพแผนที่
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =====================================================
+     NOTICE
+===================================================== -->
+
+<section class="notice">
+
+<div class="notice-icon">
+💡
+</div>
+
+<div>
+
+<h3>
+คำแนะนำ
+</h3>
+
+<p>
+หลังจากแจ้งปัญหาหรือแจ้งของหาย / พบของ
+ระบบจะแสดงหมายเลขรายการ
+ให้เก็บหมายเลขนั้นไว้สำหรับตรวจสอบสถานะภายหลัง
+</p>
+
+</div>
+
+</section>
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+BEN2 BINCARE | ระบบดูแลโรงเรียน
+
+<br>
+
+ระบบสำหรับอำนวยความสะดวก
+ในการแจ้งปัญหาและดูแลโรงเรียน
+
+</footer>
+
+</main>
+
+</body>
+
+</html>
