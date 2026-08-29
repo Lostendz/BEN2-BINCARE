@@ -10,6 +10,10 @@
 
 <style>
 
+/* =====================================================
+   BASE
+===================================================== */
+
 * {
     box-sizing: border-box;
 }
@@ -17,39 +21,81 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #f4f7f5;
-    color: #1f2937;
+    background: #f5f9ff;
+    color: #26344d;
 }
 
+
+/* =====================================================
+   HEADER
+===================================================== */
+
 header {
-    background: #166534;
+    background: linear-gradient(
+        135deg,
+        #2878d4,
+        #3d8ee5
+    );
+
     color: white;
     padding: 20px;
+    box-shadow: 0 4px 15px rgba(40,120,212,.18);
 }
 
 .header-inner {
     max-width: 1100px;
     margin: auto;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     gap: 15px;
 }
 
 .logo {
-    font-size: 26px;
+    font-size: 27px;
     font-weight: bold;
+    letter-spacing: .3px;
 }
+
+.header-subtitle {
+    margin-top: 4px;
+    opacity: .95;
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
 
 .logout {
     border: 0;
-    background: white;
-    color: #166534;
-    padding: 10px 15px;
-    border-radius: 9px;
+
+    background: #ffd84d;
+    color: #26344d;
+
+    padding: 11px 17px;
+
+    border-radius: 11px;
+
     font-weight: bold;
     cursor: pointer;
+
+    box-shadow: 0 3px 8px rgba(0,0,0,.08);
+
+    transition: .2s;
 }
+
+.logout:hover {
+    background: #ffe477;
+    transform: translateY(-1px);
+}
+
+
+/* =====================================================
+   CONTAINER
+===================================================== */
 
 .container {
     max-width: 1100px;
@@ -57,36 +103,54 @@ header {
     padding: 25px 18px;
 }
 
-/* =========================
+
+/* =====================================================
    TABS
-========================= */
+===================================================== */
 
 .tabs {
     display: flex;
     gap: 10px;
+
     margin-bottom: 20px;
+
     flex-wrap: wrap;
 }
 
 .tab {
     border: none;
+
     background: white;
-    color: #374151;
-    padding: 13px 18px;
-    border-radius: 10px;
+    color: #42526b;
+
+    padding: 13px 19px;
+
+    border-radius: 12px;
+
     font-weight: bold;
     cursor: pointer;
-    box-shadow: 0 3px 10px rgba(0,0,0,.06);
+
+    box-shadow: 0 4px 12px rgba(40,90,150,.08);
+
+    transition: .2s;
+}
+
+.tab:hover {
+    transform: translateY(-1px);
 }
 
 .tab.active {
-    background: #166534;
+    background: #327fd8;
     color: white;
+
+    box-shadow:
+        0 4px 12px rgba(50,127,216,.25);
 }
 
-/* =========================
+
+/* =====================================================
    SECTION
-========================= */
+===================================================== */
 
 .section {
     display: none;
@@ -96,16 +160,21 @@ header {
     display: block;
 }
 
-/* =========================
+
+/* =====================================================
    SECTION HEADER
-========================= */
+===================================================== */
 
 .section-head {
     display: flex;
+
     justify-content: space-between;
     align-items: center;
+
     gap: 10px;
+
     flex-wrap: wrap;
+
     margin-bottom: 15px;
 }
 
@@ -115,85 +184,126 @@ header {
 
 .live {
     margin-top: 6px;
-    color: #16a34a;
+
+    color: #3b9c68;
+
     font-size: 14px;
     font-weight: bold;
 }
 
 .refresh {
     border: none;
+
     background: white;
+    color: #327fd8;
+
     padding: 10px 15px;
-    border-radius: 9px;
+
+    border-radius: 10px;
+
     font-weight: bold;
     cursor: pointer;
-    box-shadow: 0 3px 10px rgba(0,0,0,.06);
+
+    box-shadow:
+        0 4px 12px rgba(40,90,150,.08);
+
+    transition: .2s;
 }
 
-/* =========================
+.refresh:hover {
+    background: #edf6ff;
+}
+
+
+/* =====================================================
    STATS
-========================= */
+===================================================== */
 
 .stats {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
     gap: 15px;
+
     margin-bottom: 20px;
 }
 
 .stat {
     background: white;
+
     padding: 20px;
-    border-radius: 16px;
-    box-shadow: 0 3px 12px rgba(0,0,0,.06);
+
+    border-radius: 17px;
+
+    box-shadow:
+        0 5px 16px rgba(40,90,150,.08);
+
+    border-top: 4px solid #ffd84d;
 }
 
 .stat-number {
     font-size: 32px;
+
     font-weight: bold;
+
     margin-top: 8px;
 }
 
 .pending {
-    color: #ca8a04;
+    color: #d59b18;
 }
 
 .progress {
-    color: #2563eb;
+    color: #327fd8;
 }
 
 .resolved {
-    color: #16a34a;
+    color: #3b9c68;
 }
 
-/* =========================
+
+/* =====================================================
    CARDS
-========================= */
+===================================================== */
 
 .report,
 .item-card {
     background: white;
+
     margin-top: 15px;
+
     padding: 20px;
-    border-radius: 16px;
-    box-shadow: 0 3px 12px rgba(0,0,0,.06);
+
+    border-radius: 17px;
+
+    box-shadow:
+        0 5px 16px rgba(40,90,150,.08);
+
+    border-left: 4px solid #5b9be6;
 }
 
 .ticket {
-    color: #166534;
+    color: #327fd8;
+
     font-weight: bold;
+
     margin-bottom: 8px;
 }
 
 .meta {
-    color: #6b7280;
+    color: #68778e;
+
     margin: 8px 0;
+
     line-height: 1.5;
 }
 
-/* =========================
+
+/* =====================================================
    STATUS
-========================= */
+===================================================== */
 
 .status {
     margin-top: 15px;
@@ -201,119 +311,189 @@ header {
 
 select {
     padding: 10px;
-    border-radius: 9px;
-    border: 1px solid #d1d5db;
+
+    border-radius: 10px;
+
+    border: 1px solid #cbd9ea;
+
     background: white;
+
+    color: #26344d;
+
     font-size: 15px;
+
+    outline: none;
 }
 
-/* =========================
+select:focus {
+    border-color: #327fd8;
+
+    box-shadow:
+        0 0 0 3px rgba(50,127,216,.12);
+}
+
+
+/* =====================================================
    LOST FOUND
-========================= */
+===================================================== */
 
 .item-type {
     display: inline-block;
-    padding: 6px 12px;
+
+    padding: 7px 13px;
+
     border-radius: 20px;
+
     font-size: 14px;
+
     font-weight: bold;
 }
 
 .type-found {
-    background: #dcfce7;
-    color: #166534;
+    background: #e2f7ec;
+    color: #318158;
 }
 
 .type-lost {
-    background: #fee2e2;
-    color: #991b1b;
+    background: #fff0c2;
+    color: #a87908;
 }
 
 .item-card h2 {
     margin: 12px 0;
 }
 
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
 .item-actions {
     display: flex;
+
     gap: 10px;
+
     flex-wrap: wrap;
+
     margin-top: 18px;
 }
 
 .btn {
     border: none;
-    border-radius: 9px;
+
+    border-radius: 10px;
+
     padding: 11px 16px;
+
     font-weight: bold;
+
     cursor: pointer;
+
+    transition: .2s;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
 }
 
 .btn-success {
-    background: #16a34a;
+    background: #4caf78;
     color: white;
+}
+
+.btn-success:hover {
+    background: #429968;
 }
 
 .btn-danger {
-    background: #dc2626;
+    background: #ee7373;
     color: white;
 }
 
+.btn-danger:hover {
+    background: #dc6060;
+}
+
 .btn-secondary {
-    background: #e5e7eb;
-    color: #374151;
+    background: #e8eef6;
+    color: #53647b;
 }
 
 .btn:disabled {
     opacity: .6;
     cursor: not-allowed;
+    transform: none;
 }
 
-/* =========================
+
+/* =====================================================
    MESSAGE
-========================= */
+===================================================== */
 
 .message {
     display: none;
+
     padding: 13px;
-    border-radius: 10px;
+
+    border-radius: 11px;
+
     margin-bottom: 15px;
+
     font-weight: bold;
 }
 
 .message.success {
     display: block;
-    background: #dcfce7;
-    color: #166534;
+
+    background: #e2f7ec;
+    color: #318158;
+
+    border-left: 4px solid #4caf78;
 }
 
 .message.error {
     display: block;
-    background: #fee2e2;
-    color: #991b1b;
+
+    background: #fff0f0;
+    color: #c45454;
+
+    border-left: 4px solid #ee7373;
 }
 
-/* =========================
+
+/* =====================================================
    EMPTY
-========================= */
+===================================================== */
 
 .loading {
     text-align: center;
+
     padding: 30px;
-    color: #6b7280;
+
+    color: #718096;
 }
 
 .empty {
     background: white;
+
     padding: 35px;
-    border-radius: 16px;
+
+    border-radius: 17px;
+
     text-align: center;
-    color: #6b7280;
+
+    color: #718096;
+
     margin-top: 15px;
+
+    box-shadow:
+        0 5px 16px rgba(40,90,150,.06);
 }
 
-/* =========================
+
+/* =====================================================
    MOBILE
-========================= */
+===================================================== */
 
 @media(max-width:700px) {
 
@@ -323,6 +503,10 @@ select {
 
     .header-inner {
         align-items: flex-start;
+    }
+
+    .logout {
+        padding: 9px 13px;
     }
 
     .item-actions {
@@ -350,10 +534,10 @@ select {
 <div>
 
 <div class="logo">
-BINCARE
+BEN2 BINCARE
 </div>
 
-<div>
+<div class="header-subtitle">
 🛠️ ระบบจัดการสำหรับเจ้าหน้าที่
 </div>
 
@@ -1265,12 +1449,6 @@ async function deleteLostFound(id) {
 
     }
 
-
-    /*
-       สำคัญ:
-       ถ้า data เป็น [] แสดงว่า
-       Supabase ไม่ได้ลบแถวจริง
-    */
 
     if (!data || data.length === 0) {
 
