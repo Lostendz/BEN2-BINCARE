@@ -21,14 +21,15 @@ content="width=device-width, initial-scale=1.0">
 
 body {
     font-family: Arial, sans-serif;
-    background: #eefbf5;
-    color: #173b2b;
+    background: linear-gradient(135deg, #eef6ff, #fff9db);
+    color: #172554;
 }
 
 header {
-    background: #087f5b;
+    background: linear-gradient(135deg, #075985, #2563eb);
     color: white;
     padding: 20px;
+    box-shadow: 0 5px 18px rgba(37, 99, 235, .25);
 }
 
 .logo {
@@ -45,22 +46,32 @@ header {
 .back {
     display: inline-block;
     margin-bottom: 15px;
-    color: #087f5b;
+    color: #1d4ed8;
     text-decoration: none;
     font-weight: bold;
+    background: white;
+    padding: 9px 14px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,.06);
+    transition: .2s;
+}
+
+.back:hover {
+    background: #eff6ff;
 }
 
 .card {
-    background: #ffffff;
-    border-radius: 20px;
+    background: rgba(255,255,255,.96);
+    border-radius: 24px;
     padding: 25px;
-    box-shadow: 0 4px 15px rgba(8,127,91,0.12);
-    border: 1px solid #d1fae5;
+    border: 2px solid #dbeafe;
+    box-shadow:
+        0 12px 35px rgba(30,64,175,.12);
 }
 
 h1 {
     margin-bottom: 8px;
-    color: #065f46;
+    color: #1e3a8a;
 }
 
 .subtitle {
@@ -77,41 +88,51 @@ h1 {
 input {
     flex: 1;
     padding: 14px;
-    border: 1px solid #a7d9c5;
-    border-radius: 10px;
+    border: 2px solid #dbeafe;
+    border-radius: 12px;
     font-size: 16px;
     outline: none;
-    background: #fbfffd;
+    background: #f8fbff;
+    color: #172554;
 }
 
 input:focus {
-    border-color: #10b981;
+    border-color: #2563eb;
+    background: white;
+    box-shadow: 0 0 0 4px rgba(37,99,235,.10);
 }
 
 button {
     border: none;
-    background: #10b981;
-    color: white;
+    background: linear-gradient(135deg, #facc15, #f59e0b);
+    color: #172554;
     padding: 14px 20px;
-    border-radius: 10px;
+    border-radius: 12px;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
+    box-shadow: 0 6px 15px rgba(245,158,11,.25);
+    transition: .2s;
 }
 
 button:hover {
-    background: #059669;
+    background: linear-gradient(135deg, #facc15, #f59e0b);
+    transform: translateY(-2px);
+    box-shadow: 0 9px 20px rgba(245,158,11,.35);
 }
 
 button:disabled {
-    background: #9ca3af;
+    background: #cbd5e1;
+    color: #64748b;
     cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
 }
 
 .result {
     display: none;
     margin-top: 25px;
-    border-top: 1px solid #d1fae5;
+    border-top: 1px solid #dbeafe;
     padding-top: 25px;
 }
 
@@ -120,16 +141,16 @@ button:disabled {
 }
 
 .result-card {
-    border: 1px solid #ccefe0;
+    border: 2px solid #dbeafe;
     border-radius: 15px;
     padding: 20px;
-    background: #fcfffd;
+    background: white;
 }
 
 .type {
     display: inline-block;
-    background: #d1fae5;
-    color: #047857;
+    background: #fff9db;
+    color: #713f12;
     padding: 7px 12px;
     border-radius: 20px;
     font-weight: bold;
@@ -139,13 +160,14 @@ button:disabled {
 .ticket {
     font-size: 22px;
     font-weight: bold;
-    color: #087f5b;
+    color: #1e3a8a;
     margin-bottom: 15px;
 }
 
 .info {
     margin: 10px 0;
     line-height: 1.5;
+    color: #172554;
 }
 
 .status {
@@ -157,8 +179,8 @@ button:disabled {
 }
 
 .pending {
-    background: #fef3c7;
-    color: #92400e;
+    background: #fef08a;
+    color: #713f12;
 }
 
 .in_progress {
@@ -167,13 +189,13 @@ button:disabled {
 }
 
 .resolved {
-    background: #d1fae5;
-    color: #047857;
+    background: #dcfce7;
+    color: #166534;
 }
 
 .claimed {
-    background: #d1fae5;
-    color: #047857;
+    background: #dcfce7;
+    color: #166534;
 }
 
 .not-found {
@@ -181,8 +203,9 @@ button:disabled {
     margin-top: 25px;
     padding: 18px;
     border-radius: 12px;
-    background: #fee2e2;
-    color: #991b1b;
+    background: #fff1f2;
+    border: 2px solid #fb7185;
+    color: #9f1239;
     line-height: 1.6;
 }
 
@@ -197,9 +220,9 @@ button:disabled {
     margin-top: 15px;
     padding: 12px;
     border-radius: 10px;
-    background: #ecfdf5;
-    color: #047857;
-    border: 1px solid #d1fae5;
+    background: #eef6ff;
+    border: 1px solid #dbeafe;
+    color: #1e3a8a;
     font-size: 14px;
     line-height: 1.5;
 }
