@@ -2,12 +2,8 @@
 <html lang="th">
 
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>ของที่พบ | BINCARE</title>
 
@@ -187,7 +183,6 @@ header {
 
 </head>
 
-
 <body>
 
 <header>
@@ -253,12 +248,15 @@ class="message">
 
 <script>
 
+/* =========================
+   SUPABASE
+========================= */
+
 const SUPABASE_URL =
 "https://pbjeyvupzbhxodlibjuh.supabase.co";
 
 const SUPABASE_KEY =
 "sb_publishable_paiTf1uzpiCAPR1oWQMlDg_PfVzT2p6";
-
 
 const supabaseClient =
 supabase.createClient(
@@ -286,27 +284,19 @@ function showMessage(text, type) {
         message.className =
             "message";
 
-    }, 3000);
+    }, 5000);
 
 }
 
 
 /* =========================
-   โหลดของที่พบ
+   โหลดรายการของที่พบ
 ========================= */
 
 async function loadItems() {
 
     const container =
         document.getElementById("list");
-
-
-    container.innerHTML = `
-        <div class="loading">
-            กำลังโหลดรายการ...
-        </div>
-    `;
-
 
     const {
         data,
@@ -327,13 +317,20 @@ async function loadItems() {
 
     if (error) {
 
-        console.error(error);
+        console.error(
+            "LOAD ERROR:",
+            error
+        );
 
         container.innerHTML = `
             <div class="empty">
+
                 ❌ ไม่สามารถโหลดข้อมูลได้
+
                 <br><br>
+
                 ${escapeHtml(error.message)}
+
             </div>
         `;
 
@@ -401,7 +398,9 @@ async function loadItems() {
             <button
                 class="claim-button"
                 onclick="claimItem(${item.id}, this)">
+
                 ✅ เจ้าของมารับแล้ว
+
             </button>
 
         `;
@@ -434,74 +433,160 @@ async function claimItem(id, button) {
     button.disabled = true;
 
     button.textContent =
-        "กำลังบันทึก...";
+        "⏳ กำลังบันทึก...";
 
 
-    const {
-        error
-    } =
-    await supabaseClient
-        .from("lost_found")
-        .update({
-            is_claimed: true
-        })
-        .eq("id", id);
+    try {
+
+        const {
+            data,
+            error
+        } =
+        await supabaseClient
+            .from("lost_found")
+            .update({
+                is_claimed: true
+            })
+            .eq("id", id)
+            .select("id,is_claimed");
 
 
-    if (error) {
+        console.log(
+            "UPDATE DATA:",
+            data
+        );
 
-        console.error(error);
+        console.log(
+            "UPDATE ERROR:",
+            error
+        );
+
+
+        /* =====================
+           มี Error จาก Supabase
+        ===================== */
+
+        if (error) {
+
+            console.error(
+                "SUPABASE UPDATE ERROR:",
+                error
+            );
+
+            button.disabled = false;
+
+            button.textContent =
+                "✅ เจ้าของมารับแล้ว";
+
+
+            showMessage(
+                "❌ บันทึกไม่ได้: " +
+                error.message,
+                "error"
+            );
+
+            return;
+        }
+
+
+        /* =====================
+           UPDATE ไม่ได้ข้อมูล
+        ===================== */
+
+        if (!data || data.length === 0) {
+
+            console.error(
+                "UPDATE สำเร็จแต่ไม่มีข้อมูลกลับมา"
+            );
+
+            button.disabled = false;
+
+            button.textContent =
+                "✅ เจ้าของมารับแล้ว";
+
+
+            showMessage(
+                "❌ ไม่มีสิทธิ์แก้ไขรายการนี้ หรือไม่พบรายการ",
+                "error"
+            );
+
+            return;
+        }
+
+
+        /* =====================
+           สำเร็จ
+        ===================== */
+
+        console.log(
+            "CLAIM SUCCESS:",
+            data
+        );
+
+
+        showMessage(
+            "✅ เจ้าของมารับแล้ว รายการถูกนำออกจากกระดาน",
+            "success"
+        );
+
+
+        /* โหลดใหม่ */
+
+        await loadItems();
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "UNEXPECTED ERROR:",
+            error
+        );
+
 
         button.disabled = false;
 
         button.textContent =
             "✅ เจ้าของมารับแล้ว";
 
+
         showMessage(
-            "❌ ไม่สามารถบันทึกสถานะได้",
+            "❌ เกิดข้อผิดพลาด: " +
+            error.message,
             "error"
         );
 
-        return;
     }
-
-
-    showMessage(
-        "✅ บันทึกเรียบร้อย รายการนี้ถูกนำออกจากกระดานแล้ว",
-        "success"
-    );
-
-
-    loadItems();
 
 }
 
 
 /* =========================
-   Real-time
+   REAL-TIME
 ========================= */
 
-supabaseClient
-    .channel("lost-found-live")
-    .on(
-        "postgres_changes",
-        {
-            event: "*",
-            schema: "public",
-            table: "lost_found"
-        },
-        function(payload) {
+const channel =
+    supabaseClient
+        .channel("lost-found-live")
+        .on(
+            "postgres_changes",
+            {
+                event: "*",
+                schema: "public",
+                table: "lost_found"
+            },
+            function(payload) {
 
-            console.log(
-                "ข้อมูลมีการเปลี่ยนแปลง",
-                payload
-            );
+                console.log(
+                    "REAL-TIME:",
+                    payload
+                );
 
-            loadItems();
+                loadItems();
 
-        }
-    )
-    .subscribe();
+            }
+        )
+        .subscribe();
 
 
 /* =========================
@@ -513,11 +598,26 @@ function escapeHtml(value) {
     if (!value) return "";
 
     return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
 
 }
 
