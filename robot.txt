@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lostendz.github.io/BEN2-BINCARE/sitemap.xml
