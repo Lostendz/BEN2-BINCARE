@@ -59,15 +59,43 @@ header > div:last-child {
 }
 
 .back {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+
     margin-bottom: 16px;
+
+    padding: 10px 15px;
+
+    background: white;
+
     color: #0759d7;
+
     text-decoration: none;
+
     font-weight: 800;
+    font-size: 15px;
+
+    border-radius: 12px;
+
+    border: 1px solid #dbeafe;
+
+    box-shadow:
+        0 4px 12px rgba(30, 64, 175, .08);
+
+    transition: .2s;
 }
 
 .back:hover {
-    color: #ffb800;
+    color: #0049bd;
+
+    background: #f8fbff;
+
+    border-color: #b8d5ff;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 6px 16px rgba(30, 64, 175, .12);
 }
 
 /* =========================
