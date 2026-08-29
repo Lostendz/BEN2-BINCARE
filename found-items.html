@@ -2,8 +2,12 @@
 <html lang="th">
 
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>ของที่พบ | BINCARE</title>
 
@@ -75,6 +79,14 @@ header {
     font-weight: bold;
 }
 
+.live {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 14px;
+    color: #16a34a;
+    font-weight: bold;
+}
+
 .list {
     display: grid;
     gap: 15px;
@@ -115,6 +127,28 @@ header {
     font-weight: bold;
 }
 
+.claim-button {
+    width: 100%;
+    margin-top: 18px;
+    border: none;
+    border-radius: 10px;
+    padding: 13px 16px;
+    background: #16a34a;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.claim-button:hover {
+    background: #15803d;
+}
+
+.claim-button:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+}
+
 .empty {
     background: white;
     padding: 35px;
@@ -129,17 +163,30 @@ header {
     color: #6b7280;
 }
 
-.live {
-    display: inline-block;
-    margin-top: 12px;
-    font-size: 14px;
-    color: #16a34a;
+.message {
+    display: none;
+    padding: 13px;
+    border-radius: 10px;
+    margin-bottom: 15px;
     font-weight: bold;
+}
+
+.message.success {
+    display: block;
+    background: #dcfce7;
+    color: #166534;
+}
+
+.message.error {
+    display: block;
+    background: #fee2e2;
+    color: #991b1b;
 }
 
 </style>
 
 </head>
+
 
 <body>
 
@@ -170,8 +217,8 @@ BINCARE
 </h1>
 
 <p>
-มีใครพบสิ่งของในโรงเรียนและนำมาแจ้งไว้ที่นี่
-สามารถตรวจสอบรายการด้านล่างได้
+มีคนพบสิ่งของภายในโรงเรียนและนำมาแจ้งไว้ที่นี่
+เจ้าของสามารถตรวจสอบรายการด้านล่างได้
 </p>
 
 <a
@@ -184,6 +231,12 @@ class="report-button">
 🟢 อัปเดตข้อมูลแบบ Real-time
 </div>
 
+</div>
+
+
+<div
+id="message"
+class="message">
 </div>
 
 
@@ -215,13 +268,44 @@ supabase.createClient(
 
 
 /* =========================
-   โหลดรายการของที่พบ
+   แสดงข้อความ
+========================= */
+
+function showMessage(text, type) {
+
+    const message =
+        document.getElementById("message");
+
+    message.textContent = text;
+
+    message.className =
+        "message " + type;
+
+    setTimeout(() => {
+
+        message.className =
+            "message";
+
+    }, 3000);
+
+}
+
+
+/* =========================
+   โหลดของที่พบ
 ========================= */
 
 async function loadItems() {
 
     const container =
         document.getElementById("list");
+
+
+    container.innerHTML = `
+        <div class="loading">
+            กำลังโหลดรายการ...
+        </div>
+    `;
 
 
     const {
@@ -248,6 +332,8 @@ async function loadItems() {
         container.innerHTML = `
             <div class="empty">
                 ❌ ไม่สามารถโหลดข้อมูลได้
+                <br><br>
+                ${escapeHtml(error.message)}
             </div>
         `;
 
@@ -261,9 +347,11 @@ async function loadItems() {
             <div class="empty">
 
                 🎉 ตอนนี้ยังไม่มีของที่พบ
+
                 <br><br>
 
-                หากพบของ สามารถแจ้งไว้ที่นี่ได้
+                หากพบของ
+                สามารถแจ้งไว้ที่นี่ได้
 
             </div>
         `;
@@ -310,12 +398,81 @@ async function loadItems() {
                 ${escapeHtml(item.ticket_number)}
             </div>
 
+            <button
+                class="claim-button"
+                onclick="claimItem(${item.id}, this)">
+                ✅ เจ้าของมารับแล้ว
+            </button>
+
         `;
 
 
         container.appendChild(card);
 
     });
+
+}
+
+
+/* =========================
+   เจ้าของมารับแล้ว
+========================= */
+
+async function claimItem(id, button) {
+
+    const confirmed =
+        confirm(
+            "ยืนยันว่าของชิ้นนี้เจ้าของมารับไปแล้วใช่หรือไม่?"
+        );
+
+
+    if (!confirmed) {
+        return;
+    }
+
+
+    button.disabled = true;
+
+    button.textContent =
+        "กำลังบันทึก...";
+
+
+    const {
+        error
+    } =
+    await supabaseClient
+        .from("lost_found")
+        .update({
+            is_claimed: true
+        })
+        .eq("id", id);
+
+
+    if (error) {
+
+        console.error(error);
+
+        button.disabled = false;
+
+        button.textContent =
+            "✅ เจ้าของมารับแล้ว";
+
+        showMessage(
+            "❌ ไม่สามารถบันทึกสถานะได้",
+            "error"
+        );
+
+        return;
+    }
+
+
+    showMessage(
+        "✅ บันทึกเรียบร้อย รายการนี้ถูกนำออกจากกระดานแล้ว",
+        "success"
+    );
+
+
+    loadItems();
 
 }
 
