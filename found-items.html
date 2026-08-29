@@ -17,9 +17,9 @@
 
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f5f8ff;
-    color: #24324a;
+    font-family: Arial, "Noto Sans Thai", sans-serif;
+    background: linear-gradient(135deg, #eef6ff, #fff9db);
+    color: #172554;
 }
 
 /* =========================
@@ -27,21 +27,21 @@ body {
 ========================= */
 
 header {
-    background: linear-gradient(135deg, #1769c2, #3184d8);
+    background: linear-gradient(135deg, #075985, #2563eb);
     color: white;
     padding: 22px 20px;
-    box-shadow: 0 4px 15px rgba(23,105,194,.18);
+    box-shadow: 0 5px 18px rgba(37, 99, 235, .25);
 }
 
 .logo {
     font-size: 28px;
-    font-weight: bold;
+    font-weight: 900;
     letter-spacing: .5px;
 }
 
 header div:last-child {
-    margin-top: 3px;
-    color: #fff4bd;
+    margin-top: 4px;
+    color: #fef08a;
     font-weight: bold;
 }
 
@@ -52,7 +52,7 @@ header div:last-child {
 .container {
     max-width: 900px;
     margin: auto;
-    padding: 25px 18px 40px;
+    padding: 28px 18px 40px;
 }
 
 /* =========================
@@ -60,15 +60,23 @@ header div:last-child {
 ========================= */
 
 .back {
-    display: inline-block;
-    margin-bottom: 15px;
-    color: #1769c2;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 18px;
+    color: #1d4ed8;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 800;
+    background: white;
+    padding: 9px 14px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(30,64,175,.08);
+    transition: .2s;
 }
 
 .back:hover {
-    color: #0f55a0;
+    transform: translateX(-3px);
+    background: #eff6ff;
 }
 
 /* =========================
@@ -76,12 +84,12 @@ header div:last-child {
 ========================= */
 
 .hero {
-    background: white;
-    border-radius: 22px;
+    background: rgba(255,255,255,.96);
+    border-radius: 24px;
     padding: 28px;
     margin-bottom: 20px;
-    box-shadow: 0 5px 18px rgba(31,76,135,.09);
-    border: 1px solid #e2ebf8;
+    border: 2px solid #dbeafe;
+    box-shadow: 0 12px 35px rgba(30,64,175,.12);
     position: relative;
     overflow: hidden;
 }
@@ -91,16 +99,16 @@ header div:last-child {
     position: absolute;
     width: 100px;
     height: 100px;
-    background: #fff0a8;
+    background: #fff9db;
     border-radius: 50%;
     right: -35px;
     top: -35px;
-    opacity: .7;
+    opacity: .9;
 }
 
 .hero h1 {
     margin: 0 0 8px;
-    color: #1769c2;
+    color: #1e3a8a;
     position: relative;
 }
 
@@ -117,20 +125,20 @@ header div:last-child {
 .report-button {
     display: inline-block;
     margin-top: 15px;
-    background: #f6c945;
-    color: #24324a;
+    background: linear-gradient(135deg, #facc15, #f59e0b);
+    color: #172554;
     padding: 12px 18px;
     border-radius: 11px;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 900;
     transition: .2s;
-    box-shadow: 0 4px 10px rgba(246,201,69,.25);
+    box-shadow: 0 5px 14px rgba(245,158,11,.25);
     position: relative;
 }
 
 .report-button:hover {
-    background: #f3bd22;
-    transform: translateY(-1px);
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    transform: translateY(-2px);
 }
 
 /* =========================
@@ -141,7 +149,7 @@ header div:last-child {
     display: inline-block;
     margin-top: 14px;
     font-size: 14px;
-    color: #1769c2;
+    color: #1d4ed8;
     font-weight: bold;
 }
 
@@ -159,17 +167,18 @@ header div:last-child {
 ========================= */
 
 .item {
-    background: white;
+    background: rgba(255,255,255,.96);
     border-radius: 18px;
     padding: 21px;
-    box-shadow: 0 4px 14px rgba(31,76,135,.08);
-    border: 1px solid #e3ebf7;
+    box-shadow: 0 8px 25px rgba(30,64,175,.08);
+    border: 2px solid #dbeafe;
     transition: .2s;
 }
 
 .item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 7px 20px rgba(31,76,135,.12);
+    transform: translateY(-3px);
+    border-color: #93c5fd;
+    box-shadow: 0 10px 25px rgba(30,64,175,.12);
 }
 
 /* =========================
@@ -180,11 +189,12 @@ header div:last-child {
     display: inline-block;
     padding: 7px 12px;
     border-radius: 20px;
-    background: #fff4bf;
-    color: #7a5a00;
+    background: #fff9db;
+    color: #713f12;
     font-weight: bold;
     font-size: 14px;
     margin-bottom: 10px;
+    border: 1px solid #f0df9b;
 }
 
 /* =========================
@@ -193,7 +203,7 @@ header div:last-child {
 
 .item h2 {
     margin: 5px 0 12px;
-    color: #263b5a;
+    color: #1e3a8a;
 }
 
 /* =========================
@@ -203,11 +213,11 @@ header div:last-child {
 .info {
     margin: 8px 0;
     line-height: 1.6;
-    color: #52627a;
+    color: #64748b;
 }
 
 .info b {
-    color: #334765;
+    color: #1e3a8a;
 }
 
 /* =========================
@@ -217,8 +227,8 @@ header div:last-child {
 .ticket {
     margin-top: 15px;
     padding-top: 13px;
-    border-top: 1px solid #e6edf6;
-    color: #1769c2;
+    border-top: 1px solid #dbeafe;
+    color: #1d4ed8;
     font-weight: bold;
 }
 
@@ -232,18 +242,18 @@ header div:last-child {
     border: none;
     border-radius: 11px;
     padding: 13px 16px;
-    background: #f6c945;
-    color: #24324a;
+    background: linear-gradient(135deg, #facc15, #f59e0b);
+    color: #172554;
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 900;
     cursor: pointer;
     transition: .2s;
-    box-shadow: 0 4px 10px rgba(246,201,69,.2);
+    box-shadow: 0 5px 14px rgba(245,158,11,.22);
 }
 
 .claim-button:hover {
-    background: #f3bd22;
-    transform: translateY(-1px);
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    transform: translateY(-2px);
 }
 
 .claim-button:disabled {
@@ -251,6 +261,7 @@ header div:last-child {
     color: #64748b;
     cursor: not-allowed;
     transform: none;
+    box-shadow: none;
 }
 
 /* =========================
@@ -258,13 +269,13 @@ header div:last-child {
 ========================= */
 
 .empty {
-    background: white;
+    background: rgba(255,255,255,.96);
     padding: 38px;
     border-radius: 18px;
     text-align: center;
     color: #64748b;
-    border: 1px solid #e3ebf7;
-    box-shadow: 0 4px 14px rgba(31,76,135,.06);
+    border: 2px solid #dbeafe;
+    box-shadow: 0 8px 25px rgba(30,64,175,.06);
 }
 
 /* =========================
@@ -283,24 +294,24 @@ header div:last-child {
 
 .message {
     display: none;
-    padding: 13px 15px;
-    border-radius: 11px;
+    padding: 14px 16px;
+    border-radius: 12px;
     margin-bottom: 15px;
     font-weight: bold;
 }
 
 .message.success {
     display: block;
-    background: #e8f7ed;
-    color: #187044;
-    border: 1px solid #bce8cb;
+    background: #ecfeff;
+    color: #155e75;
+    border: 2px solid #22d3ee;
 }
 
 .message.error {
     display: block;
-    background: #fff0f0;
-    color: #b42323;
-    border: 1px solid #f4c4c4;
+    background: #fff1f2;
+    color: #9f1239;
+    border: 2px solid #fb7185;
 }
 
 /* =========================
@@ -323,6 +334,7 @@ header div:last-child {
 
     .hero {
         padding: 22px;
+        border-radius: 20px;
     }
 
     .item {
