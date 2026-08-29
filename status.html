@@ -19,222 +19,548 @@ content="width=device-width, initial-scale=1.0">
     padding: 0;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #eef6ff, #fff9db);
-    color: #172554;
+/* =====================================================
+   THEME — ให้เหมือน index.html
+===================================================== */
+
+:root {
+
+    --blue: #0759d7;
+    --blue-dark: #123b8f;
+    --blue-light: #e8f1ff;
+
+    --yellow: #ffd21f;
+    --yellow-light: #fff9d6;
+
+    --text: #172554;
+    --muted: #64748b;
+
+    --bg: #f4f8ff;
+    --white: #ffffff;
+
+    --border: #dbeafe;
+
 }
 
+/* =====================================================
+   BODY
+===================================================== */
+
+body {
+
+    font-family:
+        Arial,
+        "Noto Sans Thai",
+        sans-serif;
+
+    background: #f4f8ff;
+
+    color: var(--text);
+
+    min-height: 100vh;
+
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
 header {
-    background: linear-gradient(135deg, #075985, #2563eb);
+
+    background:
+        linear-gradient(
+            135deg,
+            #0759d7,
+            #1687ff
+        );
+
     color: white;
-    padding: 20px;
-    box-shadow: 0 5px 18px rgba(37, 99, 235, .25);
+
+    padding: 18px 20px;
+
+    box-shadow:
+        0 4px 18px rgba(7, 89, 215, .25);
+
+    border-bottom: 5px solid #ffd21f;
+
 }
 
 .logo {
+
     font-size: 26px;
+
     font-weight: bold;
+
+    letter-spacing: .5px;
+
 }
+
+header div:last-child {
+
+    margin-top: 3px;
+
+    color: #fff4a8;
+
+    font-weight: bold;
+
+}
+
+/* =====================================================
+   CONTAINER
+===================================================== */
 
 .container {
+
     max-width: 700px;
+
     margin: auto;
-    padding: 25px 18px;
+
+    padding: 35px 18px 50px;
+
 }
 
+/* =====================================================
+   BACK
+===================================================== */
+
 .back {
-    display: inline-block;
-    margin-bottom: 15px;
-    color: #1d4ed8;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    margin-bottom: 18px;
+
+    color: #0759d7;
+
     text-decoration: none;
+
     font-weight: bold;
+
     background: white;
+
     padding: 9px 14px;
+
     border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(0,0,0,.06);
+
+    box-shadow:
+        0 3px 10px rgba(30,64,175,.08);
+
     transition: .2s;
+
 }
 
 .back:hover {
-    background: #eff6ff;
+
+    background: #e8f1ff;
+
+    transform: translateX(-3px);
+
 }
+
+/* =====================================================
+   CARD
+===================================================== */
 
 .card {
-    background: rgba(255,255,255,.96);
+
+    background: white;
+
     border-radius: 24px;
-    padding: 25px;
+
+    padding: 30px;
+
     border: 2px solid #dbeafe;
+
     box-shadow:
-        0 12px 35px rgba(30,64,175,.12);
+        0 12px 35px rgba(30,64,175,.10);
+
 }
 
+/* =====================================================
+   TITLE
+===================================================== */
+
 h1 {
+
     margin-bottom: 8px;
-    color: #1e3a8a;
+
+    color: #123b8f;
+
 }
 
 .subtitle {
+
     color: #64748b;
+
     margin-bottom: 25px;
-    line-height: 1.5;
+
+    line-height: 1.6;
+
 }
 
+/* =====================================================
+   SEARCH
+===================================================== */
+
 .search-box {
+
     display: flex;
+
     gap: 10px;
+
 }
 
 input {
+
     flex: 1;
+
     padding: 14px;
+
     border: 2px solid #dbeafe;
+
     border-radius: 12px;
+
     font-size: 16px;
+
     outline: none;
+
     background: #f8fbff;
+
     color: #172554;
+
 }
 
 input:focus {
-    border-color: #2563eb;
+
+    border-color: #0759d7;
+
     background: white;
-    box-shadow: 0 0 0 4px rgba(37,99,235,.10);
+
+    box-shadow:
+        0 0 0 4px rgba(7,89,215,.10);
+
 }
 
+/* =====================================================
+   BUTTON
+===================================================== */
+
 button {
+
     border: none;
-    background: linear-gradient(135deg, #facc15, #f59e0b);
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffd21f,
+            #f5b800
+        );
+
     color: #172554;
+
     padding: 14px 20px;
+
     border-radius: 12px;
+
     font-size: 16px;
+
     font-weight: bold;
+
     cursor: pointer;
-    box-shadow: 0 6px 15px rgba(245,158,11,.25);
+
+    box-shadow:
+        0 5px 14px rgba(245,184,0,.22);
+
     transition: .2s;
+
 }
 
 button:hover {
-    background: linear-gradient(135deg, #facc15, #f59e0b);
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffd21f,
+            #eab000
+        );
+
     transform: translateY(-2px);
-    box-shadow: 0 9px 20px rgba(245,158,11,.35);
+
+    box-shadow:
+        0 8px 20px rgba(245,184,0,.30);
+
 }
 
 button:disabled {
+
     background: #cbd5e1;
+
     color: #64748b;
+
     cursor: not-allowed;
+
     box-shadow: none;
+
     transform: none;
+
 }
 
+/* =====================================================
+   RESULT
+===================================================== */
+
 .result {
+
     display: none;
+
     margin-top: 25px;
-    border-top: 1px solid #dbeafe;
+
+    border-top: 2px solid #dbeafe;
+
     padding-top: 25px;
+
 }
 
 .result.show {
+
     display: block;
+
 }
 
 .result-card {
+
     border: 2px solid #dbeafe;
-    border-radius: 15px;
+
+    border-radius: 18px;
+
     padding: 20px;
+
     background: white;
+
+    box-shadow:
+        0 6px 20px rgba(30,64,175,.06);
+
 }
+
+/* =====================================================
+   TYPE
+===================================================== */
 
 .type {
+
     display: inline-block;
-    background: #fff9db;
-    color: #713f12;
+
+    background: #fff9d6;
+
+    color: #765900;
+
     padding: 7px 12px;
+
     border-radius: 20px;
+
     font-weight: bold;
+
     margin-bottom: 12px;
+
+    border: 1px solid #ffe066;
+
 }
+
+/* =====================================================
+   TICKET
+===================================================== */
 
 .ticket {
+
     font-size: 22px;
+
     font-weight: bold;
-    color: #1e3a8a;
+
+    color: #123b8f;
+
     margin-bottom: 15px;
+
 }
+
+/* =====================================================
+   INFO
+===================================================== */
 
 .info {
+
     margin: 10px 0;
+
     line-height: 1.5;
+
     color: #172554;
+
 }
 
+.info b {
+
+    color: #123b8f;
+
+}
+
+/* =====================================================
+   STATUS
+===================================================== */
+
 .status {
+
     display: inline-block;
+
     margin-top: 15px;
+
     padding: 9px 15px;
+
     border-radius: 20px;
+
     font-weight: bold;
+
 }
 
 .pending {
-    background: #fef08a;
-    color: #713f12;
+
+    background: #fff9d6;
+
+    color: #765900;
+
 }
 
 .in_progress {
-    background: #dbeafe;
-    color: #1d4ed8;
+
+    background: #e8f1ff;
+
+    color: #0759d7;
+
 }
 
 .resolved {
+
     background: #dcfce7;
+
     color: #166534;
+
 }
 
 .claimed {
+
     background: #dcfce7;
+
     color: #166534;
+
 }
+
+/* =====================================================
+   NOT FOUND
+===================================================== */
 
 .not-found {
+
     display: none;
+
     margin-top: 25px;
+
     padding: 18px;
+
     border-radius: 12px;
+
     background: #fff1f2;
+
     border: 2px solid #fb7185;
+
     color: #9f1239;
+
     line-height: 1.6;
+
 }
+
+/* =====================================================
+   LOADING
+===================================================== */
 
 .loading {
+
     display: none;
+
     margin-top: 20px;
+
     text-align: center;
+
     color: #64748b;
+
 }
 
+/* =====================================================
+   HINT
+===================================================== */
+
 .hint {
+
     margin-top: 15px;
+
     padding: 12px;
+
     border-radius: 10px;
-    background: #eef6ff;
-    border: 1px solid #dbeafe;
-    color: #1e3a8a;
+
+    background: #e8f1ff;
+
+    border: 1px solid #b8d5ff;
+
+    color: #123b8f;
+
     font-size: 14px;
+
     line-height: 1.5;
+
 }
+
+/* =====================================================
+   MOBILE
+===================================================== */
 
 @media(max-width:600px) {
 
+    header {
+
+        padding: 19px 17px;
+
+    }
+
+    .logo {
+
+        font-size: 25px;
+
+    }
+
+    .container {
+
+        padding: 20px 14px 35px;
+
+    }
+
+    .card {
+
+        padding: 22px;
+
+        border-radius: 20px;
+
+    }
+
     .search-box {
+
         flex-direction: column;
+
     }
 
     button {
+
         width: 100%;
+
     }
 
 }
@@ -248,7 +574,7 @@ button:disabled {
 <header>
 
 <div class="logo">
-BINCARE
+BEN2 BINCARE
 </div>
 
 <div>
@@ -287,7 +613,7 @@ autocomplete="off"
 
 <button
 id="searchButton"
-onclick="searchTicket()">
+onclick="searchTicket">
 
 🔍 ตรวจสอบ
 
@@ -356,10 +682,6 @@ class="ticket">
 
 <script>
 
-/* =====================================================
-   SUPABASE
-===================================================== */
-
 const SUPABASE_URL =
 "https://pbjeyvupzbhxodlibjuh.supabase.co";
 
@@ -371,10 +693,6 @@ supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY
 );
-
-/* =====================================================
-   SEARCH
-===================================================== */
 
 async function searchTicket() {
 
@@ -398,13 +716,9 @@ async function searchTicket() {
     const loading =
         document.getElementById("loading");
 
-    /* ซ่อนผลเดิม */
-
     result.classList.remove("show");
 
     notFound.style.display = "none";
-
-    /* ตรวจสอบช่องว่าง */
 
     if (!ticket) {
 
@@ -429,10 +743,6 @@ async function searchTicket() {
         "กำลังค้นหา...";
 
     try {
-
-        /* =================================================
-           ค้นหา REPORTS
-        ================================================= */
 
         const {
             data: reports,
@@ -469,10 +779,6 @@ async function searchTicket() {
 
         }
 
-        /* =================================================
-           ค้นหา LOST FOUND
-        ================================================= */
-
         const {
             data: lostFound,
             error: lostError
@@ -507,10 +813,6 @@ async function searchTicket() {
             return;
 
         }
-
-        /* =================================================
-           ไม่พบข้อมูล
-        ================================================= */
 
         notFound.innerHTML = `
             ❌ ไม่พบหมายเลขรายการนี้
@@ -550,10 +852,6 @@ async function searchTicket() {
     }
 
 }
-
-/* =====================================================
-   แสดงแจ้งปัญหา
-===================================================== */
 
 function showReport(report) {
 
@@ -617,10 +915,6 @@ function showReport(report) {
 
 }
 
-/* =====================================================
-   แสดงของหาย / พบของ
-===================================================== */
-
 function showLostFound(item) {
 
     const isLost =
@@ -673,13 +967,6 @@ function showLostFound(item) {
 
     `;
 
-    /* =================================================
-       สำคัญ:
-       ถ้าเจ้าของรับของแล้ว
-       ให้แสดง "เจ้าของมารับแล้ว"
-       ไม่ว่าค่า status จะเป็นอะไร
-    ================================================= */
-
     if (
         item.is_claimed === true
     ) {
@@ -695,10 +982,6 @@ function showLostFound(item) {
     );
 
 }
-
-/* =====================================================
-   แสดงสถานะทั่วไป
-===================================================== */
 
 function showStatus(status) {
 
@@ -737,10 +1020,6 @@ function showStatus(status) {
 
 }
 
-/* =====================================================
-   เจ้าของมารับของแล้ว
-===================================================== */
-
 function showClaimedStatus() {
 
     const statusElement =
@@ -759,10 +1038,6 @@ function showClaimedStatus() {
         .classList.add("show");
 
 }
-
-/* =====================================================
-   ESCAPE HTML
-===================================================== */
 
 function escapeHtml(value) {
 
@@ -803,10 +1078,6 @@ function escapeHtml(value) {
         );
 
 }
-
-/* =====================================================
-   ENTER
-===================================================== */
 
 document
     .getElementById(
