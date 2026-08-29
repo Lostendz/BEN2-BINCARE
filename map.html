@@ -1,274 +1,248 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>แผนที่โรงเรียน | BINCARE</title>
+    <title>แผนที่โรงเรียน | BINCARE</title>
 
-<style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-body {
-    font-family: Arial, sans-serif;
-    background: #f4f7f5;
-    color: #1f2937;
-}
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7f5;
+            color: #1f2937;
+        }
 
-header {
-    background: #166534;
-    color: white;
-    padding: 20px;
-}
+        header {
+            background: #166534;
+            color: white;
+            padding: 20px;
+        }
 
-.logo {
-    font-size: 26px;
-    font-weight: bold;
-}
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+        }
 
-.container {
-    max-width: 1100px;
-    margin: auto;
-    padding: 20px;
-}
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 25px 18px;
+        }
 
-.back {
-    display: inline-block;
-    margin-bottom: 15px;
-    color: #166534;
-    text-decoration: none;
-    font-weight: bold;
-}
+        .back {
+            display: inline-block;
+            margin-bottom: 15px;
+            color: #166534;
+            text-decoration: none;
+            font-weight: bold;
+        }
 
-.card {
-    background: white;
-    border-radius: 20px;
-    padding: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-}
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
 
-h1 {
-    margin-bottom: 8px;
-}
+        h1 {
+            margin-bottom: 8px;
+        }
 
-.subtitle {
-    color: #6b7280;
-    margin-bottom: 15px;
-}
+        .subtitle {
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
 
-.controls {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-bottom: 15px;
-}
+        .controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
 
-button {
-    border: none;
-    border-radius: 10px;
-    padding: 12px 18px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-}
+        button {
+            border: none;
+            border-radius: 10px;
+            padding: 12px 18px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
 
-.add-btn {
-    background: #16a34a;
-    color: white;
-}
+        .add-btn {
+            background: #16a34a;
+            color: white;
+        }
 
-.delete-btn {
-    background: #dc2626;
-    color: white;
-}
+        .admin-btn {
+            background: #1d4ed8;
+            color: white;
+        }
 
-.save-btn {
-    background: #166534;
-    color: white;
-}
+        .delete-btn {
+            background: #dc2626;
+            color: white;
+            padding: 7px 10px;
+            font-size: 13px;
+        }
 
-.cancel-btn {
-    background: #6b7280;
-    color: white;
-}
+        .hint {
+            background: #f0fdf4;
+            color: #166534;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
 
-button:disabled {
-    background: #9ca3af;
-    cursor: not-allowed;
-}
+        .map-wrapper {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 15px;
+            border: 2px solid #d1d5db;
+            background: #eee;
+        }
 
-#mapWrapper {
-    width: 100%;
-    overflow: auto;
-    border-radius: 15px;
-    border: 2px solid #d1d5db;
-    background: #eee;
-}
+        #schoolMap {
+            display: block;
+            width: 100%;
+            height: auto;
+            user-select: none;
+        }
 
-#map {
-    position: relative;
-    width: 100%;
-    max-width: 1000px;
-    margin: auto;
-    user-select: none;
-}
+        .bin {
+            position: absolute;
+            transform: translate(-50%, -100%);
+            font-size: 30px;
+            cursor: grab;
+            z-index: 10;
+            user-select: none;
+        }
 
-#mapImage {
-    display: block;
-    width: 100%;
-    height: auto;
-}
+        .bin:active {
+            cursor: grabbing;
+        }
 
-.trash {
-    position: absolute;
-    width: 38px;
-    height: 38px;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    background: white;
-    border: 3px solid #166534;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 21px;
-    cursor: grab;
-    z-index: 10;
-}
+        .bin-label {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 30px;
+            white-space: nowrap;
+            background: white;
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: bold;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
 
-.trash.selected {
-    border-color: #dc2626;
-    background: #fee2e2;
-    transform: translate(-50%, -50%) scale(1.15);
-}
+        .admin-panel {
+            display: none;
+            background: #eff6ff;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
 
-.trash.dragging {
-    cursor: grabbing;
-}
+        .admin-panel.show {
+            display: block;
+        }
 
-.notice {
-    display: none;
-    margin-top: 15px;
-    padding: 12px;
-    border-radius: 10px;
-    background: #dcfce7;
-    color: #166534;
-    font-weight: bold;
-}
+        .status-message {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 10px;
+            display: none;
+        }
 
-.admin-panel {
-    display: none;
-}
+        .success {
+            display: block;
+            background: #dcfce7;
+            color: #166534;
+        }
 
-.admin-panel.active {
-    display: block;
-}
-
-.mode {
-    display: inline-block;
-    padding: 7px 12px;
-    border-radius: 20px;
-    background: #e5e7eb;
-    color: #374151;
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-
-.info {
-    margin-top: 15px;
-    color: #6b7280;
-    font-size: 14px;
-}
-</style>
+        .error {
+            display: block;
+            background: #fee2e2;
+            color: #991b1b;
+        }
+    </style>
 </head>
 
 <body>
 
 <header>
     <div class="logo">BINCARE</div>
-    <div>แผนที่โรงเรียน</div>
+    <div>ระบบดูแลโรงเรียน</div>
 </header>
 
 <div class="container">
 
-<a href="index.html" class="back">
-    ← กลับหน้าหลัก
-</a>
+    <a href="index.html" class="back">
+        ← กลับหน้าหลัก
+    </a>
 
-<div class="card">
+    <div class="card">
 
-    <h1>🗺️ แผนที่โรงเรียน</h1>
+        <h1>🗺️ แผนที่โรงเรียน</h1>
 
-    <p class="subtitle">
-        ตำแหน่งอาคาร สนาม และจุดต่าง ๆ ภายในโรงเรียน
-    </p>
-
-    <!-- ส่วนควบคุมแอดมิน -->
-    <div id="adminPanel" class="admin-panel">
-
-        <div class="mode">
-            🛠️ โหมดจัดการถังขยะ
-        </div>
+        <p class="subtitle">
+            แสดงตำแหน่งถังขยะภายในโรงเรียน
+        </p>
 
         <div class="controls">
 
             <button
                 class="add-btn"
-                onclick="addTrash()">
+                id="addBinButton"
+                onclick="startAddBin()">
                 ➕ เพิ่มถังขยะ
             </button>
 
             <button
-                class="delete-btn"
-                onclick="deleteSelectedTrash()">
-                🗑️ ลบถังขยะ
-            </button>
-
-            <button
-                class="save-btn"
-                onclick="saveTrash()">
-                💾 บันทึกตำแหน่ง
-            </button>
-
-            <button
-                class="cancel-btn"
-                onclick="exitAdmin()">
-                ✕ ออกจากโหมดจัดการ
+                class="admin-btn"
+                id="adminButton"
+                onclick="toggleAdmin()">
+                🔐 โหมดแอดมิน
             </button>
 
         </div>
 
-        <div class="info">
-            💡 คลิกถังขยะเพื่อเลือก แล้วลากไปยังตำแหน่งที่ต้องการ
+        <div id="adminPanel" class="admin-panel">
+
+            <strong>🛠️ โหมดแอดมินเปิดอยู่</strong>
+
+            <p style="margin-top:8px;">
+                สามารถลากหมุด 🗑️ ไปยังตำแหน่งที่ถูกต้องได้
+                และสามารถลบหมุดได้
+            </p>
+
         </div>
 
-    </div>
+        <div id="hint" class="hint">
+            💡 กด "เพิ่มถังขยะ" แล้วกดตำแหน่งบนแผนที่
+        </div>
 
-    <div id="notice" class="notice"></div>
+        <div class="map-wrapper" id="mapWrapper">
 
-    <div id="mapWrapper">
-
-        <div id="map">
-
-            <!--
-                เปลี่ยนชื่อไฟล์ตรงนี้ให้ตรงกับชื่อรูปแผนที่
-                ที่อัปโหลดไว้ใน GitHub
-            -->
             <img
-                id="mapImage"
+                id="schoolMap"
                 src="school-map.png"
-                alt="แผนที่โรงเรียน"
-            >
+                alt="แผนผังโรงเรียน">
 
         </div>
 
-    </div>
+        <div id="message" class="status-message"></div>
 
-</div>
+    </div>
 
 </div>
 
@@ -280,25 +254,188 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
     "sb_publishable_paiTf1uzpiCAPR1oWQMlDg_PfVzT2p6";
 
-const map = document.getElementById("map");
-const notice = document.getElementById("notice");
-
-let trashBins = [];
-let selectedTrash = null;
+let adminMode = false;
+let addingBin = false;
 
 
 /* =========================
    แสดงข้อความ
 ========================= */
 
-function showNotice(text) {
+function showMessage(text, type) {
 
-    notice.textContent = text;
-    notice.style.display = "block";
+    const message =
+        document.getElementById("message");
+
+    message.textContent = text;
+
+    message.className =
+        "status-message " + type;
 
     setTimeout(() => {
-        notice.style.display = "none";
-    }, 2500);
+        message.className =
+            "status-message";
+    }, 3000);
+}
+
+
+/* =========================
+   เปิด/ปิดโหมดแอดมิน
+========================= */
+
+function toggleAdmin() {
+
+    adminMode = !adminMode;
+
+    const panel =
+        document.getElementById("adminPanel");
+
+    const button =
+        document.getElementById("adminButton");
+
+    if (adminMode) {
+
+        panel.classList.add("show");
+
+        button.textContent =
+            "🔓 ปิดโหมดแอดมิน";
+
+        showMessage(
+            "เปิดโหมดแอดมินแล้ว",
+            "success"
+        );
+
+    } else {
+
+        panel.classList.remove("show");
+
+        button.textContent =
+            "🔐 โหมดแอดมิน";
+
+        showMessage(
+            "ปิดโหมดแอดมินแล้ว",
+            "success"
+        );
+    }
+
+    loadBins();
+}
+
+
+/* =========================
+   เริ่มเพิ่มถังขยะ
+========================= */
+
+function startAddBin() {
+
+    addingBin = true;
+
+    document.getElementById("hint").textContent =
+        "📍 ตอนนี้ให้กดตำแหน่งที่ต้องการวางถังขยะบนแผนที่";
+
+}
+
+
+/* =========================
+   คลิกแผนที่เพื่อเพิ่ม
+========================= */
+
+document
+    .getElementById("mapWrapper")
+    .addEventListener("click", async function(event) {
+
+        if (!addingBin) return;
+
+        if (event.target.classList.contains("bin")) {
+            return;
+        }
+
+        const rect =
+            this.getBoundingClientRect();
+
+        const x =
+            ((event.clientX - rect.left) / rect.width) * 100;
+
+        const y =
+            ((event.clientY - rect.top) / rect.height) * 100;
+
+        addingBin = false;
+
+        document.getElementById("hint").textContent =
+            "💡 กด 'เพิ่มถังขยะ' แล้วกดตำแหน่งบนแผนที่";
+
+        await addBin(x, y);
+
+    });
+
+
+/* =========================
+   เพิ่มข้อมูลถังขยะ
+========================= */
+
+async function addBin(x, y) {
+
+    try {
+
+        const response = await fetch(
+            SUPABASE_URL + "/rest/v1/trash_bins",
+            {
+
+                method: "POST",
+
+                headers: {
+
+                    "Content-Type":
+                        "application/json",
+
+                    "apikey":
+                        SUPABASE_KEY,
+
+                    "Authorization":
+                        "Bearer " + SUPABASE_KEY,
+
+                    "Prefer":
+                        "return=representation"
+
+                },
+
+                body: JSON.stringify({
+
+                    name: "ถังขยะ",
+                    x: x,
+                    y: y,
+                    status: "normal"
+
+                })
+
+            }
+        );
+
+        if (!response.ok) {
+
+            throw new Error(
+                await response.text()
+            );
+
+        }
+
+        showMessage(
+            "✅ เพิ่มถังขยะเรียบร้อย",
+            "success"
+        );
+
+        loadBins();
+
+    } catch (error) {
+
+        console.error(error);
+
+        showMessage(
+            "❌ ไม่สามารถเพิ่มถังขยะได้",
+            "error"
+        );
+
+    }
 }
 
 
@@ -306,7 +443,7 @@ function showNotice(text) {
    โหลดถังขยะจาก Supabase
 ========================= */
 
-async function loadTrash() {
+async function loadBins() {
 
     try {
 
@@ -314,246 +451,270 @@ async function loadTrash() {
             SUPABASE_URL +
             "/rest/v1/trash_bins?select=*",
             {
+
                 headers: {
-                    "apikey": SUPABASE_KEY,
+
+                    "apikey":
+                        SUPABASE_KEY,
+
                     "Authorization":
                         "Bearer " + SUPABASE_KEY
+
                 }
+
             }
         );
 
         if (!response.ok) {
-            throw new Error(await response.text());
+
+            throw new Error(
+                await response.text()
+            );
+
         }
 
-        trashBins = await response.json();
+        const bins =
+            await response.json();
 
-        renderTrash();
+        document
+            .querySelectorAll(".bin")
+            .forEach(bin => bin.remove());
+
+        bins.forEach(bin => {
+
+            createBinMarker(bin);
+
+        });
 
     } catch (error) {
 
         console.error(error);
 
-        /*
-            ถ้ายังไม่ได้สร้างตาราง trash_bins
-            แผนที่จะยังเปิดได้ตามปกติ
-        */
-
-        trashBins = [];
+        showMessage(
+            "❌ ไม่สามารถโหลดตำแหน่งถังขยะได้",
+            "error"
+        );
 
     }
 }
 
 
 /* =========================
-   แสดงหมุด
+   สร้างหมุด
 ========================= */
 
-function renderTrash() {
+function createBinMarker(binData) {
 
-    document
-        .querySelectorAll(".trash")
-        .forEach(el => el.remove());
+    const wrapper =
+        document.getElementById("mapWrapper");
 
-    trashBins.forEach(bin => {
+    const marker =
+        document.createElement("div");
 
-        const marker =
-            document.createElement("div");
+    marker.className = "bin";
 
-        marker.className = "trash";
+    marker.innerHTML =
+        "🗑️";
 
-        marker.textContent = "🗑️";
+    marker.style.left =
+        binData.x + "%";
 
-        marker.dataset.id = bin.id;
+    marker.style.top =
+        binData.y + "%";
 
-        marker.style.left =
-            bin.x + "%";
 
-        marker.style.top =
-            bin.y + "%";
+    const label =
+        document.createElement("div");
 
+    label.className =
+        "bin-label";
+
+    label.textContent =
+        binData.name || "ถังขยะ";
+
+    marker.appendChild(label);
+
+
+    /* =====================
+       ลากหมุด
+    ===================== */
+
+    if (adminMode) {
+
+        let dragging = false;
 
         marker.addEventListener(
             "pointerdown",
-            startDrag
-        );
-
-        marker.addEventListener(
-            "click",
             function(event) {
 
                 event.stopPropagation();
 
-                selectTrash(bin.id);
+                dragging = true;
+
+                marker.setPointerCapture(
+                    event.pointerId
+                );
 
             }
         );
 
 
-        map.appendChild(marker);
+        marker.addEventListener(
+            "pointermove",
+            function(event) {
 
-    });
-}
+                if (!dragging) return;
+
+                const rect =
+                    wrapper.getBoundingClientRect();
+
+                let x =
+                    ((event.clientX - rect.left) /
+                    rect.width) * 100;
+
+                let y =
+                    ((event.clientY - rect.top) /
+                    rect.height) * 100;
 
 
-/* =========================
-   เลือกถังขยะ
-========================= */
+                x = Math.max(0, Math.min(100, x));
+                y = Math.max(0, Math.min(100, y));
 
-function selectTrash(id) {
 
-    selectedTrash = id;
+                marker.style.left =
+                    x + "%";
 
-    document
-        .querySelectorAll(".trash")
-        .forEach(el => {
+                marker.style.top =
+                    y + "%";
 
-            el.classList.remove("selected");
-
-            if (
-                String(el.dataset.id) ===
-                String(id)
-            ) {
-                el.classList.add("selected");
             }
-
-        });
-
-}
-
-
-/* =========================
-   ลากหมุด
-========================= */
-
-let dragging = null;
-
-function startDrag(event) {
-
-    if (
-        !document
-            .getElementById("adminPanel")
-            .classList
-            .contains("active")
-    ) {
-        return;
-    }
-
-    event.preventDefault();
-
-    const id = this.dataset.id;
-
-    selectTrash(id);
-
-    dragging = this;
-
-    this.classList.add("dragging");
-
-    document.addEventListener(
-        "pointermove",
-        dragMove
-    );
-
-    document.addEventListener(
-        "pointerup",
-        stopDrag
-    );
-}
-
-
-function dragMove(event) {
-
-    if (!dragging) return;
-
-    const rect =
-        map.getBoundingClientRect();
-
-    let x =
-        ((event.clientX - rect.left) /
-        rect.width) * 100;
-
-    let y =
-        ((event.clientY - rect.top) /
-        rect.height) * 100;
-
-
-    x = Math.max(0, Math.min(100, x));
-    y = Math.max(0, Math.min(100, y));
-
-
-    dragging.style.left = x + "%";
-    dragging.style.top = y + "%";
-
-
-    const bin =
-        trashBins.find(
-            b =>
-                String(b.id) ===
-                String(dragging.dataset.id)
         );
 
-    if (bin) {
 
-        bin.x = x;
-        bin.y = y;
+        marker.addEventListener(
+            "pointerup",
+            async function(event) {
+
+                if (!dragging) return;
+
+                dragging = false;
+
+                const rect =
+                    wrapper.getBoundingClientRect();
+
+                const x =
+                    ((event.clientX - rect.left) /
+                    rect.width) * 100;
+
+                const y =
+                    ((event.clientY - rect.top) /
+                    rect.height) * 100;
+
+                await updateBin(
+                    binData.id,
+                    x,
+                    y
+                );
+
+            }
+        );
+
+
+        /* =====================
+           ดับเบิลคลิกเพื่อลบ
+        ===================== */
+
+        marker.addEventListener(
+            "dblclick",
+            async function(event) {
+
+                event.stopPropagation();
+
+                const confirmDelete =
+                    confirm(
+                        "ต้องการลบถังขยะนี้หรือไม่?"
+                    );
+
+                if (!confirmDelete) return;
+
+                await deleteBin(binData.id);
+
+            }
+        );
 
     }
 
-}
-
-
-function stopDrag() {
-
-    if (!dragging) return;
-
-    dragging.classList.remove("dragging");
-
-    dragging = null;
-
-    document.removeEventListener(
-        "pointermove",
-        dragMove
-    );
-
-    document.removeEventListener(
-        "pointerup",
-        stopDrag
-    );
-
+    wrapper.appendChild(marker);
 }
 
 
 /* =========================
-   เพิ่มถังขยะ
+   อัปเดตตำแหน่ง
 ========================= */
 
-function addTrash() {
+async function updateBin(id, x, y) {
 
-    const newBin = {
+    try {
 
-        id:
-            "new-" +
-            Date.now(),
+        const response = await fetch(
 
-        x: 50,
+            SUPABASE_URL +
+            "/rest/v1/trash_bins?id=eq." +
+            id,
 
-        y: 50,
+            {
 
-        name:
-            "ถังขยะใหม่"
+                method: "PATCH",
 
-    };
+                headers: {
 
-    trashBins.push(newBin);
+                    "Content-Type":
+                        "application/json",
 
-    renderTrash();
+                    "apikey":
+                        SUPABASE_KEY,
 
-    selectTrash(newBin.id);
+                    "Authorization":
+                        "Bearer " + SUPABASE_KEY
 
-    showNotice(
-        "➕ เพิ่มถังขยะแล้ว ลากหมุดไปยังตำแหน่งที่ต้องการ"
-    );
+                },
 
+                body: JSON.stringify({
+
+                    x: x,
+                    y: y
+
+                })
+
+            }
+
+        );
+
+        if (!response.ok) {
+
+            throw new Error(
+                await response.text()
+            );
+
+        }
+
+        showMessage(
+            "✅ บันทึกตำแหน่งใหม่แล้ว",
+            "success"
+        );
+
+    } catch (error) {
+
+        console.error(error);
+
+        showMessage(
+            "❌ บันทึกตำแหน่งไม่สำเร็จ",
+            "error"
+        );
+
+        loadBins();
+
+    }
 }
 
 
@@ -561,216 +722,67 @@ function addTrash() {
    ลบถังขยะ
 ========================= */
 
-function deleteSelectedTrash() {
-
-    if (!selectedTrash) {
-
-        showNotice(
-            "⚠️ กรุณาเลือกถังขยะก่อน"
-        );
-
-        return;
-    }
-
-    trashBins =
-        trashBins.filter(
-            b =>
-                String(b.id) !==
-                String(selectedTrash)
-        );
-
-    selectedTrash = null;
-
-    renderTrash();
-
-    showNotice(
-        "🗑️ ลบถังขยะแล้ว"
-    );
-
-}
-
-
-/* =========================
-   บันทึกตำแหน่ง
-========================= */
-
-async function saveTrash() {
+async function deleteBin(id) {
 
     try {
 
-        /*
-            ลบข้อมูลเดิมทั้งหมด
-            แล้วบันทึกตำแหน่งใหม่
-        */
+        const response = await fetch(
 
-        const deleteResponse =
-            await fetch(
-                SUPABASE_URL +
-                "/rest/v1/trash_bins?id=not.is.null",
-                {
-                    method: "DELETE",
+            SUPABASE_URL +
+            "/rest/v1/trash_bins?id=eq." +
+            id,
 
-                    headers: {
+            {
 
-                        "apikey":
-                            SUPABASE_KEY,
+                method: "DELETE",
 
-                        "Authorization":
-                            "Bearer " +
-                            SUPABASE_KEY
+                headers: {
 
-                    }
+                    "apikey":
+                        SUPABASE_KEY,
+
+                    "Authorization":
+                        "Bearer " + SUPABASE_KEY
+
                 }
-            );
-
-
-        if (!deleteResponse.ok) {
-
-            throw new Error(
-                await deleteResponse.text()
-            );
-
-        }
-
-
-        const data =
-            trashBins.map(bin => ({
-
-                name:
-                    bin.name ||
-                    "ถังขยะ",
-
-                x:
-                    Number(bin.x),
-
-                y:
-                    Number(bin.y)
-
-            }));
-
-
-        if (data.length > 0) {
-
-            const insertResponse =
-                await fetch(
-                    SUPABASE_URL +
-                    "/rest/v1/trash_bins",
-                    {
-
-                        method: "POST",
-
-                        headers: {
-
-                            "Content-Type":
-                                "application/json",
-
-                            "apikey":
-                                SUPABASE_KEY,
-
-                            "Authorization":
-                                "Bearer " +
-                                SUPABASE_KEY,
-
-                            "Prefer":
-                                "return=minimal"
-
-                        },
-
-                        body:
-                            JSON.stringify(data)
-
-                    }
-                );
-
-
-            if (!insertResponse.ok) {
-
-                throw new Error(
-                    await insertResponse.text()
-                );
 
             }
 
-        }
-
-
-        await loadTrash();
-
-        showNotice(
-            "✅ บันทึกตำแหน่งถังขยะเรียบร้อยแล้ว"
         );
 
+        if (!response.ok) {
+
+            throw new Error(
+                await response.text()
+            );
+
+        }
+
+        showMessage(
+            "🗑️ ลบถังขยะแล้ว",
+            "success"
+        );
+
+        loadBins();
 
     } catch (error) {
 
         console.error(error);
 
-        showNotice(
-            "❌ บันทึกไม่ได้ กรุณาตรวจสอบตาราง trash_bins"
+        showMessage(
+            "❌ ไม่สามารถลบถังขยะได้",
+            "error"
         );
 
     }
-
 }
 
 
 /* =========================
-   โหมดแอดมิน
+   เริ่มต้น
 ========================= */
 
-function enterAdmin() {
-
-    document
-        .getElementById("adminPanel")
-        .classList
-        .add("active");
-
-}
-
-
-function exitAdmin() {
-
-    document
-        .getElementById("adminPanel")
-        .classList
-        .remove("active");
-
-    selectedTrash = null;
-
-    document
-        .querySelectorAll(".trash")
-        .forEach(el =>
-            el.classList.remove("selected")
-        );
-
-}
-
-
-/*
-    ตอนนี้ใช้ ?admin=1
-    เพื่อทดสอบระบบจัดการ
-
-    ตัวอย่าง:
-    map.html?admin=1
-*/
-
-const params =
-    new URLSearchParams(
-        window.location.search
-    );
-
-if (params.get("admin") === "1") {
-
-    enterAdmin();
-
-}
-
-
-/* =========================
-   เริ่มระบบ
-========================= */
-
-loadTrash();
+loadBins();
 
 </script>
 
