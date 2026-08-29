@@ -68,6 +68,11 @@ button {
     color: white;
     font-size: 17px;
     font-weight: bold;
+    cursor: pointer;
+}
+
+button:disabled {
+    background: #9ca3af;
 }
 
 #error {
@@ -112,7 +117,9 @@ button {
             required
         >
 
-        <button id="loginButton">
+        <button
+            id="loginButton"
+            type="submit">
             เข้าสู่ระบบ
         </button>
 
@@ -133,64 +140,157 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "sb_publishable_paiTf1uzpiCAPR1oWQMlDg_PfVzT2p6";
 
+
 const supabaseClient =
 supabase.createClient(
     SUPABASE_URL,
-    SUPABASE_KEY
+    SUPABASE_KEY,
+    {
+        auth: {
+            persistSession: true,
+            autoRefreshToken: true,
+            detectSessionInUrl: true
+        }
+    }
 );
 
 
-document
-.getElementById("loginForm")
-.addEventListener("submit", async function(e) {
+/* =========================
+   ตรวจสอบว่าล็อกอินอยู่แล้ว
+========================= */
 
-    e.preventDefault();
+async function checkExistingLogin() {
 
-    const email =
-        document.getElementById("email").value;
-
-    const password =
-        document.getElementById("password").value;
-
-    const button =
-        document.getElementById("loginButton");
-
-    const errorBox =
-        document.getElementById("error");
-
-    button.disabled = true;
-    button.textContent = "กำลังเข้าสู่ระบบ...";
-
-    errorBox.style.display = "none";
-
-
-    const { data, error } =
-        await supabaseClient.auth.signInWithPassword({
-            email: email,
-            password: password
-        });
+    const {
+        data,
+        error
+    } =
+    await supabaseClient.auth.getSession();
 
 
     if (error) {
 
-        errorBox.textContent =
-            "อีเมลหรือรหัสผ่านไม่ถูกต้อง";
-
-        errorBox.style.display = "block";
-
-        button.disabled = false;
-        button.textContent = "เข้าสู่ระบบ";
+        console.error(error);
 
         return;
     }
 
 
-    window.location.href =
-        "dashboard.html";
+    if (data.session) {
 
-});
+        // ถ้ามี Session อยู่แล้ว
+        // ไม่ต้องกรอกรหัสใหม่
+
+        window.location.href =
+            "admin.html";
+
+    }
+
+}
+
+
+/* =========================
+   เข้าสู่ระบบ
+========================= */
+
+document
+.getElementById("loginForm")
+.addEventListener(
+    "submit",
+    async function(e) {
+
+        e.preventDefault();
+
+
+        const email =
+            document
+            .getElementById("email")
+            .value
+            .trim();
+
+
+        const password =
+            document
+            .getElementById("password")
+            .value;
+
+
+        const button =
+            document
+            .getElementById("loginButton");
+
+
+        const errorBox =
+            document
+            .getElementById("error");
+
+
+        button.disabled = true;
+
+        button.textContent =
+            "กำลังเข้าสู่ระบบ...";
+
+        errorBox.style.display =
+            "none";
+
+
+        const {
+            data,
+            error
+        } =
+        await supabaseClient.auth
+            .signInWithPassword({
+
+                email: email,
+
+                password: password
+
+            });
+
+
+        if (error) {
+
+            console.error(error);
+
+
+            errorBox.textContent =
+                "❌ อีเมลหรือรหัสผ่านไม่ถูกต้อง";
+
+
+            errorBox.style.display =
+                "block";
+
+
+            button.disabled = false;
+
+            button.textContent =
+                "เข้าสู่ระบบ";
+
+
+            return;
+
+        }
+
+
+        /* =====================
+           ล็อกอินสำเร็จ
+        ===================== */
+
+        window.location.href =
+            "admin.html";
+
+    }
+);
+
+
+/* =========================
+   เริ่มต้น
+========================= */
+
+checkExistingLogin();
 
 </script>
 
 </body>
+
 </html>
