@@ -17,7 +17,7 @@
 
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #eef6ff, #fff9db);
+            background: #f4f8ff;
             color: #172554;
             min-height: 100vh;
         }
@@ -27,10 +27,11 @@
         ========================= */
 
         header {
-            background: linear-gradient(135deg, #075985, #2563eb);
+            background: linear-gradient(135deg, #0759d7, #1687ff);
             color: white;
             padding: 22px 20px;
-            box-shadow: 0 5px 18px rgba(37, 99, 235, .25);
+            box-shadow: 0 4px 18px rgba(7, 89, 215, .25);
+            border-bottom: 5px solid #ffd21f;
         }
 
         .logo {
@@ -41,7 +42,7 @@
 
         header div:last-child {
             margin-top: 4px;
-            color: #fef08a;
+            color: #fff9d6;
             font-weight: bold;
         }
 
@@ -64,7 +65,7 @@
             align-items: center;
             gap: 5px;
             margin-bottom: 18px;
-            color: #1d4ed8;
+            color: #0759d7;
             text-decoration: none;
             font-weight: 800;
             background: white;
@@ -76,7 +77,8 @@
 
         .back:hover {
             transform: translateX(-3px);
-            background: #eff6ff;
+            color: #ffb800;
+            background: #e8f1ff;
         }
 
         /* =========================
@@ -84,16 +86,15 @@
         ========================= */
 
         .card {
-            background: rgba(255,255,255,.96);
+            background: white;
             border-radius: 24px;
             padding: 28px;
-            border: 2px solid #dbeafe;
-            box-shadow:
-                0 12px 35px rgba(30,64,175,.12);
+            border: 1px solid #dbeafe;
+            box-shadow: 0 8px 30px rgba(30, 64, 175, .10);
         }
 
         h1 {
-            color: #1e3a8a;
+            color: #123b8f;
             margin-bottom: 8px;
             font-size: 28px;
         }
@@ -113,7 +114,7 @@
             font-weight: 800;
             margin-top: 18px;
             margin-bottom: 8px;
-            color: #1e3a8a;
+            color: #123b8f;
         }
 
         input,
@@ -125,7 +126,7 @@
             border-radius: 12px;
             font-size: 16px;
             font-family: inherit;
-            background: #f8fbff;
+            background: #f4f8ff;
             color: #172554;
             outline: none;
             transition: .2s;
@@ -134,9 +135,9 @@
         input:focus,
         select:focus,
         textarea:focus {
-            border-color: #2563eb;
+            border-color: #1687ff;
             background: white;
-            box-shadow: 0 0 0 4px rgba(37,99,235,.10);
+            box-shadow: 0 0 0 4px rgba(22, 135, 255, .12);
         }
 
         textarea {
@@ -154,18 +155,19 @@
             padding: 15px;
             border: none;
             border-radius: 13px;
-            background: linear-gradient(135deg, #facc15, #f59e0b);
+            background: linear-gradient(135deg, #ffd21f, #ffb800);
             color: #172554;
             font-size: 18px;
             font-weight: 900;
             cursor: pointer;
-            box-shadow: 0 6px 15px rgba(245,158,11,.25);
+            box-shadow: 0 6px 15px rgba(255, 210, 31, .28);
             transition: .2s;
         }
 
         button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 9px 20px rgba(245,158,11,.35);
+            background: linear-gradient(135deg, #ffca00, #ffb000);
+            box-shadow: 0 9px 20px rgba(255, 210, 31, .35);
         }
 
         button:active {
@@ -193,15 +195,15 @@
         }
 
         .success {
-            background: #ecfeff;
-            border: 2px solid #22d3ee;
-            color: #155e75;
+            background: #dcfce7;
+            border: 2px solid #86efac;
+            color: #087443;
         }
 
         .error {
-            background: #fff1f2;
-            border: 2px solid #fb7185;
-            color: #9f1239;
+            background: #ffe4e2;
+            border: 2px solid #ffaaa5;
+            color: #c62828;
         }
 
         /* =========================
@@ -213,8 +215,9 @@
             margin-top: 10px;
             padding: 8px 14px;
             border-radius: 10px;
-            background: #fef08a;
-            color: #713f12;
+            background: #fff8cc;
+            color: #765900;
+            border: 1px solid #ffe066;
             font-size: 24px;
             font-weight: 900;
             letter-spacing: 1px;
